@@ -228,6 +228,18 @@
             .hero h1 { font-size: 2rem; }
             nav { flex-direction: column; gap: 10px; }
         }
+        .skill-box { 
+            position: relative; 
+            overflow: hidden; 
+            transition: 0.3s; /* Tambahkan ini agar gerakannya mulus */
+            border: 1px solid transparent; /* Biar pas hover nggak goyang */
+        }
+
+        .skill-box:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(254, 163, 17, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -297,16 +309,7 @@
 
         </div>
     </section>
-/* Container untuk kotak skill */
-.skill-box {
-    position: relative;
-    overflow: hidden;
-}
-.skill-box:hover {
-    border-color: var(--accent); /* Memberi garis orange saat di-hover */
-    transform: translateY(-5px); /* Kotak sedikit naik ke atas */
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.2); /* Efek cahaya lembut */
-}
+    
     <section id="skills">
     <h2 class="section-title">Skills & Tools</h2>
     <div class="skills-grid">
