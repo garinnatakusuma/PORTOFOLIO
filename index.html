@@ -60,18 +60,31 @@
         .nav-links a:hover {
             color: var(--accent);
         }
-
+/* Kotak Transparan untuk Teks Hero */
+.hero-overlay-box {
+    background: rgba(0, 0, 0, 0.6); /* Kotak hitam transparan (60% gelap) */
+    padding: 50px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Garis tepi tipis supaya elegan */
+    backdrop-filter: blur(8px); /* Efek blur kaca pada background */
+    max-width: 850px;
+    margin: 0 20px;
+}
         /* --- HERO SECTION --- */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: radial-gradient(circle at center, #252525 0%, #0f0f11 70%);
-        }
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    /* Ganti 'BACKGROUND.jpg' */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('nama-foto-kamu.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Membuat efek parallax saat di-scroll */
+}    
 
         .hero h1 {
             font-size: 3rem;
@@ -229,15 +242,19 @@
         </div>
     </nav>
 
-    <header class="hero">
+   <header class="hero">
+    <div class="hero-overlay-box"> 
         <h3>Hi, I'm</h3>
         <h1>Garin Nata <span>Kusuma</span></h1>
         <h3>Footwear Designer | Technical Design Drafter</h3>
-        <p style="max-width: 600px; color: #888; margin-bottom: 30px;">
+        <p style="max-width: 600px; color: #eee; margin-bottom: 30px;">
             Bridging creative vision with manufacturing precision.
         </p>
-        <a href="#projects" class="btn">View My Work</a>
-    </header>
+        <div style="display: flex; gap: 15px; justify-content: center;">
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </div>
+</header>
 
     <section id="about">
         <h2 class="section-title">About Me</h2>
@@ -280,24 +297,68 @@
 
         </div>
     </section>
+/* Container untuk kotak skill */
+.skill-box {
+    position: relative;
+    overflow: hidden;
+}
 
+/* Panel yang muncul saat mouse menyentuh kotak (hover) */
+.hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 29, 0.95); /* Menutup teks asli saat hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transition: 0.4s ease-in-out;
+    pointer-events: none;
+}
+
+/* Munculkan gambar logo saat kotak disentuh mouse */
+.skill-box:hover .hover-image {
+    opacity: 1;
+}
+
+/* Ukuran gambar gabungan logo aplikasi */
+.hover-image img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+}
     <section id="skills">
-        <h2 class="section-title">Skills & Tools</h2>
-        <div class="skills-grid">
-            <div class="skill-box">
-                <h4>Design</h4>
-                <p style="font-size: 0.9rem; color: #888;">Adobe Illustrator, Corel Draw, Photoshop, Footwear Sketching</p>
-            </div>
-            <div class="skill-box">
-                <h4>Technical CAD</h4>
-                <p style="font-size: 0.9rem; color: #888;">AutoCAD, Rhinoceros, Nanocad, Delcam Shoemaker</p>
-            </div>
-            <div class="skill-box">
-                <h4>Manufacturing</h4>
-                <p style="font-size: 0.9rem; color: #888;">Vulcanization, Operational Excellence, Computer Stiching Drafter</p>
+    <h2 class="section-title">Skills & Tools</h2>
+    <div class="skills-grid">
+        
+        <div class="skill-box">
+            <h4>Design</h4>
+            <p style="font-size: 0.9rem; color: #888;">Adobe Illustrator, Corel Draw, Photoshop, Footwear Sketching</p>
+            <div class="hover-image">
+                <img src="LOGO DESIGN.png" alt="Design Logos">
             </div>
         </div>
-    </section>
+
+        <div class="skill-box">
+            <h4>Technical CAD</h4>
+            <p style="font-size: 0.9rem; color: #888;">AutoCAD, Rhinoceros, Nanocad, Delcam Shoemaker</p>
+            <div class="hover-image">
+                <img src="LOGO MANU.png" alt="CAD Logos">
+            </div>
+        </div>
+
+        <div class="skill-box">
+            <h4>Manufacturing</h4>
+            <p style="font-size: 0.9rem; color: #888;">Vulcanization, Operational Excellence, Computer Stitching Drafter</p>
+            <div class="hover-image">
+            </div>
+        </div>
+
+    </div>
+</section>
 
     <section id="contact" style="background: #151515;">
         <h2 class="section-title">Let's Connect</h2>
