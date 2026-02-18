@@ -80,7 +80,7 @@
     text-align: center;
     padding: 0 20px;
     /* Ganti 'BACKGROUND.jpg' */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(BACKGROUND.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(BACKGROUND.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Membuat efek parallax saat di-scroll */
@@ -302,57 +302,26 @@
     position: relative;
     overflow: hidden;
 }
-
-/* Panel yang muncul saat mouse menyentuh kotak (hover) */
-  .hover-image img {
-    /* Gunakan width 100% agar lebarnya mentok di batas kotak */
-    width: 100%; 
-    /* height auto supaya gambarnya nggak penyet/gepeng */
-    height: auto; 
-    /* Tambahkan padding supaya gambar nggak nempel banget ke pinggir kotak */
-    padding: 10px;
-    object-fit: contain;
-}
-}
-
-/* Munculkan gambar logo saat kotak disentuh mouse */
-.skill-box:hover .hover-image {
-    opacity: 1;
-}
-
-/* Ukuran gambar gabungan logo aplikasi */
-.hover-image img {
-    max-width: 85%;
-    max-height: 85%;
-    object-fit: contain;
+.skill-box:hover {
+    border-color: var(--accent); /* Memberi garis orange saat di-hover */
+    transform: translateY(-5px); /* Kotak sedikit naik ke atas */
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.2); /* Efek cahaya lembut */
 }
     <section id="skills">
     <h2 class="section-title">Skills & Tools</h2>
     <div class="skills-grid">
-        
         <div class="skill-box">
             <h4>Design</h4>
             <p style="font-size: 0.9rem; color: #888;">Adobe Illustrator, Corel Draw, Photoshop, Footwear Sketching</p>
-            <div class="hover-image">
-                <img src="LOGO DESIGN.png" alt="Design Logos">
-            </div>
         </div>
-
         <div class="skill-box">
             <h4>Technical CAD</h4>
-            <p style="font-size: 0.9rem; color: #888;">AutoCAD, Rhinoceros, Nanocad, Delcam Shoemaker</p>
-            <div class="hover-image">
-                <img src="LOGO MANU.png" alt="CAD Logos">
-            </div>
+            <p style="font-size: 0.9rem; color: #888;">Rhinoceros, AutoCAD, Nanocad, Delcam Shoemaker</p>
         </div>
-
         <div class="skill-box">
             <h4>Manufacturing</h4>
-            <p style="font-size: 0.9rem; color: #888;">Vulcanization, Operational Excellence, Computer Stitching Drafter</p>
-            <div class="hover-image">
-            </div>
+            <p style="font-size: 0.9rem; color: #888;">Pattern Making, Vulcanization Process, Computer Stiching, Operational Excellence</p>
         </div>
-
     </div>
 </section>
 
