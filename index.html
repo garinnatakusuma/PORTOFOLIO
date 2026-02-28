@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garin Nata Kusuma | Footwear Designer</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
@@ -60,31 +63,33 @@
         .nav-links a:hover {
             color: var(--accent);
         }
-/* Kotak Transparan untuk Teks Hero */
-.hero-overlay-box {
-    background: rgba(0, 0, 0, 0.6); /* Kotak hitam transparan (60% gelap) */
-    padding: 50px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Garis tepi tipis supaya elegan */
-    backdrop-filter: blur(8px); /* Efek blur kaca pada background */
-    max-width: 850px;
-    margin: 0 20px;
-}
+
+        /* Kotak Transparan untuk Teks Hero */
+        .hero-overlay-box {
+            background: rgba(0, 0, 0, 0.6); /* Kotak hitam transparan (60% gelap) */
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Garis tepi tipis supaya elegan */
+            backdrop-filter: blur(8px); /* Efek blur kaca pada background */
+            max-width: 850px;
+            margin: 0 20px;
+        }
+
         /* --- HERO SECTION --- */
         .hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 20px;
-    /* Ganti 'BACKGROUND.jpg' */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(BACKGROUND.jpg);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Membuat efek parallax saat di-scroll */
-}    
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            /* Ganti 'BACKGROUND.jpg' */
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(BACKGROUND.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Membuat efek parallax saat di-scroll */
+        }    
 
         .hero h1 {
             font-size: 3rem;
@@ -108,6 +113,7 @@
             color: var(--accent);
             border-radius: 5px;
             font-weight: bold;
+            display: inline-block;
         }
 
         .btn:hover {
@@ -128,19 +134,14 @@
             display: inline-block;
         }
 
-        /* --- PROJECTS (GALLERY STYLE) --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
+        /* --- PROJECTS CARDS --- */
         .project-card {
             background: var(--card-bg);
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease;
             border: 1px solid rgba(255,255,255,0.05);
+            height: 100%; /* Agar semua kartu tingginya sama di slider */
         }
 
         .project-card:hover {
@@ -190,6 +191,18 @@
             margin-bottom: 5px;
         }
 
+        /* --- SWIPER CUSTOM STYLES --- */
+        .swiper {
+            width: 100%;
+            padding: 20px 0 60px 0 !important; /* Ruang untuk efek hover dan tombol */
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--accent) !important;
+        }
+        .swiper-slide {
+            height: auto; /* Agar tinggi card menyesuaikan isinya */
+        }
+
         /* --- SKILLS & SERVICES --- */
         .skills-grid {
             display: grid;
@@ -202,11 +215,21 @@
             padding: 20px;
             border-radius: 8px;
             text-align: center;
+            position: relative; 
+            overflow: hidden; 
+            transition: 0.3s;
+            border: 1px solid transparent;
         }
 
         .skill-box h4 {
             color: var(--text-main);
             margin-bottom: 10px;
+        }
+
+        .skill-box:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(254, 163, 17, 0.3);
         }
 
         /* --- FOOTER --- */
@@ -227,18 +250,6 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             nav { flex-direction: column; gap: 10px; }
-        }
-        .skill-box { 
-            position: relative; 
-            overflow: hidden; 
-            transition: 0.3s; /* Tambahkan ini agar gerakannya mulus */
-            border: 1px solid transparent; /* Biar pas hover nggak goyang */
-        }
-
-        .skill-box:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(254, 163, 17, 0.3);
         }
     </style>
 </head>
@@ -277,73 +288,89 @@
 
     <section id="projects">
         <h2 class="section-title">Featured Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <div class="img-container">
-                    <img src="TOPAN2.jpg" alt="Smooth Criminal Project">
+        
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="img-container">
+                            <img src="TOPAN2.jpg" alt="Smooth Criminal Project">
+                        </div>
+                        <div class="card-content">
+                            <h3>Project College: SMOOTH CRIMINAL JACKET</h3>
+                            <p><strong>jacket.</strong> that seamlessly blends Javanese cultural heritage with the iconic style of the 'King of Pop,' Michael Jackson. This project explores the use of premium lambskin leather and traditional Sorjan-patterned woven fabric (Tenun) to create an innovative and luxurious garment. Originally developed as an academic project, this piece was selected to be showcased in a prestigious fashion show at the PDIN (National Industrial Design Center) building.</p>
+                            <span class="tag">Classic</span>
+                            <span class="tag">Street Culture</span>
+                            <span class="tag">Leather Tech</span>
+                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                *Details include: Story Writing, Moodboard, Technical Pattern Making (Leather & Tenun), and Full Production Workflow.
+                            </p>
+                            <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" class="btn">View Details</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <h3>Project College: SMOOTH CRIMINAL JACKET</h3>
-                    <p><strong>jacket.</strong> that seamlessly blends Javanese cultural heritage with the iconic style of the 'King of Pop,' Michael Jackson. This project explores the use of premium lambskin leather and traditional Sorjan-patterned woven fabric (Tenun) to create an innovative and luxurious garment. Originally developed as an academic project, this piece was selected to be showcased in a prestigious fashion show at the PDIN (National Industrial Design Center) building.</p>
-                    <span class="tag">Classic</span>
-                    <span class="tag">Street Culture</span>
-                    <span class="tag">Leather Tech</span>
-                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-    *Details include: Story Writing, Moodboard, Technical Pattern Making (Leather & Tenun), and Full Production Workflow.
-</p>
-                    <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" class="btn">View Details</a>
+                
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="img-container">
+                            <img src="20260218_221106_0000 (1).png" alt="Reverve Project">
+                        </div>
+                        <div class="card-content">
+                            <h3>Project 1: REVERVE</h3>
+                            <p><strong>The "Climate Adapt" Concept.</strong> Inspired by potential extreme environmental shifts. Engineered with advanced vulcanization technology for a future ice-age scenario.</p>
+                            <span class="tag">Footwear Design</span>
+                            <span class="tag">Vulcanized</span>
+                            <span class="tag">Concept</span>
+                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                *Details include: Technical Drawing, Material Specs, & R&D Process
+                            </p>
+                            <a href="https://drive.google.com/file/d/1QuzEPMjsKXmWg1QH1tJIt6kzAem_eKuC/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="img-container">
-                    <img src="20260218_221106_0000 (1).png" alt="Reverve Project">
-                </div>
-                <div class="card-content">
-                    <h3>Project 1: REVERVE</h3>
-                    <p><strong>The "Climate Adapt" Concept.</strong> Inspired by potential extreme environmental shifts. Engineered with advanced vulcanization technology for a future ice-age scenario.</p>
-                    <span class="tag">Footwear Design</span>
-                    <span class="tag">Vulcanized</span>
-                    <span class="tag">Concept</span>
-                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-    *Details include: Technical Drawing, Material Specs, & R&D Process
-</p>
-                    <a href="https://drive.google.com/file/d/1QuzEPMjsKXmWg1QH1tJIt6kzAem_eKuC/view?usp=drive_link" target="_blank" class="btn">View Details</a>
-                </div>
-            </div>
 
-            <div class="project-card">
-                <div class="img-container">
-                    <img src="20260218_221106_0000 (2).png" alt="Muscle Memory Project">
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="img-container">
+                            <img src="20260218_221106_0000 (2).png" alt="Muscle Memory Project">
+                        </div>
+                        <div class="card-content">
+                            <h3>Project 2: MUSCLE MEMORY</h3>
+                            <p><strong>Urban Skateboard Performance.</strong> Designed for the heat of East Java. Lightweight, breathable, and refined for high-performance versatility in skateboarding.</p>
+                            <span class="tag">Performance</span>
+                            <span class="tag">Skateboarding</span>
+                            <span class="tag">Leather Tech</span>
+                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                *Details include: Technical Drawing, Performance Testing, & R&D Process
+                            </p>
+                            <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <h3>Project 2: MUSCLE MEMORY</h3>
-                    <p><strong>Urban Skateboard Performance.</strong> Designed for the heat of East Java. Lightweight, breathable, and refined for high-performance versatility in skateboarding.</p>
-                    <span class="tag">Performance</span>
-                    <span class="tag">Skateboarding</span>
-                    <span class="tag">Leather Tech</span>
-                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-    *Details include: Technical Drawing, Performance Testing, & R&D Process
-</p>
-                    <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="img-container">
+                            <img src="porto 3.png" alt="Dark System Projects">
+                        </div>
+                        <div class="card-content">
+                            <h3>Project 3: DARK SYSTEM</h3>
+                            <p><strong>Lifestyle Defiance & Social Connectivity.</strong>  The 'Dark System' is a term that highlights the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices, serving as a visual manifesto for those who refuse to be silenced. By wearing them, we stand in solidarity with those who have been silenced and overlooked. In a structured social order, lines are often drawn, trapping those on the outside in a cycle of exclusivity. These shoes act as a bridge that connects these divides. Every pair is a declaration of our refusal to be silent in the face of oppression and a statement that we are all equal, with the same right to pursue our dreams.</p>
+                            <span class="tag">Lifestyle</span>
+                            <span class="tag">Solidarity</span>
+                            <span class="tag">Social Statment</span>
+                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                *Details include: 2D/3D Design Process, Riot-Inspired Moodboards, & Meaning Analysis
+                            </p>
+                            <a href="https://drive.google.com/file/d/1HHs4mxWiBJkWJ5zMDvbiCtm4tfmAv0jU/view?usp=drive_link" class="btn">View Details</a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        <div class="project-card">
-                <div class="img-container">
-                    <img src="porto 3.png" alt="Dark System Projects">
-                </div>
-                <div class="card-content">
-                    <h3>Project 3: DARK SYSTEM</h3>
-                    <p><strong>Lifestyle Defiance & Social Connectivity.</strong>  The 'Dark System' is a term that highlights the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices, serving as a visual manifesto for those who refuse to be silenced. By wearing them, we stand in solidarity with those who have been silenced and overlooked. In a structured social order, lines are often drawn, trapping those on the outside in a cycle of exclusivity. These shoes act as a bridge that connects these divides. Every pair is a declaration of our refusal to be silent in the face of oppression and a statement that we are all equal, with the same right to pursue our dreams.</p>
-                    <span class="tag">Lifestyle</span>
-                    <span class="tag">Solidarity</span>
-                    <span class="tag">Social Statment</span>
-                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-    *Details include: 2D/3D Design Process, Riot-Inspired Moodboards, & Meaning Analysis
-</p>
-                    <a href="https://drive.google.com/file/d/1HHs4mxWiBJkWJ5zMDvbiCtm4tfmAv0jU/view?usp=drive_link" class="btn">View Details</a>
-                </div>
-            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
     </section>
     
@@ -380,5 +407,22 @@
         <p>&copy; 2026 Garin Nata Kusuma. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3, // Tampilkan 3 kartu sekaligus
+        spaceBetween: 30, // Jarak antar kartu
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          // Responsif: Di layar kecil (HP) tampil 1, layar sedang 2, PC 3
+          320: { slidesPerView: 1, spaceBetween: 10 },
+          768: { slidesPerView: 2, spaceBetween: 20 },
+          1024: { slidesPerView: 3, spaceBetween: 30 }
+        }
+      });
+    </script>
 </body>
 </html>
