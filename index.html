@@ -14,8 +14,12 @@
             --card-bg: #1a1a1d;   /* Latar kartu */
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
-            --accent: #fca311;    /* Warna aksen (Orange/Emas) mirip referensi */
+            --accent: #fca311;    /* Warna aksen (Orange/Emas) */
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Membuat efek scroll menjadi halus saat menu diklik */
         }
 
         * {
@@ -53,6 +57,11 @@
             font-weight: bold;
             color: var(--accent);
             letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .nav-links {
@@ -256,7 +265,7 @@
 <body>
 
     <nav>
-        <div class="logo">PROJECTS CATALOGUE</div>
+        <a href="#home" class="logo">PROJECTS CATALOGUE</a>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
@@ -265,7 +274,7 @@
         </div>
     </nav>
 
-   <header class="hero">
+   <header id="home" class="hero">
     <div class="hero-overlay-box"> 
         <h3>Hi, I'm</h3>
         <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
@@ -281,10 +290,10 @@
 
     <section id="about">
         <h2 class="section-title">About Me</h2>
-        <p style="max-width: 800px; color: #ccc;">
+        <div style="max-width: 800px; color: #ccc;">
            <p>Hi, I'm <strong>Garin Kusuma</strong>. I’ve been designing footwear for the past four years, mostly because I’m just a curious guy who likes to see how we live in Indonesia. I have this habit of picking up random things—unique objects, weird stories, or odd experiences—and somehow connecting them all together. People might think it’s a bit 'strange' or 'out there,' but I actually love the chaos in my head.</p>
-<p>Right now, what you see here are my design narratives, but I’m working on making them a reality very soon. To support this, I also serve as a <strong>Design Drafter</strong> for automated manufacturing, with a focus on pallet design and computer stitching processes.</p>
-        </p>
+           <p style="margin-top: 15px;">Right now, what you see here are my design narratives, but I’m working on making them a reality very soon. To support this, I also serve as a <strong>Design Drafter</strong> for automated manufacturing, with a focus on pallet design and computer stitching processes.</p>
+        </div>
     </section>
 
     <section id="projects">
@@ -388,6 +397,27 @@
                     </div>
                 </div>
 
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <div class="img-container">
+                            <img src="SCAR FLOW.png" alt="Scar Flow - IFCC Submission">
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 0.75rem; font-weight: bold; color: #ff823a; letter-spacing: 1.5px; margin-bottom: 5px; text-transform: uppercase;">
+                                Official Submission: IFCC 2026
+                            </p>
+                            <h3>Project 5: SCAR FLOW x REISEN</h3>
+                            <p><strong>The "Adaptive Current" Concept.</strong> An official design entry for the <strong>Indonesian Footwear Creative Competition (IFCC)</strong>, developed specifically for <strong>REI Footwear</strong>. This project bridges urban utility with rugged trail performance, featuring technical TPU architecture and an outsole system validated through intense environment with 3 styles concept.</p>
+                            <span class="tag">IFCC Entry</span>
+                            <span class="tag">REI Footwear</span>
+                            <span class="tag">Trail Performance</span>
+                            <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                *Includes: IFCC Design Board, Technical Material Specifications, 3D Rendering by Vizcom, and Visual Imaginary Use.
+                            </p>
+                            <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" class="btn">View Full Submission</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -395,22 +425,22 @@
     </section>
     
     <section id="skills">
-    <h2 class="section-title">Skills & Tools</h2>
-    <div class="skills-grid">
-        <div class="skill-box">
-            <h4>Design</h4>
-            <p style="font-size: 0.9rem; color: #888;">Adobe Illustrator, Corel Draw, Photoshop, Footwear Sketching</p>
+        <h2 class="section-title">Skills & Tools</h2>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <h4>Design</h4>
+                <p style="font-size: 0.9rem; color: #888;">Adobe Illustrator, Corel Draw, Photoshop, Footwear Sketching</p>
+            </div>
+            <div class="skill-box">
+                <h4>Technical CAD</h4>
+                <p style="font-size: 0.9rem; color: #888;">Rhinoceros, AutoCAD, Nanocad, Delcam Shoemaker</p>
+            </div>
+            <div class="skill-box">
+                <h4>Manufacturing</h4>
+                <p style="font-size: 0.9rem; color: #888;">Pattern Making, Vulcanization Process, Computer Stiching, Operational Excellence</p>
+            </div>
         </div>
-        <div class="skill-box">
-            <h4>Technical CAD</h4>
-            <p style="font-size: 0.9rem; color: #888;">Rhinoceros, AutoCAD, Nanocad, Delcam Shoemaker</p>
-        </div>
-        <div class="skill-box">
-            <h4>Manufacturing</h4>
-            <p style="font-size: 0.9rem; color: #888;">Pattern Making, Vulcanization Process, Computer Stiching, Operational Excellence</p>
-        </div>
-    </div>
-</section>
+    </section>
 
     <section id="contact" style="background: #151515;">
         <h2 class="section-title">Let's Connect</h2>
@@ -430,14 +460,13 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
       var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3, // Tampilkan 3 kartu sekaligus
-        spaceBetween: 30, // Jarak antar kartu
+        slidesPerView: 3, 
+        spaceBetween: 30, 
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
         breakpoints: {
-          // Responsif: Di layar kecil (HP) tampil 1, layar sedang 2, PC 3
           320: { slidesPerView: 1, spaceBetween: 10 },
           768: { slidesPerView: 2, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 30 }
