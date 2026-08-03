@@ -10,16 +10,16 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            --bg-color: #0f0f11; /* Latar belakang gelap pekat */
-            --card-bg: #1a1a1d;   /* Latar kartu */
+            --bg-color: #0f0f11;
+            --card-bg: #1a1a1d;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
-            --accent: #fca311;    /* Warna aksen (Orange/Emas) */
+            --accent: #fca311;
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         html {
-            scroll-behavior: smooth; /* Membuat efek scroll menjadi halus saat menu diklik */
+            scroll-behavior: smooth;
         }
 
         * {
@@ -73,13 +73,12 @@
             color: var(--accent);
         }
 
-        /* Kotak Transparan untuk Teks Hero */
         .hero-overlay-box {
-            background: rgba(0, 0, 0, 0.6); /* Kotak hitam transparan (60% gelap) */
+            background: rgba(0, 0, 0, 0.6);
             padding: 50px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Garis tepi tipis supaya elegan */
-            backdrop-filter: blur(8px); /* Efek blur kaca pada background */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
             max-width: 850px;
             margin: 0 20px;
         }
@@ -93,12 +92,11 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            /* Ganti 'BACKGROUND.jpg' */
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(BACKGROUND.jpg);
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Membuat efek parallax saat di-scroll */
-        }    
+            background-attachment: fixed;
+        }  
 
         .hero h1 {
             font-size: 3rem;
@@ -132,7 +130,7 @@
 
         /* --- SECTIONS GENERAL --- */
         section {
-            padding: 80px 10%;
+            padding: 60px 10%; /* Sedikit dikurangi agar jarak antar kategori tidak terlalu jauh */
         }
 
         .section-title {
@@ -143,14 +141,29 @@
             display: inline-block;
         }
 
-        /* --- PROJECTS CARDS --- */
+        /* --- PROJECTS CARDS & GRID --- */
+        /* Ditambahkan khusus untuk College & Technical yang isinya sedikit (tidak butuh swiper) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        @media (min-width: 1024px) {
+            .projects-grid .project-card {
+                max-width: 380px; /* Ukuran disamakan dengan lebar swiper slide */
+            }
+        }
+
         .project-card {
             background: var(--card-bg);
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease;
             border: 1px solid rgba(255,255,255,0.05);
-            height: 100%; /* Agar semua kartu tingginya sama di slider */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -161,7 +174,7 @@
         .img-container {
             width: 100%;
             height: 250px;
-            background: #252525; /* Background gelap agar PNG transparan terlihat bagus */
+            background: #252525;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -171,12 +184,15 @@
         .project-card img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Agar sepatu tidak terpotong */
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); /* Efek bayangan sepatu */
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
         }
 
         .card-content {
             padding: 25px;
+            flex-grow: 1; /* Mendorong tombol ke bawah agar rata */
+            display: flex;
+            flex-direction: column;
         }
 
         .card-content h3 {
@@ -200,16 +216,21 @@
             margin-bottom: 5px;
         }
 
+        .btn-wrapper {
+            margin-top: auto; /* Memastikan tombol selalu ada di bawah */
+            padding-top: 15px;
+        }
+
         /* --- SWIPER CUSTOM STYLES --- */
         .swiper {
             width: 100%;
-            padding: 20px 0 60px 0 !important; /* Ruang untuk efek hover dan tombol */
+            padding: 20px 0 60px 0 !important;
         }
         .swiper-button-next, .swiper-button-prev {
             color: var(--accent) !important;
         }
         .swiper-slide {
-            height: auto; /* Agar tinggi card menyesuaikan isinya */
+            height: auto;
         }
 
         /* --- SKILLS & SERVICES --- */
@@ -268,9 +289,10 @@
         <a href="#home" class="logo">PROJECTS CATALOGUE</a>
         <div class="nav-links">
             <a href="#about">About</a>
-            <a href="#projects">Projects</a>
+            <a href="#college">College</a>
+            <a href="#footwear">Footwear</a>
+            <a href="#technical">Technical</a>
             <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
         </div>
     </nav>
 
@@ -280,10 +302,10 @@
         <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
         <h3>Footwear Designer | Technical Design Drafter</h3>
         <p style="max-width: 600px; color: #eee; margin-bottom: 30px;">
-            Bridging creative vision with manufacturing precision.
+            I am a Footwear Designer & Developer specializing in decoding narratives into functional, high-performance products. Where storytelling meets advanced technical execution.
         </p>
         <div style="display: flex; gap: 15px; justify-content: center;">
-            <a href="#projects" class="btn">View My Work</a>
+            <a href="#footwear" class="btn">View My Work</a>
         </div>
     </div>
 </header>
@@ -296,30 +318,39 @@
         </div>
     </section>
 
-    <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
+    <!-- KATEGORI 1: COLLEGE PROJECTS -->
+    <section id="college">
+        <h2 class="section-title">College Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="img-container">
+                    <img src="TOPAN2.jpg" alt="Smooth Criminal Project">
+                </div>
+                <div class="card-content">
+                    <h3>Project College: SMOOTH CRIMINAL JACKET</h3>
+                    <p><strong>Fashion Apparel.</strong> A jacket that seamlessly blends Javanese cultural heritage with the iconic style of the 'King of Pop,' Michael Jackson. This project explores the use of premium lambskin leather and traditional Sorjan-patterned woven fabric (Tenun) to create an innovative and luxurious garment. Originally developed as an academic project, this piece was selected to be showcased in a prestigious fashion show at the PDIN (National Industrial Design Center) building.</p>
+                    <div>
+                        <span class="tag">Classic</span>
+                        <span class="tag">Street Culture</span>
+                        <span class="tag">Leather Tech</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                        *Details include: Story Writing, Moodboard, Technical Pattern Making (Leather & Tenun), and Full Production Workflow.
+                    </p>
+                    <div class="btn-wrapper">
+                        <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KATEGORI 2: FOOTWEAR CONCEPTS (DENGAN SLIDER) -->
+    <section id="footwear" style="background-color: #121215;"> <!-- Diberi sedikit perbedaan warna background -->
+        <h2 class="section-title">Footwear Concept & Design</h2>
         
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="TOPAN2.jpg" alt="Smooth Criminal Project">
-                        </div>
-                        <div class="card-content">
-                            <h3>Project College: SMOOTH CRIMINAL JACKET</h3>
-                            <p><strong>jacket.</strong> that seamlessly blends Javanese cultural heritage with the iconic style of the 'King of Pop,' Michael Jackson. This project explores the use of premium lambskin leather and traditional Sorjan-patterned woven fabric (Tenun) to create an innovative and luxurious garment. Originally developed as an academic project, this piece was selected to be showcased in a prestigious fashion show at the PDIN (National Industrial Design Center) building.</p>
-                            <span class="tag">Classic</span>
-                            <span class="tag">Street Culture</span>
-                            <span class="tag">Leather Tech</span>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: Story Writing, Moodboard, Technical Pattern Making (Leather & Tenun), and Full Production Workflow.
-                            </p>
-                            <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" class="btn">View Details</a>
-                        </div>
-                    </div>
-                </div>
                 
                 <div class="swiper-slide">
                     <div class="project-card">
@@ -329,13 +360,17 @@
                         <div class="card-content">
                             <h3>Project 1: REVERVE</h3>
                             <p><strong>The "Climate Adapt" Concept.</strong> Inspired by potential extreme environmental shifts. Engineered with advanced vulcanization technology for a future ice-age scenario.</p>
-                            <span class="tag">Footwear Design</span>
-                            <span class="tag">Vulcanized</span>
-                            <span class="tag">Concept</span>
+                            <div>
+                                <span class="tag">Footwear Design</span>
+                                <span class="tag">Vulcanized</span>
+                                <span class="tag">Concept</span>
+                            </div>
                             <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
                                 *Details include: Technical Drawing, Material Specs, & R&D Process
                             </p>
-                            <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                            <div class="btn-wrapper">
+                                <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -348,13 +383,17 @@
                         <div class="card-content">
                             <h3>Project 2: MUSCLE MEMORY</h3>
                             <p><strong>Urban Skateboard Performance.</strong> Designed for the heat of East Java. Lightweight, breathable, and refined for high-performance versatility in skateboarding.</p>
-                            <span class="tag">Performance</span>
-                            <span class="tag">Skateboarding</span>
-                            <span class="tag">Leather Tech</span>
+                            <div>
+                                <span class="tag">Performance</span>
+                                <span class="tag">Skateboarding</span>
+                                <span class="tag">Leather Tech</span>
+                            </div>
                             <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
                                 *Details include: Technical Drawing, Performance Testing, & R&D Process
                             </p>
-                            <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                            <div class="btn-wrapper">
+                                <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -366,14 +405,18 @@
                         </div>
                         <div class="card-content">
                             <h3>Project 3: DARK SYSTEM</h3>
-                            <p><strong>Lifestyle Defiance & Social Connectivity.</strong>  The 'Dark System' is a term that highlights the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices, serving as a visual manifesto for those who refuse to be silenced. By wearing them, we stand in solidarity with those who have been silenced and overlooked. In a structured social order, lines are often drawn, trapping those on the outside in a cycle of exclusivity. These shoes act as a bridge that connects these divides. Every pair is a declaration of our refusal to be silent in the face of oppression and a statement that we are all equal, with the same right to pursue our dreams.</p>
-                            <span class="tag">Lifestyle</span>
-                            <span class="tag">Solidarity</span>
-                            <span class="tag">Social Statment</span>
+                            <p><strong>Lifestyle Defiance & Social Connectivity.</strong> The 'Dark System' is a term that highlights the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices, serving as a visual manifesto for those who refuse to be silenced. Every pair is a declaration of our refusal to be silent in the face of oppression and a statement that we are all equal.</p>
+                            <div>
+                                <span class="tag">Lifestyle</span>
+                                <span class="tag">Solidarity</span>
+                                <span class="tag">Social Statement</span>
+                            </div>
                             <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
                                 *Details include: 2D/3D Design Process, Riot-Inspired Moodboards, & Meaning Analysis
                             </p>
-                            <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" class="btn">View Details</a>
+                            <div class="btn-wrapper">
+                                <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" class="btn">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -386,13 +429,17 @@
                         <div class="card-content">
                             <h3>Project 4: SPICE BLOOM</h3>
                             <p><strong>The "Heritage Flow" Concept.</strong> Inspired by the historical legacy of the Indonesian spice trade and the modern global running phenomenon. Engineered with organic sole ergonomics to capture the high-energy pulse of the equatorial sun.</p>
-                            <span class="tag">Running</span>
-                            <span class="tag">Performance</span>
-                            <span class="tag">Sport</span>
+                            <div>
+                                <span class="tag">Running</span>
+                                <span class="tag">Performance</span>
+                                <span class="tag">Sport</span>
+                            </div>
                             <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
                                 *Details include: Concept Explanation, Visual Development, & Technical Specifications
                             </p>
-                            <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" class="btn">View Details</a>
+                            <div class="btn-wrapper">
+                                <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" class="btn">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -408,42 +455,84 @@
                             </p>
                             <h3>Project 5: SCAR FLOW x REISEN</h3>
                             <p><strong>The "Adaptive Current" Concept.</strong> An official design entry for the <strong>Indonesian Footwear Creative Competition (IFCC)</strong>, developed specifically for <strong>REI Footwear</strong>. This project bridges urban utility with rugged trail performance, featuring technical TPU architecture and an outsole system validated through intense environment with 3 styles concept.</p>
-                            <span class="tag">IFCC Entry</span>
-                            <span class="tag">REI Footwear</span>
-                            <span class="tag">Trail Performance</span>
+                            <div>
+                                <span class="tag">IFCC Entry</span>
+                                <span class="tag">REI Footwear</span>
+                                <span class="tag">Trail Performance</span>
+                            </div>
                             <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Includes: IFCC Design Board, Technical Material Specifications, 3D Rendering by Vizcom, and Visual Imaginary Use.
+                                *Includes: IFCC Design Board, Technical Material Specifications, 3D Rendering by Vizcom.
                             </p>
-                            <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" class="btn">View Full Submission</a>
+                            <div class="btn-wrapper">
+                                <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" class="btn">View Full Submission</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                   <div class="swiper-slide">
+                
+                <div class="swiper-slide">
                     <div class="project-card">
                         <div class="img-container">
                             <img src="BLAKRAKAN.png" alt="BLAKRAAN">
                         </div>
                         <div class="card-content">
-                            </p>
                            <h3>Project 6: BLAKRAAN</h3>
                             <p><strong>The "Aimless Wandering" Concept.</strong> A tribute to the pure essence of unburdened childhood exploration. Designed with tactical, earthy accents and rugged comfort to bridge small-town nostalgia with modern urban functionality.</p>
-                            <span class="tag">Footwear Design</span>
-                            <span class="tag">Casual Silhouette</span>
-                            <span class="tag">Concept</span>
+                            <div>
+                                <span class="tag">Footwear Design</span>
+                                <span class="tag">Casual Silhouette</span>
+                                <span class="tag">Concept</span>
+                            </div>
                             <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
                                 *Details include: Storytelling, Technical Specs, & Colorway Archive
                             </p>
-                            <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" class="btn">View Details</a>
+                            <div class="btn-wrapper">
+                                <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" class="btn">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Tombol navigasi slider -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
     </section>
+
+    <!-- KATEGORI 3: TECHNICAL DRAFTING -->
+    <section id="technical">
+        <h2 class="section-title">Technical Drafting & Manufacturing</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="img-container">
+                    <!-- Silakan ganti placeholder gambar teknikal SCI ini dengan screenshot CAD/mesinmu -->
+                    <img src="TECHNICAL_PLACEHOLDER.png" alt="Computer Stitching & Pallet Engineering">
+                </div>
+                <div class="card-content">
+                    <p style="font-size: 0.75rem; font-weight: bold; color: #ff823a; letter-spacing: 1.5px; margin-bottom: 5px; text-transform: uppercase;">
+                        Professional Work: PT Selalu Cinta Indonesia (SCI)
+                    </p>
+                    <h3>Computer Stitching & Pallet Engineering</h3>
+                    <p><strong>Bridging Design to Production.</strong> Executed technical drafting for automated manufacturing processes. Focused on translating 2D vector lines into 3D surfaces, computer stitching line path generation, and programming highly precise CNC machine codes to manage tool path priorities and ensure manufacturing operational excellence.</p>
+                    <div>
+                        <span class="tag">Technical CAD</span>
+                        <span class="tag">Computer Stitching</span>
+                        <span class="tag">Pallet Design</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                        *Details include: 2D/3D Vector Translation, Stitching Path Priorities, & CNC Pattern Execution.
+                    </p>
+                    <div class="btn-wrapper">
+                        <!-- Ganti "#" dengan link Google Drive portofolio teknikalmu -->
+                        <a href="#" class="btn">View Technical Specs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
-    <section id="skills">
+    <section id="skills" style="background-color: #121215;">
         <h2 class="section-title">Skills & Tools</h2>
         <div class="skills-grid">
             <div class="skill-box">
@@ -456,7 +545,7 @@
             </div>
             <div class="skill-box">
                 <h4>Manufacturing</h4>
-                <p style="font-size: 0.9rem; color: #888;">Pattern Making, Vulcanization Process, Computer Stiching, Operational Excellence</p>
+                <p style="font-size: 0.9rem; color: #888;">Pattern Making, Vulcanization Process, Computer Stitching, Operational Excellence</p>
             </div>
         </div>
     </section>
@@ -467,7 +556,7 @@
         
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
             <a href="mailto:garinkusuma.design@gmail.com" class="btn">Email Me</a>
-            <a href="https://www.linkedin.com/in/garinkusuma" class="btn">linkedIn</a>
+            <a href="https://www.linkedin.com/in/garinkusuma" class="btn">LinkedIn</a>
             <a href="https://www.instagram.com/presidengarin?igsh=MTFjYzlpeWtsMnpubA==" class="btn">Instagram</a>
         </div>
     </section>
