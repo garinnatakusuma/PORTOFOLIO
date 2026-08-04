@@ -128,7 +128,7 @@
             color: #000;
         }
 
-        /* --- ABOUT SECTION STYLES (BARU DITAMBAHKAN) --- */
+        /* --- ABOUT SECTION STYLES --- */
         .about-container {
             display: flex;
             flex-wrap: wrap; 
@@ -270,16 +270,53 @@
             padding-top: 15px;
         }
 
-        /* --- SWIPER CUSTOM STYLES --- */
+        /* --- SWIPER CUSTOM STYLES (DIPERBARUI) --- */
         .swiper {
             width: 100%;
             padding: 20px 0 60px 0 !important;
         }
+        
+        /* Modifikasi Tombol Swiper Agar Jelas Terlihat */
         .swiper-button-next, .swiper-button-prev {
             color: var(--accent) !important;
+            background-color: rgba(26, 26, 29, 0.8); /* Latar belakang semi-transparan */
+            width: 50px !important;
+            height: 50px !important;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Efek bayangan */
+            transition: 0.3s;
         }
+        
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background-color: var(--accent);
+            color: #000 !important;
+        }
+
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 1.3rem !important;
+            font-weight: bold;
+        }
+        
         .swiper-slide {
             height: auto;
+        }
+
+        /* Teks Indikator Swipe (BARU) */
+        .swipe-hint {
+            text-align: right;
+            color: var(--accent);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: -30px;
+            margin-bottom: 20px;
+            font-style: italic;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
         }
 
         /* --- SKILLS & SERVICES --- */
@@ -329,6 +366,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             nav { flex-direction: column; gap: 10px; }
+            .swipe-hint { text-align: center; } /* Teks instruksi di tengah kalau di HP */
         }
     </style>
 </head>
@@ -412,6 +450,11 @@
     <!-- KATEGORI 2: FOOTWEAR CONCEPTS (DENGAN SLIDER) -->
     <section id="footwear" style="background-color: #121215;"> 
         <h2 class="section-title">Footwear Concept & Design</h2>
+        
+        <!-- TEKS PERTANDA GESER DITAMBAHKAN DI SINI -->
+        <div class="swipe-hint">
+            &#8592; Swipe or click arrows to explore more projects &#8594;
+        </div>
         
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -593,6 +636,7 @@
             </div>
         </div>
     </section>
+    
     <section id="skills" style="background-color: #121215;">
         <h2 class="section-title">Skills & Tools</h2>
         <div class="skills-grid">
