@@ -191,6 +191,33 @@
             display: inline-block;
         }
 
+        /* --- COLLEGE SECTION LAYOUT (BARU) --- */
+        .college-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .college-video-wrapper {
+            flex: 1 1 500px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+        }
+
+        .college-video-wrapper iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            border: none;
+        }
+
         /* --- PROJECTS CARDS & GRID --- */
         .projects-grid {
             display: grid;
@@ -270,20 +297,19 @@
             padding-top: 15px;
         }
 
-        /* --- SWIPER CUSTOM STYLES (DIPERBARUI) --- */
+        /* --- SWIPER CUSTOM STYLES --- */
         .swiper {
             width: 100%;
             padding: 20px 0 60px 0 !important;
         }
         
-        /* Modifikasi Tombol Swiper Agar Jelas Terlihat */
         .swiper-button-next, .swiper-button-prev {
             color: var(--accent) !important;
-            background-color: rgba(26, 26, 29, 0.8); /* Latar belakang semi-transparan */
+            background-color: rgba(26, 26, 29, 0.8);
             width: 50px !important;
             height: 50px !important;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Efek bayangan */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
             transition: 0.3s;
         }
         
@@ -301,7 +327,6 @@
             height: auto;
         }
 
-        /* Teks Indikator Swipe (BARU) */
         .swipe-hint {
             text-align: right;
             color: var(--accent);
@@ -366,7 +391,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             nav { flex-direction: column; gap: 10px; }
-            .swipe-hint { text-align: center; } /* Teks instruksi di tengah kalau di HP */
+            .swipe-hint { text-align: center; } 
         }
     </style>
 </head>
@@ -407,7 +432,6 @@
                 <p style="margin-top: 15px;">Right now, what you see here are my design narratives, but I’m working on making them a reality very soon. To support this, I also serve as a <strong>Design Drafter</strong> for automated manufacturing, with a focus on pallet design and computer stitching processes.</p>
             </div>
             
-         
             <div class="about-education">
                 <img src="LOGO POLTEK.png" alt="Politeknik ATK Yogyakarta Logo">
                 
@@ -420,11 +444,13 @@
         </div>
     </section>
 
-    <!-- KATEGORI 1: COLLEGE PROJECTS -->
+    <!-- KATEGORI 1: COLLEGE PROJECTS (DENGAN YOUTUBE) -->
     <section id="college">
         <h2 class="section-title">College Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
+        
+        <div class="college-layout">
+            <!-- Kartu Proyek -->
+            <div class="project-card" style="max-width: 380px; flex: 1 1 320px;">
                 <div class="img-container">
                     <img src="TOPAN2.jpg" alt="Smooth Criminal Project">
                 </div>
@@ -444,6 +470,12 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Kontainer Video YouTube -->
+            <div class="college-video-wrapper">
+                <!-- Ganti "MASUKKAN_ID_YOUTUBE_DISINI" dengan ID asli videomu -->
+                <iframe src="https://www.youtube.com/watch?v=snPK9X9Hn5M?autoplay=1&mute=1&loop=1&playlist=snPK9X9Hn5M" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
         </div>
     </section>
 
@@ -451,7 +483,6 @@
     <section id="footwear" style="background-color: #121215;"> 
         <h2 class="section-title">Footwear Concept & Design</h2>
         
-        <!-- TEKS PERTANDA GESER DITAMBAHKAN DI SINI -->
         <div class="swipe-hint">
             &#8592; Swipe or click arrows to explore more projects &#8594;
         </div>
