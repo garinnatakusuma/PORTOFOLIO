@@ -77,41 +77,35 @@
         /* NOTE UPDATE BARA API: Modifikasi Hero Box */
         /* ========================================== */
         .hero-overlay-box {
-            background: rgba(0, 0, 0, 0.85);
+            /* Background sangat gelap agar api tidak tembus ke dalam (text bersih & terbaca) */
+            background: rgba(10, 10, 12, 0.98); 
             padding: 50px;
             border-radius: 20px;
-            /* Border dibuat agak kemerahan sebagai dasar api */
-            border: 1px solid rgba(255, 69, 0, 0.3); 
-            backdrop-filter: blur(8px);
+            /* Border tipis kemerahan */
+            border: 1px solid rgba(255, 69, 0, 0.4); 
             max-width: 850px;
             margin: 0 20px;
             z-index: 3; 
             position: relative;
         }
 
-        /* Elemen bayangan untuk membuat efek api kecil (embers) di tepi kotak */
+        /* Elemen bayangan pendaran api HANYA di pinggir kotak */
         .hero-overlay-box::before {
             content: "";
             position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            border-radius: inherit;
+            top: -3px; left: -3px; right: -3px; bottom: -3px;
+            border-radius: 22px;
             z-index: -1;
-            background: linear-gradient(45deg, #ff3300, #ff6600, #8b0000, #ff2200);
-            background-size: 400%;
-            opacity: 0.4; /* Opacity rendah agar apinya tidak terlalu terang */
-            filter: blur(5px); /* Diblur agar terlihat seperti hawa panas/api */
-            animation: subtle-fire 4s linear infinite, fire-flicker 0.15s infinite alternate;
+            background: linear-gradient(45deg, #ff2a00, #ff7b00, #ff2a00, #8b0000);
+            background-size: 300%;
+            filter: blur(10px); /* Efek pendaran api di luar kotak */
+            animation: fire-glow 4s linear infinite;
         }
 
-        @keyframes subtle-fire {
-            0% { background-position: 0 0; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0 0; }
-        }
-
-        @keyframes fire-flicker {
-            0% { opacity: 0.2; filter: blur(4px); transform: scale(1); }
-            100% { opacity: 0.5; filter: blur(6px); transform: scale(1.005); }
+        @keyframes fire-glow {
+            0% { background-position: 0% 50%; opacity: 0.5; }
+            50% { background-position: 100% 50%; opacity: 0.9; }
+            100% { background-position: 0% 50%; opacity: 0.5; }
         }
 
         /* Class khusus untuk trigger ledakan saat diklik */
@@ -482,7 +476,7 @@
 
     <svg id="laces-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;"></svg>
 
-    <!-- KOTAK TEKS DENGAN EFEK TERBAKAR -->
+    <!-- KOTAK TEKS DENGAN EFEK TERBAKAR DI PINGGIR -->
     <div class="hero-overlay-box" id="hero-box"> 
         <h3>Hi, I'm</h3>
         <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
@@ -491,7 +485,6 @@
             I am a Footwear Designer & Developer specializing in decoding narratives into functional, high-performance products. Where storytelling meets advanced technical execution.
         </p>
         <div style="display: flex; gap: 15px; justify-content: center;">
-            <!-- NOTE UPDATE: Menambahkan ID btn-explode -->
             <a href="#footwear" class="btn" id="btn-explode">View My Work</a>
         </div>
     </div>
@@ -884,30 +877,23 @@
       animateLaces(); 
     </script>
 
-    <!-- ========================================== -->
-    <!-- NOTE UPDATE LEDAKAN: Script Pemicu Tombol -->
-    <!-- ========================================== -->
+    <!-- SCRIPT PEMICU LEDAKAN -->
     <script>
         document.getElementById('btn-explode').addEventListener('click', function(e) {
-            e.preventDefault(); // Mencegah loncat ke bawah secara instan
+            e.preventDefault(); 
             const box = document.getElementById('hero-box');
             
-            // Tambahkan class animasi ledakan
             box.classList.add('explode-effect');
             
-            // Tunggu 0.35 detik (saat ledakan membesar), lalu scroll ke bawah dengan mulus
             setTimeout(() => {
                 document.querySelector('#footwear').scrollIntoView({ behavior: 'smooth' });
                 
-                // (Opsional) Kembalikan box ke keadaan semula setelah 1.5 detik
-                // Berjaga-jaga kalau user scroll balik ke atas lagi
                 setTimeout(() => {
                     box.classList.remove('explode-effect');
                 }, 1500);
             }, 350); 
         });
     </script>
-    <!-- ========================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
