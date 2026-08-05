@@ -74,50 +74,31 @@
         }
 
         /* ========================================== */
-        /* NOTE UPDATE BARA API: Modifikasi Hero Box */
+        /* KOTAK DIKEMBALIKAN BERSIH SEPERTI SEMULA */
         /* ========================================== */
         .hero-overlay-box {
-            /* Background sangat gelap agar api tidak tembus ke dalam (text bersih & terbaca) */
-            background: rgba(10, 10, 12, 0.98); 
+            background: rgba(0, 0, 0, 0.6);
             padding: 50px;
             border-radius: 20px;
-            /* Border tipis kemerahan */
-            border: 1px solid rgba(255, 69, 0, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
             max-width: 850px;
             margin: 0 20px;
             z-index: 3; 
             position: relative;
         }
 
-        /* Elemen bayangan pendaran api HANYA di pinggir kotak */
-        .hero-overlay-box::before {
-            content: "";
-            position: absolute;
-            top: -3px; left: -3px; right: -3px; bottom: -3px;
-            border-radius: 22px;
-            z-index: -1;
-            background: linear-gradient(45deg, #ff2a00, #ff7b00, #ff2a00, #8b0000);
-            background-size: 300%;
-            filter: blur(10px); /* Efek pendaran api di luar kotak */
-            animation: fire-glow 4s linear infinite;
-        }
-
-        @keyframes fire-glow {
-            0% { background-position: 0% 50%; opacity: 0.5; }
-            50% { background-position: 100% 50%; opacity: 0.9; }
-            100% { background-position: 0% 50%; opacity: 0.5; }
-        }
-
         /* Class khusus untuk trigger ledakan saat diklik */
         .explode-effect {
             animation: box-explode 0.7s forwards cubic-bezier(0.1, 0.9, 0.2, 1);
-            pointer-events: none; /* Mencegah user klik berulang kali saat meledak */
+            pointer-events: none;
         }
 
+        /* Ledakan disesuaikan warnanya agar menyatu dengan aksen oranye */
         @keyframes box-explode {
-            0% { transform: scale(1); filter: brightness(1); opacity: 1; box-shadow: 0 0 10px #ff3300; }
-            40% { transform: scale(1.15); filter: brightness(2) blur(3px); opacity: 0.9; box-shadow: 0 0 100px #ff3300, inset 0 0 30px #ff3300; }
-            100% { transform: scale(2) translateY(-30px); filter: brightness(4) blur(15px); opacity: 0; box-shadow: 0 0 300px #ff3300; }
+            0% { transform: scale(1); filter: brightness(1); opacity: 1; box-shadow: 0 0 10px var(--accent); }
+            40% { transform: scale(1.15); filter: brightness(2) blur(3px); opacity: 0.9; box-shadow: 0 0 100px var(--accent), inset 0 0 30px var(--accent); }
+            100% { transform: scale(2) translateY(-30px); filter: brightness(4) blur(15px); opacity: 0; box-shadow: 0 0 300px var(--accent); }
         }
         /* ========================================== */
 
@@ -476,7 +457,7 @@
 
     <svg id="laces-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;"></svg>
 
-    <!-- KOTAK TEKS DENGAN EFEK TERBAKAR DI PINGGIR -->
+    <!-- KOTAK TEKS BERSIH SEPERTI SEMULA -->
     <div class="hero-overlay-box" id="hero-box"> 
         <h3>Hi, I'm</h3>
         <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
@@ -512,7 +493,6 @@
         </div>
     </section>
 
-    <!-- KATEGORI 1: COLLEGE PROJECTS -->
     <section id="college">
         <h2 class="section-title">College Projects</h2>
         
@@ -544,7 +524,6 @@
         </div>
     </section>
 
-    <!-- KATEGORI 2: FOOTWEAR CONCEPTS -->
     <section id="footwear" style="background-color: #121215;"> 
         <h2 class="section-title">Footwear Concept & Design</h2>
         
@@ -797,7 +776,9 @@
         <p>&copy; 2026 Garin Nata Kusuma. All Rights Reserved.</p>
     </footer>
 
-    <!-- SCRIPT TALI SEPATU INTERAKTIF -->
+    <!-- ========================================== -->
+    <!-- WARNA TALI DIUBAH MENJADI SILVER METALLIC -->
+    <!-- ========================================== -->
     <script>
       const canvas = document.getElementById('laces-svg');
       const heroSection = document.getElementById('home');
@@ -862,11 +843,12 @@
           }
       }
 
+      // Variasi warna Silver Metallic
       const laces = [
-          new Lace(0.15, 0.30, 14, "#0d0d0d", 0.15, 0.75), 
-          new Lace(0.40, 0.20, 10, "#1a1a1a", 0.10, 0.85), 
-          new Lace(0.65, 0.80, 18, "#050505", 0.25, 0.65), 
-          new Lace(0.90, 0.85, 12, "#fca311", 0.12, 0.80)  
+          new Lace(0.15, 0.30, 14, "#e0e0e0", 0.15, 0.75), // Silver terang
+          new Lace(0.40, 0.20, 10, "#c0c0c0", 0.10, 0.85), // Silver medium
+          new Lace(0.65, 0.80, 18, "#a9a9a9", 0.25, 0.65), // Silver agak gelap
+          new Lace(0.90, 0.85, 12, "#d3d3d3", 0.12, 0.80)  // Silver soft
       ];
 
       function animateLaces() {
