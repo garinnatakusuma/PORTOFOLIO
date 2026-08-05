@@ -81,6 +81,9 @@
             backdrop-filter: blur(8px);
             max-width: 850px;
             margin: 0 20px;
+            /* NOTE: Menambahkan z-index agar box ini ada di atas tali */
+            z-index: 2; 
+            position: relative;
         }
 
         /* --- HERO SECTION --- */
@@ -96,6 +99,9 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            /* NOTE: Menambahkan position relative agar tali tidak keluar layar */
+            position: relative; 
+            overflow: hidden;
         }  
 
         .hero h1 {
@@ -409,6 +415,13 @@
     </nav>
 
    <header id="home" class="hero">
+    <!-- ========================================== -->
+    <!-- NOTE MULAI DARI SINI: CONTAINER TALI SEPATU -->
+    <!-- ========================================== -->
+    <svg id="laces-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></svg>
+    <!-- ========================================== -->
+
+    <!-- KOTAK TEKS INI SAMA PERSIS SEPERTI MILIKMU ASLI -->
     <div class="hero-overlay-box"> 
         <h3>Hi, I'm</h3>
         <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
@@ -630,11 +643,9 @@
                     </div>
                 </div>
 
-                <!-- PROYEK 7: TERRA NULLIUS (SEKARANG SUDAH MASUK KANDANG SWIPER) -->
                 <div class="swiper-slide">
                     <div class="project-card">
                         <div class="img-container">
-                            <!-- Pastikan file TERRA.png sudah kamu masukkan ke folder yang sama -->
                             <img src="TERRA.png" alt="TERRA NULLIUS">
                         </div>
                         <div class="card-content">
@@ -655,15 +666,13 @@
                     </div>
                 </div>
 
-            </div> <!-- Penutup swiper-wrapper -->
+            </div> 
             
-            <!-- Tombol navigasi slider -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
     </section>
 
-   <!-- KATEGORI 3: TECHNICAL DRAFTING -->
     <section id="technical">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
         <div class="projects-grid">
@@ -734,6 +743,89 @@
     <footer>
         <p>&copy; 2026 Garin Nata Kusuma. All Rights Reserved.</p>
     </footer>
+
+    <!-- ========================================== -->
+    <!-- NOTE MULAI DARI SINI: SCRIPT TALI SEPATU -->
+    <!-- ========================================== -->
+    <script>
+      const canvas = document.getElementById('laces-svg');
+      const heroSection = document.getElementById('home');
+      let w = heroSection.clientWidth;
+      let h = heroSection.clientHeight;
+      
+      let mouse = { x: w/2, y: h/2, hover: false };
+
+      heroSection.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+          mouse.hover = true;
+      });
+      heroSection.addEventListener('mouseleave', () => { mouse.hover = false; });
+      window.addEventListener('resize', () => {
+          w = heroSection.clientWidth;
+          h = heroSection.clientHeight;
+      });
+
+      class Lace {
+          constructor(y1, y2, thickness, color, tension, friction) {
+              this.y1Ratio = y1;
+              this.y2Ratio = y2;
+              this.tension = tension;
+              this.friction = friction;
+              
+              this.cx = w / 2;
+              this.cy = ((this.y1Ratio + this.y2Ratio) / 2) * h;
+              this.vy = 0;
+
+              this.path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+              this.path.setAttribute("stroke", color);
+              this.path.setAttribute("stroke-width", thickness);
+              this.path.setAttribute("fill", "transparent");
+              this.path.setAttribute("stroke-linecap", "round");
+              this.path.style.filter = "drop-shadow(0px 15px 10px rgba(0,0,0,0.9))"; 
+              canvas.appendChild(this.path);
+          }
+
+          update() {
+              let startY = this.y1Ratio * h;
+              let endY = this.y2Ratio * h;
+              let targetCy = (startY + endY) / 2;
+              let controlX = w / 2;
+
+              if (mouse.hover) {
+                  let dy = mouse.y - targetCy;
+                  if (Math.abs(dy) < 150) { 
+                      targetCy = mouse.y;
+                      controlX = mouse.x;
+                  }
+              }
+
+              let ay = (targetCy - this.cy) * this.tension;
+              this.vy += ay;
+              this.vy *= this.friction;
+              this.cy += this.vy;
+
+              let d = `M -50 ${startY} Q ${controlX} ${this.cy} ${w + 50} ${endY}`;
+              this.path.setAttribute("d", d);
+          }
+      }
+
+      const laces = [
+          new Lace(0.15, 0.30, 14, "#0d0d0d", 0.15, 0.75), 
+          new Lace(0.40, 0.20, 10, "#1a1a1a", 0.10, 0.85), 
+          new Lace(0.65, 0.80, 18, "#050505", 0.25, 0.65), 
+          new Lace(0.90, 0.85, 12, "#fca311", 0.12, 0.80)  
+      ];
+
+      function animateLaces() {
+          laces.forEach(lace => lace.update());
+          requestAnimationFrame(animateLaces);
+      }
+      
+      animateLaces(); 
+    </script>
+    <!-- ========================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
