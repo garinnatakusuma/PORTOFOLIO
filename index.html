@@ -73,18 +73,59 @@
             color: var(--accent);
         }
 
+        /* ========================================== */
+        /* NOTE UPDATE BARA API: Modifikasi Hero Box */
+        /* ========================================== */
         .hero-overlay-box {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.85);
             padding: 50px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Border dibuat agak kemerahan sebagai dasar api */
+            border: 1px solid rgba(255, 69, 0, 0.3); 
             backdrop-filter: blur(8px);
             max-width: 850px;
             margin: 0 20px;
-            /* NOTE UPDATE: Z-index diubah jadi 3 agar paling depan */
             z-index: 3; 
             position: relative;
         }
+
+        /* Elemen bayangan untuk membuat efek api kecil (embers) di tepi kotak */
+        .hero-overlay-box::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: inherit;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff3300, #ff6600, #8b0000, #ff2200);
+            background-size: 400%;
+            opacity: 0.4; /* Opacity rendah agar apinya tidak terlalu terang */
+            filter: blur(5px); /* Diblur agar terlihat seperti hawa panas/api */
+            animation: subtle-fire 4s linear infinite, fire-flicker 0.15s infinite alternate;
+        }
+
+        @keyframes subtle-fire {
+            0% { background-position: 0 0; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0 0; }
+        }
+
+        @keyframes fire-flicker {
+            0% { opacity: 0.2; filter: blur(4px); transform: scale(1); }
+            100% { opacity: 0.5; filter: blur(6px); transform: scale(1.005); }
+        }
+
+        /* Class khusus untuk trigger ledakan saat diklik */
+        .explode-effect {
+            animation: box-explode 0.7s forwards cubic-bezier(0.1, 0.9, 0.2, 1);
+            pointer-events: none; /* Mencegah user klik berulang kali saat meledak */
+        }
+
+        @keyframes box-explode {
+            0% { transform: scale(1); filter: brightness(1); opacity: 1; box-shadow: 0 0 10px #ff3300; }
+            40% { transform: scale(1.15); filter: brightness(2) blur(3px); opacity: 0.9; box-shadow: 0 0 100px #ff3300, inset 0 0 30px #ff3300; }
+            100% { transform: scale(2) translateY(-30px); filter: brightness(4) blur(15px); opacity: 0; box-shadow: 0 0 300px #ff3300; }
+        }
+        /* ========================================== */
 
         /* --- HERO SECTION --- */
         .hero {
@@ -95,23 +136,19 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            /* NOTE UPDATE VIDEO BACKGROUND: Background gambar dan gradient dihapus dari sini */
             background-color: var(--bg-color); 
             position: relative; 
             overflow: hidden;
         }  
 
-        /* ========================================== */
-        /* NOTE UPDATE VIDEO BACKGROUND: Tambahan CSS untuk Video */
-        /* ========================================== */
         .hero-bg-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Memastikan video memenuhi layar tanpa gepeng */
-            z-index: 0; /* Paling belakang */
+            object-fit: cover;
+            z-index: 0; 
         }
 
         .hero-overlay-dark {
@@ -120,10 +157,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Efek gelap agar teks terbaca jelas */
-            z-index: 1; /* Di atas video, di bawah tali */
+            background: rgba(0, 0, 0, 0.7); 
+            z-index: 1; 
         }
-        /* ========================================== */
 
         .hero h1 {
             font-size: 3rem;
@@ -148,6 +184,7 @@
             border-radius: 5px;
             font-weight: bold;
             display: inline-block;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -436,24 +473,17 @@
     </nav>
 
    <header id="home" class="hero">
-    <!-- ========================================== -->
-    <!-- NOTE UPDATE VIDEO BACKGROUND: Tag Video ditambahkan di sini -->
-    <!-- Video diset otomatis main (autoplay), mengulang (loop), dan dibisukan (muted) -->
-    <!-- ========================================== -->
+    
     <video autoplay loop muted playsinline class="hero-bg-video">
         <source src="2t2tf2t.mp4" type="video/mp4">
     </video>
     
-    <!-- Lapisan gelap agar teks tetap bisa dibaca dengan jelas di atas video -->
     <div class="hero-overlay-dark"></div>
-    <!-- ========================================== -->
 
-    <!-- CONTAINER TALI SEPATU -->
-    <!-- NOTE UPDATE: Z-index diubah jadi 2 agar di atas overlay gelap -->
     <svg id="laces-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;"></svg>
 
-    <!-- KOTAK TEKS INI SAMA PERSIS SEPERTI MILIKMU ASLI -->
-    <div class="hero-overlay-box"> 
+    <!-- KOTAK TEKS DENGAN EFEK TERBAKAR -->
+    <div class="hero-overlay-box" id="hero-box"> 
         <h3>Hi, I'm</h3>
         <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
         <h3>Footwear Designer | Technical Design Drafter</h3>
@@ -461,7 +491,8 @@
             I am a Footwear Designer & Developer specializing in decoding narratives into functional, high-performance products. Where storytelling meets advanced technical execution.
         </p>
         <div style="display: flex; gap: 15px; justify-content: center;">
-            <a href="#footwear" class="btn">View My Work</a>
+            <!-- NOTE UPDATE: Menambahkan ID btn-explode -->
+            <a href="#footwear" class="btn" id="btn-explode">View My Work</a>
         </div>
     </div>
 </header>
@@ -488,12 +519,11 @@
         </div>
     </section>
 
-    <!-- KATEGORI 1: COLLEGE PROJECTS (DENGAN YOUTUBE UPDATE) -->
+    <!-- KATEGORI 1: COLLEGE PROJECTS -->
     <section id="college">
         <h2 class="section-title">College Projects</h2>
         
         <div class="college-layout">
-            <!-- Kartu Proyek -->
             <div class="project-card" style="max-width: 380px; flex: 1 1 320px;">
                 <div class="img-container">
                     <img src="TOPAN2.jpg" alt="Smooth Criminal Project">
@@ -515,14 +545,13 @@
                 </div>
             </div>
 
-            <!-- Kontainer Video YouTube -->
             <div class="college-video-wrapper">
                 <iframe src="https://www.youtube.com/embed/snPK9X9Hn5M?autoplay=1&mute=1&loop=1&playlist=snPK9X9Hn5M" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <!-- KATEGORI 2: FOOTWEAR CONCEPTS (DENGAN SLIDER) -->
+    <!-- KATEGORI 2: FOOTWEAR CONCEPTS -->
     <section id="footwear" style="background-color: #121215;"> 
         <h2 class="section-title">Footwear Concept & Design</h2>
         
@@ -775,7 +804,7 @@
         <p>&copy; 2026 Garin Nata Kusuma. All Rights Reserved.</p>
     </footer>
 
-    <!-- SCRIPT TALI SEPATU -->
+    <!-- SCRIPT TALI SEPATU INTERAKTIF -->
     <script>
       const canvas = document.getElementById('laces-svg');
       const heroSection = document.getElementById('home');
@@ -854,6 +883,31 @@
       
       animateLaces(); 
     </script>
+
+    <!-- ========================================== -->
+    <!-- NOTE UPDATE LEDAKAN: Script Pemicu Tombol -->
+    <!-- ========================================== -->
+    <script>
+        document.getElementById('btn-explode').addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah loncat ke bawah secara instan
+            const box = document.getElementById('hero-box');
+            
+            // Tambahkan class animasi ledakan
+            box.classList.add('explode-effect');
+            
+            // Tunggu 0.35 detik (saat ledakan membesar), lalu scroll ke bawah dengan mulus
+            setTimeout(() => {
+                document.querySelector('#footwear').scrollIntoView({ behavior: 'smooth' });
+                
+                // (Opsional) Kembalikan box ke keadaan semula setelah 1.5 detik
+                // Berjaga-jaga kalau user scroll balik ke atas lagi
+                setTimeout(() => {
+                    box.classList.remove('explode-effect');
+                }, 1500);
+            }, 350); 
+        });
+    </script>
+    <!-- ========================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
