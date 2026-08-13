@@ -88,13 +88,11 @@
             position: relative;
         }
 
-        /* Class khusus untuk trigger ledakan saat diklik */
         .explode-effect {
             animation: box-explode 0.7s forwards cubic-bezier(0.1, 0.9, 0.2, 1);
             pointer-events: none;
         }
 
-        /* Ledakan disesuaikan warnanya agar menyatu dengan aksen oranye */
         @keyframes box-explode {
             0% { transform: scale(1); filter: brightness(1); opacity: 1; box-shadow: 0 0 10px var(--accent); }
             40% { transform: scale(1.15); filter: brightness(2) blur(3px); opacity: 0.9; box-shadow: 0 0 100px var(--accent), inset 0 0 30px var(--accent); }
@@ -152,19 +150,34 @@
             margin-bottom: 30px;
         }
 
+        /* --- 3D BUTTON STYLES (BRUTAL & CLICKABLE) --- */
         .btn {
-            padding: 12px 30px;
+            padding: 12px 35px;
+            background-color: var(--card-bg);
             border: 2px solid var(--accent);
             color: var(--accent);
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             display: inline-block;
             cursor: pointer;
+            box-shadow: 0 6px 0 #b37300, 0 15px 20px rgba(0,0,0,0.4); 
+            transition: all 0.1s ease-in-out;
+            text-align: center;
         }
 
         .btn:hover {
             background: var(--accent);
             color: #000;
+            box-shadow: 0 4px 0 #b37300, 0 8px 10px rgba(0,0,0,0.4); 
+            transform: translateY(2px);
+        }
+
+        .btn:active {
+            box-shadow: 0 0 0 transparent, 0 2px 5px rgba(0,0,0,0.4);
+            transform: translateY(6px);
         }
 
         /* --- ABOUT SECTION STYLES --- */
@@ -279,11 +292,44 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            position: relative; /* TAMBAHAN MUTLAK BIAR STIKER GA LARI COK */
         }
 
         .project-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
+        }
+
+        /* --- CSS STIKER KEDIP-KEDIP NEW !!! --- */
+        .badge-new {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #ff003c;
+            color: #ffffff;
+            font-family: 'Arial Black', Impact, sans-serif;
+            font-weight: 900;
+            font-size: 0.85rem;
+            padding: 5px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 10;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            animation: blink-sticker 0.8s infinite alternate ease-in-out;
+            pointer-events: none; /* Biar ga ganggu klik gambar */
+        }
+
+        @keyframes blink-sticker {
+            0% { 
+                transform: scale(1) rotate(10deg); 
+                box-shadow: 0 4px 10px rgba(255,0,60,0.4); 
+            }
+            100% { 
+                transform: scale(1.15) rotate(15deg); 
+                box-shadow: 0 0 20px rgba(255,0,60,0.9), 0 0 10px rgba(255,255,255,0.6) inset; 
+            }
         }
 
         .img-container {
@@ -333,7 +379,11 @@
 
         .btn-wrapper {
             margin-top: auto; 
-            padding-top: 15px;
+            padding-top: 25px;
+            padding-bottom: 15px; 
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
         /* --- SWIPER CUSTOM STYLES --- */
@@ -699,7 +749,7 @@
 
                 <div class="swiper-slide">
                     <div class="project-card">
-                        <div class="img-container">
+                        <div class="badge-new">NEW !!!</div> <div class="img-container">
                             <img src="NETT.png" alt="NETT Project">
                         </div>
                         <div class="card-content">
@@ -708,13 +758,14 @@
                             <div>
                                 <span class="tag">Tennis Performance</span>
                                 <span class="tag">Footwear Design</span>
-                                <span class="tag">Concept</span>
+                                <span class="tag">Heritage</span>
                             </div>
                             <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
                                 *Details include: Storytelling Narrative, Validation Logs, & Visual Development
                             </p>
                             <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/1U3m9BnDxirXK-WiIXHjjk5UnwH3CflwX/view?usp=drive_link" class="btn">View Details</a> </div>
+                                <a href="#" class="btn">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -748,7 +799,6 @@
                         *Software used: NanoCAD
                     </p>
                     <div class="btn-wrapper">
-                     
                         <a href="https://drive.google.com/file/d/1PXgj588q9WxFWnodBLEassRiE8V8W9P1/view?usp=drive_link" class="btn">View Technical Specs</a>
                     </div>
                 </div>
@@ -787,9 +837,9 @@
         </p>
         
         <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
-            <a href="mailto:garinkusuma.design@gmail.com" class="btn" style="padding: 15px 45px; font-size: 1.1rem; border-width: 3px;">Email Me</a>
-            <a href="https://www.linkedin.com/in/garinkusuma" class="btn" style="padding: 15px 45px; font-size: 1.1rem; border-width: 3px;">LinkedIn</a>
-            <a href="https://www.instagram.com/voidtostar?igsh=MTFjYzlpeWtsMnpubA==" class="btn" style="padding: 15px 45px; font-size: 1.1rem; border-width: 3px;">Instagram</a>
+            <a href="mailto:garinkusuma.design@gmail.com" class="btn">Email Me</a>
+            <a href="https://www.linkedin.com/in/garinkusuma" class="btn">LinkedIn</a>
+            <a href="https://www.instagram.com/voidtostar?igsh=MTFjYzlpeWtsMnpubA==" class="btn">Instagram</a>
         </div>
     </section>
 
@@ -861,12 +911,11 @@
           }
       }
 
-      // Variasi warna Silver Metallic
       const laces = [
-          new Lace(0.15, 0.30, 14, "#e0e0e0", 0.15, 0.75), // Silver terang
-          new Lace(0.40, 0.20, 10, "#c0c0c0", 0.10, 0.85), // Silver medium
-          new Lace(0.65, 0.80, 18, "#a9a9a9", 0.25, 0.65), // Silver agak gelap
-          new Lace(0.90, 0.85, 12, "#d3d3d3", 0.12, 0.80)  // Silver soft
+          new Lace(0.15, 0.30, 14, "#e0e0e0", 0.15, 0.75), 
+          new Lace(0.40, 0.20, 10, "#c0c0c0", 0.10, 0.85), 
+          new Lace(0.65, 0.80, 18, "#a9a9a9", 0.25, 0.65), 
+          new Lace(0.90, 0.85, 12, "#d3d3d3", 0.12, 0.80)  
       ];
 
       function animateLaces() {
