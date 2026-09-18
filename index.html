@@ -6,6 +6,9 @@
     <title>Garin Nata Kusuma | Footwear Designer</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+    <!-- BAGIAN BARU: Script untuk Model Viewer 3D -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
     <style>
         /* --- CSS VARIABLES & RESET --- */
@@ -476,11 +479,94 @@
             font-weight: bold;
         }
 
+        /* --- BAGIAN BARU: CSS UNTUK 3D VIEWER & HOTSPOT --- */
+        .model-container {
+            width: 100%;
+            height: 60vh; /* Tinggi area 3D */
+            min-height: 400px;
+            background: radial-gradient(circle, #2a2a2d 0%, var(--bg-color) 70%);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+            outline: none;
+        }
+
+        /* Desain titik Hotspot (Button) */
+        .Hotspot {
+            background: var(--accent);
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(252, 163, 17, 0.8);
+            box-sizing: border-box;
+            cursor: pointer;
+            height: 20px;
+            width: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .Hotspot:not([data-visible]) {
+            background: transparent;
+            border: 2px solid transparent;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        /* Animasi titik hotspot berdenyut */
+        .Hotspot:focus {
+            outline: none;
+        }
+        .Hotspot > * {
+            opacity: 1;
+            transform: translateY(-50%);
+        }
+
+        /* Desain Bubble Info (Tulisan Coming Soon) */
+        .HotspotAnnotation{
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: block;
+            font-family: var(--font-main);
+            font-size: 14px;
+            font-weight: bold;
+            left: calc(100% + 1em);
+            max-width: 200px;
+            padding: 10px 15px;
+            position: absolute;
+            top: 50%;
+            width: max-content;
+            border: 1px solid var(--accent);
+            pointer-events: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* Efek muncul halus */
+            opacity: 0;
+            transform: translate3d(-10px, -50%, 0);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        /* Menampilkan bubble saat hotspot di-klik atau hover */
+        .Hotspot:hover .HotspotAnnotation,
+        .Hotspot:focus .HotspotAnnotation {
+            opacity: 1;
+            transform: translate3d(0, -50%, 0);
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             nav { flex-direction: column; gap: 10px; }
             .swipe-hint { text-align: center; } 
+            .model-container { height: 50vh; }
         }
     </style>
 </head>
@@ -492,6 +578,8 @@
             <a href="#about">About</a>
             <a href="#college">College</a>
             <a href="#footwear">Footwear</a>
+            <!-- BAGIAN BARU: Link navigasi ke Coming Soon -->
+            <a href="#coming-soon" style="color: var(--accent); font-weight: bold;">Coming Soon</a> 
             <a href="#technical">Technical</a>
             <a href="#skills">Skills</a>
         </div>
@@ -776,6 +864,34 @@
             <div class="swiper-button-prev"></div>
         </div>
     </section>
+
+    <!-- BAGIAN BARU: COMING SOON SECTION (3D VIEWER) -->
+    <section id="coming-soon">
+        <h2 class="section-title">Coming Soon Projects</h2>
+        <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
+            Take a sneak peek at what's currently on my drawing board. Explore the 3D prototype below.
+        </p>
+        
+        <div class="model-container">
+            <!-- Ganti "nama-file-3d-mu.glb" dengan nama file GLB aslimu yang sudah di-upload ke GitHub -->
+            <model-viewer 
+                src="GIRRAFEE.glb" 
+                alt="3D CLOG Prototype" 
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1.5"
+                exposure="1"
+                interaction-prompt="hover">
+                
+                <!-- Titik Hotspot. Kamu bisa menyesuaikan angka data-position "x y z" agar pas dengan modelmu -->
+                <button class="Hotspot" slot="hotspot-1" data-position="0 0.1 0.1" data-normal="0 1 0">
+                    <div class="HotspotAnnotation">Coming Soon</div>
+                </button>
+                
+            </model-viewer>
+        </div>
+    </section>
+    <!-- AKHIR BAGIAN BARU -->
 
     <section id="technical">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
