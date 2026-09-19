@@ -274,6 +274,16 @@
             transform: translateY(6px);
         }
 
+        /* Modifikasi Khusus Button Disabled (Untuk Coming Soon Specs) */
+        .btn.disabled {
+            background-color: #333;
+            border-color: #555;
+            color: #888;
+            box-shadow: none;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         /* --- ABOUT SECTION STYLES --- */
         .about-container {
             display: flex;
@@ -736,9 +746,9 @@
             margin-top: 2px;
         }
 
-        /* Label Khusus Judul Besar MARINA (Merah Kotak 1) */
+        /* Label Khusus Judul Besar MARINA */
         .title-marina-label {
-            font-size: 1.25rem !important;
+            font-size: 1.3rem !important;
             font-weight: 900 !important;
             color: var(--accent) !important;
             letter-spacing: 1.5px !important;
@@ -1281,14 +1291,17 @@
             
             <!-- Kotak Cyan: Viewer 3D file teknikal (Dibuat menjadi Slider) -->
             <div class="technical-3d-viewport">
+                <!-- TEKS AJAKAN 3D -->
+                <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
+
                 <!-- Inisialisasi Swiper Khusus Technical -->
                 <div class="swiper technical-swiper">
                     <div class="swiper-wrapper">
                         
-                        <!-- SLIDE 1: MARINAAA.glb (Model Utama) -->
+                        <!-- SLIDE 1: MARINA3D.glb (Model Utama Solid) -->
                         <div class="swiper-slide">
                             <model-viewer 
-                                src="MARINAAA.glb" 
+                                src="MARINA3D.glb" 
                                 alt="Nike Marina Heel Peg Pallet - Solid View" 
                                 auto-rotate 
                                 camera-controls 
@@ -1321,7 +1334,7 @@
                             </model-viewer>
                         </div>
 
-                        <!-- SLIDE 3: SLOT DESAIN BARU (TAMPILAN COMING SOON) -->
+                        <!-- SLIDE 3: SLOT DESAIN BARU (TAMPILAN COMING SOON LAYAR HITAM) -->
                         <div class="swiper-slide">
                             <div class="coming-soon-viewport">
                                 <h2>COMING SOON</h2>
@@ -1346,16 +1359,16 @@
                 </div>
                 
                 <div class="sidebar-list">
-                    <!-- Navigasi Slide MARINA (Menggeser antara Solid & Exploded View) -->
+                    <!-- Navigasi Slide 1: MARINA (Mewakili Slide 0 Solid & Slide 1 Exploded) -->
                     <div class="sidebar-item active-item" id="nav-item-1" onclick="techSwiper.slideTo(0)">
                         <span class="item-number">01</span>
                         <div class="item-info">
                             <strong class="title-marina-label">MARINA</strong>
-                            <small>Solid Model & Tooling View</small>
+                            <small>Solid Model & Exploded View</small>
                         </div>
                     </div>
                     
-                    <!-- Navigasi Slide COMING SOON -->
+                    <!-- Navigasi Slide 2: NEXT SPEC (Langsung melompat ke Slide 2 Coming Soon) -->
                     <div class="sidebar-item" id="nav-item-2" onclick="techSwiper.slideTo(2)">
                         <span class="item-number">02</span>
                         <div class="item-info">
@@ -1369,7 +1382,8 @@
                     <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; font-style: italic;">
                         *Hint: Drag the 3D model to rotate. Click the arrows or items above to change perspective.
                     </p>
-                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs</a>
+                    <!-- ID 'tech-spec-btn' ditambahkan agar Javascript bisa memanipulasi tombol ini -->
+                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" id="tech-spec-btn" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs</a>
                 </div>
             </div>
         </div>
@@ -1416,7 +1430,6 @@
         <p>&copy; 2026 Garin Nata Kusuma. All Rights Reserved.</p>
     </footer>
 
-    <!-- SCRIPT HERO LACES -->
     <script>
       const canvas = document.getElementById('laces-svg');
       const heroSection = document.getElementById('home');
@@ -1496,7 +1509,6 @@
       animateLaces(); 
     </script>
 
-    <!-- SCRIPT BUTTON EXPLODE -->
     <script>
         document.getElementById('btn-explode').addEventListener('click', function(e) {
             e.preventDefault(); 
@@ -1516,7 +1528,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
-    <!-- SCRIPT INISIALISASI SWIPER UTAMA DAN SWIPER TECHNICAL -->
     <script>
       // 1. Swiper untuk Projects Grid
       var projectSwiper = new Swiper(".mySwiper", {
@@ -1537,24 +1548,44 @@
       var techSwiper = new Swiper(".technical-swiper", {
         slidesPerView: 1, 
         spaceBetween: 0,
-        allowTouchMove: false, /* Dimatikan agar tidak bentrok saat user memutar model 3D */
+        allowTouchMove: false, 
         navigation: {
           nextEl: ".tech-next",
           prevEl: ".tech-prev",
         },
         on: {
           slideChange: function () {
-            // Update teks indikator (Item 1 of X)
-            // Karena slide 0 dan 1 adalah MARINA, dan slide 2 adalah Coming Soon,
-            // kita buat logika sederhana untuk index:
+            // Logika untuk menampilkan Indikator (Item 1 of 2)
+            // Slide 0 & 1 adalah milik MARINA (Index 1)
+            // Slide 2 adalah milik Coming Soon (Index 2)
             let displayIndex = this.activeIndex < 2 ? 1 : 2;
-            let totalItems = 2; // Hanya ada 2 item di sidebar
+            let totalItems = 2; 
             
             document.getElementById('tech-slide-count').innerText = `Item ${displayIndex} of ${totalItems}`;
             
             // Ubah class 'active-item' di kotak sidebar agar sesuai dengan slide 3D
             document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active-item'));
-            document.getElementById(`nav-item-${displayIndex}`).classList.add('active-item');
+            const activeNav = document.getElementById(`nav-item-${displayIndex}`);
+            if (activeNav) {
+                activeNav.classList.add('active-item');
+            }
+
+            // Logika untuk Tombol View Technical Specs
+            const specBtn = document.getElementById('tech-spec-btn');
+            
+            if (this.activeIndex < 2) {
+                // Saat berada di Slide MARINA (Solid atau Exploded)
+                specBtn.href = "https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link";
+                specBtn.innerText = "View Technical Specs";
+                specBtn.classList.remove("disabled");
+                specBtn.style.pointerEvents = "auto";
+            } else {
+                // Saat berada di Slide COMING SOON
+                specBtn.removeAttribute("href"); // Buang link agar tidak bisa di-klik
+                specBtn.innerText = "Specs Coming Soon";
+                specBtn.classList.add("disabled"); // Tambahkan styling abu-abu mati
+                specBtn.style.pointerEvents = "none";
+            }
           }
         }
       });
