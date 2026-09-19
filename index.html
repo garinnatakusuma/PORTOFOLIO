@@ -42,14 +42,14 @@
         ul { list-style: none; }
 
         /* ========================================== */
-        /* APPLE-STYLE NAVBAR & MEGA MENU (BARU) */
+        /* APPLE-STYLE NAVBAR & MEGA MENU */
         /* ========================================== */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 5%;
-            height: 75px; /* Tinggi fix agar mega menu pas di bawahnya */
+            height: 75px; 
             position: fixed;
             width: 100%;
             background: rgba(15, 15, 17, 0.85);
@@ -66,6 +66,10 @@
             color: var(--accent);
             letter-spacing: 1px;
             cursor: pointer;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .nav-links {
@@ -95,7 +99,7 @@
         /* Panel Dropdown Apple Style */
         .mega-menu {
             position: fixed;
-            top: 75px; /* Tepat di bawah navbar */
+            top: 75px; 
             left: 0;
             width: 100%;
             background: rgba(20, 20, 23, 0.95);
@@ -108,7 +112,6 @@
             justify-content: center;
             gap: 50px;
             
-            /* Animasi Halus (Cubic Bezier mirip Apple) */
             opacity: 0;
             visibility: hidden;
             transform: translateY(-20px);
@@ -117,14 +120,12 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
-        /* Saat menu di-hover, turunkan mega menu */
         .nav-item:hover .mega-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
-        /* Ikon di dalam Mega Menu */
         .mega-link {
             display: flex;
             flex-direction: column;
@@ -472,29 +473,36 @@
             width: 100%;
         }
 
-        /* --- SWIPER CUSTOM STYLES --- */
+        /* --- SWIPER CUSTOM STYLES (KOTAK VERTIKAL TINGGI) --- */
         .swiper {
             width: 100%;
             padding: 20px 0 60px 0 !important;
+            position: relative;
         }
         
         .swiper-button-next, .swiper-button-prev {
-            color: var(--accent) !important;
-            background-color: rgba(26, 26, 29, 0.8);
-            width: 50px !important;
-            height: 50px !important;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
-            transition: 0.3s;
+            width: 5% !important; 
+            min-width: 40px;
+            height: 100% !important; 
+            top: 0 !important;
+            margin-top: 0 !important;
+            background-color: transparent; 
+            color: rgba(255, 255, 255, 0.3) !important; 
+            transition: all 0.3s ease;
+            z-index: 10;
         }
+
+        .swiper-button-prev { left: 0 !important; border-radius: 0 10px 10px 0; }
+        .swiper-button-next { right: 0 !important; border-radius: 10px 0 0 10px; }
         
         .swiper-button-next:hover, .swiper-button-prev:hover {
-            background-color: var(--accent);
-            color: #000 !important;
+            background-color: rgba(252, 163, 17, 0.9); 
+            color: #000 !important; 
+            box-shadow: 0 0 20px rgba(252, 163, 17, 0.5);
         }
 
         .swiper-button-next::after, .swiper-button-prev::after {
-            font-size: 1.3rem !important;
+            font-size: 2rem !important; 
             font-weight: bold;
         }
         
@@ -517,6 +525,119 @@
             0% { opacity: 0.4; }
             50% { opacity: 1; }
             100% { opacity: 0.4; }
+        }
+
+        /* ========================================== */
+        /* BAGIAN BARU: TECHNICAL SHOWCASE (KOTAK CYAN & UNGU) */
+        /* ========================================== */
+        .technical-showcase-container {
+            display: flex;
+            gap: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 25px;
+            min-height: 520px;
+            align-items: stretch;
+        }
+
+        /* Kotak Cyan: Viewer Utama untuk file MARINAAA.stl */
+        .technical-3d-viewport {
+            flex: 1;
+            background: radial-gradient(circle, #252528 0%, #121215 70%);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            min-height: 450px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .technical-3d-viewport model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+            outline: none;
+        }
+
+        /* Kotak Ungu: Sidebar Navigasi / Slider Pemilihan Item Teknik */
+        .technical-sidebar {
+            width: 300px;
+            background: rgba(15, 15, 17, 0.7);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-header {
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
+        }
+
+        .sidebar-header h4 {
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.03);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(252, 163, 17, 0.08);
+            border-color: var(--accent);
+        }
+
+        .sidebar-item.active-item {
+            background: rgba(252, 163, 17, 0.15);
+            border-color: var(--accent);
+        }
+
+        .placeholder-item {
+            opacity: 0.5;
+        }
+
+        .item-number {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .item-info strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .item-info small {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-footer {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 15px;
+            text-align: center;
         }
 
         /* --- SKILLS & SERVICES --- */
@@ -562,7 +683,7 @@
             font-weight: bold;
         }
 
-        /* --- CSS UNTUK 3D VIEWER & HOTSPOT --- */
+        /* --- CSS UNTUK 3D VIEWER COMING SOON & HOTSPOT --- */
         .model-container {
             width: 100%;
             height: 60vh;
@@ -639,13 +760,16 @@
             transform: translate3d(0, -50%, 0);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .hero h1 { font-size: 2rem; }
             nav { flex-direction: column; gap: 10px; height: auto; padding: 15px 5%; }
             .nav-links { flex-wrap: wrap; justify-content: center; }
-            .mega-menu { display: none; /* Sembunyikan mega menu di HP agar tidak menuhi layar */ }
+            .mega-menu { display: none; }
             .swipe-hint { text-align: center; } 
             .model-container { height: 50vh; }
+            .swiper-button-next, .swiper-button-prev { width: 30px !important; min-width: auto; }
+            .technical-showcase-container { flex-direction: column; }
+            .technical-sidebar { width: 100%; }
         }
     </style>
 </head>
@@ -657,10 +781,8 @@
             <div class="nav-item"><a href="#about">About</a></div>
             <div class="nav-item"><a href="#college">College</a></div>
             
-            <!-- MEGA MENU APPLE STYLE DI BAGIAN FOOTWEAR -->
             <div class="nav-item">
                 <a href="#footwear">Footwear</a>
-                <!-- Panel Dropdown -->
                 <div class="mega-menu">
                     <a href="#footwear" class="mega-link">
                         <img src="20260218_221106_0000 (1).png" alt="Reverve">
@@ -960,7 +1082,6 @@
         </div>
     </section>
 
-    <!-- SECTION COMING SOON DENGAN FILE GIRRAFE.GLB -->
     <section id="coming-soon" class="fade-in-section">
         <h2 class="section-title">Coming Soon Projects</h2>
         <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
@@ -985,34 +1106,57 @@
         </div>
     </section>
 
+    <!-- BAGIAN BARU: TECHNICAL SHOWCASE (KOTAK CYAN 3D MARINAAA.stl & KOTAK UNGU SIDEBAR) -->
     <section id="technical" class="fade-in-section">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="img-container">
-                    <img src="MARINAJUDUL.png" alt="Nike Marina Heel Peg Pallet">
+        
+        <div class="technical-showcase-container">
+            <!-- Kotak Cyan: Viewer 3D file MARINAAA.stl -->
+            <div class="technical-3d-viewport">
+                <model-viewer 
+                    src="MARINAAA.stl" 
+                    alt="Nike Marina Heel Peg Pallet 3D Model" 
+                    auto-rotate 
+                    camera-controls 
+                    shadow-intensity="1.5"
+                    exposure="1"
+                    interaction-prompt="hover">
+                </model-viewer>
+            </div>
+
+            <!-- Kotak Ungu: Sidebar Navigasi / Slider Pembuatan (Placeholder Siap Pakai) -->
+            <div class="technical-sidebar">
+                <div class="sidebar-header">
+                    <h4>Technical Index</h4>
+                    <span style="font-size: 0.75rem; color: var(--accent);">Item 1 of 1</span>
                 </div>
-                <div class="card-content">
-                    <p style="font-size: 0.75rem; font-weight: bold; color: #ff823a; letter-spacing: 1.5px; margin-bottom: 5px; text-transform: uppercase;">
-                        Manufacturer Facility: PT Selalu Cinta Indonesia (SCI)
-                    </p>
-                    <h3>NIKE MARINA HEEL PEG PALLET</h3>
-                    <p><strong>Pallet Engineering & Computer Stitching.</strong> Executed the technical preparation for mass manufacturing: Responsible for translating 2D design vectors into 3D surfaces, engineering the CNC pallet structures, and programming highly precise computer stitching paths to ensure production efficiency and operational excellence.</p>
-                    <div>
-                        <span class="tag">CNC Program</span>
-                        <span class="tag">3D Construction</span>
-                        <span class="tag">CAD Design</span>
+                
+                <div class="sidebar-list">
+                    <div class="sidebar-item active-item">
+                        <span class="item-number">01</span>
+                        <div class="item-info">
+                            <strong>Marina Pallet</strong>
+                            <small>CNC & Stitching</small>
+                        </div>
                     </div>
-                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                        *Software used: NanoCAD
-                    </p>
-                    <div class="btn-wrapper">
-                        <a href="https://drive.google.com/file/d/1PXgj588q9WxFWnodBLEassRiE8V8W9P1/view?usp=drive_link" class="btn">View Technical Specs</a>
+                    
+                    <!-- Slot Placeholder untuk item berikutnya di masa depan -->
+                    <div class="sidebar-item placeholder-item" onclick="alert('Slot tempat dokumen teknis berikutnya.')">
+                        <span class="item-number">02</span>
+                        <div class="item-info">
+                            <strong>Next Spec</strong>
+                            <small>Coming Soon</small>
+                        </div>
                     </div>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs</a>
                 </div>
             </div>
         </div>
     </section>
+    <!-- AKHIR BAGIAN BARU -->
     
     <section id="skills" style="background-color: #121215;" class="fade-in-section">
         <h2 class="section-title">Skills & Tools</h2>
@@ -1168,7 +1312,6 @@
       });
     </script>
 
-    <!-- SCRIPT INTERSECTION OBSERVER UNTUK EFEK BLUR-REVEAL -->
     <script>
       const observerOptions = {
           root: null,
