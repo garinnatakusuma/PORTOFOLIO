@@ -1,127 +1,224 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garin Nata Kusuma | Footwear Designer</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Garin Nata Kusuma — Footwear Designer & Technical Design Drafter</title>
+
+    <!-- ============ META UNTUK PREVIEW SAAT DI-SHARE (LinkedIn / WhatsApp) ============ -->
+    <meta name="description" content="Portfolio of Garin Nata Kusuma — footwear designer and technical design drafter. Concept development, technical drawing, pattern making and manufacturing tooling.">
+    <meta name="author" content="Garin Nata Kusuma">
+    <meta name="theme-color" content="#0f0f11">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Garin Nata Kusuma — Footwear Designer & Technical Design Drafter">
+    <meta property="og:description" content="Footwear concepts, technical drafting and manufacturing tooling. 8 design projects, 3D prototypes, and full documentation.">
+    <meta property="og:url" content="https://garinnatakusuma.github.io/PORTOFOLIO/">
+    <meta property="og:image" content="https://garinnatakusuma.github.io/PORTOFOLIO/NETT.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Garin Nata Kusuma — Footwear Designer">
+    <meta name="twitter:description" content="Footwear concepts, technical drafting and manufacturing tooling.">
+    <meta name="twitter:image" content="https://garinnatakusuma.github.io/PORTOFOLIO/NETT.png">
+
+    <!-- Favicon inline (tidak perlu file baru) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f0f11'/><text x='50' y='72' font-size='64' font-family='Arial Black,Arial' font-weight='900' fill='%23ed6e03' text-anchor='middle'>G</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
     <style>
-        /* --- CSS VARIABLES & RESET --- */
+        /* ========================================== */
+        /* TOKENS                                     */
+        /* ========================================== */
         :root {
             --bg-color: #0f0f11;
+            --bg-soft: #121215;
             --card-bg: #1a1a1d;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
+            --text-main: #e8e8ea;
+            --text-muted: #9b9ba2;
             --accent: #ed6e03;
-            --shoe-band-color: #ed6e03; 
-            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --accent-dark: #b55402;
+            --accent-soft: rgba(237, 110, 3, 0.12);
+            --line: rgba(255, 255, 255, 0.07);
+            --shoe-band-color: #ed6e03;
+
+            --font-display: 'Archivo', 'Segoe UI', Tahoma, sans-serif;
+            --font-main: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            --nav-h: 72px;
+            --band-h: 250px;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+            --radius: 14px;
         }
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px; 
+            scroll-padding-top: calc(var(--nav-h) + 24px);
+            -webkit-text-size-adjust: 100%;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: var(--font-main);
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.65;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        h1, h2, h3, h4, .logo, .btn { font-family: var(--font-display); }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s var(--ease); }
         ul { list-style: none; }
+        img { max-width: 100%; }
+
+        ::selection { background: var(--accent); color: #000; }
+
+        /* Fokus keyboard terlihat (aksesibilitas) */
+        a:focus-visible,
+        button:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #0b0b0d; }
+        ::-webkit-scrollbar-thumb { background: #2c2c31; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-dark); }
+
+        .skip-link {
+            position: absolute; left: -9999px; top: 0; z-index: 2000;
+            background: var(--accent); color: #000; padding: 12px 20px;
+            font-weight: 700; border-radius: 0 0 8px 0;
+        }
+        .skip-link:focus { left: 0; }
 
         /* ========================================== */
-        /* APPLE-STYLE NAVBAR & MEGA MENU */
+        /* NAVBAR                                     */
         /* ========================================== */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 5%;
-            height: 75px; 
+            height: var(--nav-h);
             position: fixed;
             width: 100%;
-            background: rgba(15, 15, 17, 0.85);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            top: 0;
+            background: rgba(15, 15, 17, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: background 0.3s ease;
+            border-bottom: 1px solid transparent;
+            transition: background 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+        }
+
+        nav.scrolled {
+            background: rgba(12, 12, 14, 0.92);
+            border-bottom-color: var(--line);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+
+        /* Indikator progres baca */
+        .nav-progress {
+            position: absolute;
+            left: 0; bottom: -1px;
+            height: 2px; width: 0;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            transition: width 0.1s linear;
+            pointer-events: none;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.15rem;
+            font-weight: 800;
             color: var(--accent);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             cursor: pointer;
-        }
-
-        .logo:hover {
-            opacity: 0.8;
-        }
-
-        .nav-links {
             display: flex;
-            height: 100%;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
         }
+        .logo .logo-mark {
+            width: 26px; height: 26px; border-radius: 7px;
+            background: var(--accent); color: #000;
+            display: grid; place-items: center;
+            font-size: 0.85rem; font-weight: 900;
+        }
+        .logo:hover { opacity: 0.85; }
+
+        .nav-links { display: flex; height: 100%; }
 
         .nav-item {
             display: flex;
             align-items: center;
-            padding: 0 15px;
+            padding: 0 14px;
             height: 100%;
             cursor: pointer;
             position: relative;
-            color: var(--text-main);
             transition: color 0.3s;
         }
 
         .nav-item > a {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            position: relative;
+            padding: 4px 0;
         }
 
-        .nav-item:hover > a {
-            color: var(--accent);
+        /* Garis bawah aktif / hover */
+        .nav-item > a::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: -2px;
+            height: 2px; width: 100%;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s var(--ease);
         }
+        .nav-item:hover > a::after,
+        .nav-item > a.active::after { transform: scaleX(1); }
+        .nav-item:hover > a, .nav-item > a.active { color: var(--accent); }
 
-        /* Panel Dropdown Apple Style */
+        /* Mega menu */
         .mega-menu {
             position: fixed;
-            top: 75px; 
+            top: var(--nav-h);
             left: 0;
             width: 100%;
-            background: rgba(20, 20, 23, 0.95);
+            background: rgba(18, 18, 21, 0.96);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 40px 5% 50px 5%;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 34px 5% 40px 5%;
             display: flex;
             justify-content: center;
-            gap: 50px;
-            
+            flex-wrap: wrap;
+            gap: 14px 34px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-20px);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(-14px);
+            transition: opacity 0.3s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
             z-index: 999;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.6);
         }
 
-        .nav-item:hover .mega-menu {
+        .nav-item:hover .mega-menu,
+        .nav-item:focus-within .mega-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
@@ -131,57 +228,214 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: var(--text-main);
-            font-size: 0.85rem;
-            transition: transform 0.3s ease, color 0.3s ease;
+            width: 108px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding: 10px 6px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            text-align: center;
+            transition: transform 0.3s var(--ease), color 0.3s, background 0.3s, border-color 0.3s;
         }
 
         .mega-link img {
-            width: 80px;
-            height: 60px;
+            width: 84px;
+            height: 58px;
             object-fit: contain;
             margin-bottom: 10px;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+            transition: transform 0.35s var(--ease);
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
         }
 
         .mega-link:hover {
-            color: var(--accent);
-            transform: translateY(-5px);
+            color: var(--text-main);
+            background: var(--accent-soft);
+            border-color: rgba(237,110,3,0.35);
+            transform: translateY(-4px);
         }
+        .mega-link:hover img { transform: scale(1.08) rotate(-3deg); }
 
-        .mega-link:hover img {
-            transform: scale(1.1);
+        /* Tombol hamburger */
+        .nav-toggle {
+            display: none;
+            width: 42px; height: 42px;
+            background: transparent;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
         }
+        .nav-toggle span {
+            position: absolute;
+            left: 11px; width: 20px; height: 2px;
+            background: var(--text-main);
+            border-radius: 2px;
+            transition: transform 0.3s var(--ease), opacity 0.2s;
+        }
+        .nav-toggle span:nth-child(1) { top: 14px; }
+        .nav-toggle span:nth-child(2) { top: 20px; }
+        .nav-toggle span:nth-child(3) { top: 26px; }
+        .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        /* Drawer mobile */
+        .mobile-menu {
+            position: fixed;
+            top: var(--nav-h);
+            left: 0; right: 0;
+            background: rgba(12, 12, 14, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--line);
+            padding: 10px 5% 26px;
+            z-index: 998;
+            transform: translateY(-110%);
+            transition: transform 0.4s var(--ease);
+            max-height: calc(100vh - var(--nav-h));
+            overflow-y: auto;
+        }
+        .mobile-menu.open { transform: translateY(0); }
+        .mobile-menu a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 4px;
+            border-bottom: 1px solid var(--line);
+            font-size: 1.02rem;
+            font-weight: 500;
+        }
+        .mobile-menu a span { color: var(--accent); font-size: 0.8rem; }
+        .mobile-menu a:active { color: var(--accent); }
+        .mobile-menu .m-cta { margin-top: 22px; display: flex; gap: 12px; }
+        .mobile-menu .m-cta .btn { flex: 1; padding: 12px 10px; font-size: 0.82rem; }
 
         /* ========================================== */
-        /* EFEK BLUR & FADE IN SAAT SCROLL */
+        /* REVEAL SAAT SCROLL                         */
         /* ========================================== */
         .fade-in-section {
             opacity: 0;
-            filter: blur(10px);
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, filter 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, filter, transform;
+            transform: translateY(26px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+            will-change: opacity, transform;
         }
-
         .fade-in-section.is-visible {
             opacity: 1;
-            filter: blur(0);
             transform: translateY(0);
+            will-change: auto;
         }
 
-        /* --- HERO OVERLAY & EXPLODE EFFECT --- */
-        .hero-overlay-box {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 50px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            max-width: 850px;
-            margin: 0 20px;
-            z-index: 3; 
+        /* ========================================== */
+        /* HERO                                       */
+        /* ========================================== */
+        .hero {
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: calc(var(--nav-h) + 20px) 20px 90px;
+            background: radial-gradient(circle at 50% 40%, #1c1c20 0%, var(--bg-color) 70%);
             position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay-dark {
+            position: absolute;
+            inset: 0;
+            background:
+              radial-gradient(circle at 50% 45%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.82) 70%),
+              linear-gradient(to bottom, rgba(15,15,17,0.85) 0%, rgba(15,15,17,0.35) 30%, rgba(15,15,17,0.95) 100%);
+            z-index: 1;
+        }
+
+        .hero-overlay-box {
+            background: rgba(10, 10, 12, 0.55);
+            padding: 46px 48px 44px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            max-width: 760px;
+            margin: 0 auto;
+            z-index: 3;
+            position: relative;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+        }
+
+        /* Badge status ketersediaan kerja */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            color: #ffd7ae;
+            background: rgba(237, 110, 3, 0.14);
+            border: 1px solid rgba(237, 110, 3, 0.35);
+            padding: 7px 16px;
+            border-radius: 100px;
+            margin-bottom: 22px;
+        }
+        .status-pill i {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #3ddc84;
+            box-shadow: 0 0 0 0 rgba(61, 220, 132, 0.6);
+            animation: ping 2.4s infinite;
+        }
+        @keyframes ping {
+            0% { box-shadow: 0 0 0 0 rgba(61,220,132,0.55); }
+            70% { box-shadow: 0 0 0 9px rgba(61,220,132,0); }
+            100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); }
+        }
+
+        .hero-kicker {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.1rem, 6vw, 3.6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 14px;
+        }
+        .hero h1 span { color: var(--accent); }
+
+        .hero-role {
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+        .hero-role .sep { color: var(--accent); margin: 0 8px; }
+
+        .hero-desc {
+            max-width: 56ch;
+            margin: 0 auto 32px;
+            color: #cfcfd4;
+            font-size: 0.98rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .explode-effect {
@@ -190,713 +444,517 @@
         }
 
         @keyframes box-explode {
-            0% { transform: scale(1); filter: brightness(1); opacity: 1; box-shadow: 0 0 10px var(--accent); }
-            40% { transform: scale(1.15); filter: brightness(2) blur(3px); opacity: 0.9; box-shadow: 0 0 100px var(--accent), inset 0 0 30px var(--accent); }
-            100% { transform: scale(2) translateY(-30px); filter: brightness(4) blur(15px); opacity: 0; box-shadow: 0 0 300px var(--accent); }
+            0% { transform: scale(1); filter: brightness(1); opacity: 1; }
+            40% { transform: scale(1.1); filter: brightness(1.8) blur(3px); opacity: 0.85; box-shadow: 0 0 90px var(--accent); }
+            100% { transform: scale(1.7) translateY(-24px); filter: brightness(3) blur(14px); opacity: 0; }
         }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background-color: var(--bg-color); 
-            position: relative; 
-            overflow: hidden;
-        }  
-
-        .hero-bg-video {
+        /* Petunjuk scroll */
+        .scroll-cue {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0; 
+            bottom: 26px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            width: 26px; height: 42px;
+            border: 2px solid rgba(255,255,255,0.35);
+            border-radius: 20px;
+            display: grid; place-items: start center;
+            padding-top: 8px;
         }
-
-        .hero-overlay-dark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7); 
-            z-index: 1; 
+        .scroll-cue i {
+            width: 3px; height: 8px; border-radius: 3px;
+            background: var(--accent);
+            animation: cue 1.8s infinite;
         }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+        @keyframes cue {
+            0% { transform: translateY(0); opacity: 0; }
+            35% { opacity: 1; }
+            100% { transform: translateY(14px); opacity: 0; }
         }
+        .scroll-cue:hover { border-color: var(--accent); }
 
-        .hero h1 span {
-            color: var(--accent);
-        }
-
-        .hero h3 {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            margin-bottom: 30px;
-        }
-
-        /* --- 3D BUTTON STYLES --- */
+        /* ========================================== */
+        /* BUTTONS                                    */
+        /* ========================================== */
         .btn {
-            padding: 12px 35px;
+            padding: 13px 30px;
             background-color: var(--card-bg);
             border: 2px solid var(--accent);
             color: var(--accent);
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 800;
-            font-size: 1.05rem;
+            font-size: 0.92rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            display: inline-block;
             cursor: pointer;
-            box-shadow: 0 6px 0 #b55402, 0 15px 20px rgba(0,0,0,0.4); 
-            transition: all 0.1s ease-in-out;
+            box-shadow: 0 5px 0 var(--accent-dark), 0 14px 22px rgba(0,0,0,0.42);
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease, color 0.2s ease;
             text-align: center;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; /* Jarak ikon dengan teks */
+            gap: 9px;
         }
+        .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
 
         .btn:hover {
             background: var(--accent);
             color: #000;
-            box-shadow: 0 4px 0 #b55402, 0 8px 10px rgba(0,0,0,0.4); 
+            box-shadow: 0 3px 0 var(--accent-dark), 0 8px 14px rgba(0,0,0,0.4);
             transform: translateY(2px);
         }
 
         .btn:active {
             box-shadow: 0 0 0 transparent, 0 2px 5px rgba(0,0,0,0.4);
-            transform: translateY(6px);
+            transform: translateY(5px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-color: rgba(255,255,255,0.25);
+            color: var(--text-main);
+            box-shadow: 0 5px 0 rgba(255,255,255,0.08), 0 14px 22px rgba(0,0,0,0.35);
+        }
+        .btn-ghost:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 3px 0 rgba(255,255,255,0.2), 0 8px 14px rgba(0,0,0,0.4);
         }
 
         .btn.disabled {
-            background-color: #333;
-            border-color: #555;
-            color: #888;
+            background-color: #2a2a2e;
+            border-color: #3a3a40;
+            color: #7c7c84;
             box-shadow: none;
             cursor: not-allowed;
             pointer-events: none;
         }
 
-        /* --- ABOUT SECTION STYLES --- */
-        .about-container {
-            display: flex;
-            flex-wrap: wrap; 
-            gap: 50px;
-            align-items: center; 
+        /* ========================================== */
+        /* SECTIONS                                   */
+        /* ========================================== */
+        section {
+            padding: 88px 8%;
+            scroll-margin-top: var(--nav-h);
         }
 
-        .about-text {
-            flex: 1 1 500px;
-            color: #ccc;
+        .section-title {
+            font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 14px;
+            border-left: 5px solid var(--accent);
+            padding-left: 16px;
+            display: inline-block;
         }
+
+        .section-lead {
+            color: var(--text-muted);
+            max-width: 62ch;
+            margin-bottom: 38px;
+            font-size: 0.96rem;
+        }
+
+        /* ========================================== */
+        /* ABOUT                                      */
+        /* ========================================== */
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 46px;
+            align-items: center;
+        }
+
+        .about-text { flex: 1 1 460px; color: #c8c8cf; max-width: 68ch; }
+        .about-text p + p { margin-top: 16px; }
+        .about-text strong { color: var(--text-main); }
 
         .about-education {
             flex: 1 1 250px;
-            max-width: 350px;
-            background: var(--card-bg);
+            max-width: 330px;
+            background: linear-gradient(160deg, #1e1e22 0%, var(--card-bg) 100%);
             padding: 30px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.35s var(--ease), border-color 0.35s;
         }
 
         .about-education:hover {
             transform: translateY(-5px);
-            border-color: var(--accent);
+            border-color: rgba(237,110,3,0.5);
         }
 
-        .about-education img {
-            width: 90px;
-            height: auto;
-            margin-bottom: 15px;
+        .about-education img { width: 86px; height: auto; margin-bottom: 16px; }
+        .about-education h4 { font-size: 1.05rem; margin-bottom: 4px; }
+        .about-education .major { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-bottom: 16px; }
+        .about-education .meta {
+            display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+        }
+        .about-education .meta span {
+            font-size: 0.78rem; color: var(--text-muted);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--line);
+            padding: 5px 12px; border-radius: 100px;
         }
 
-        .about-education h4 {
-            color: var(--text-main);
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+        /* Fakta ringkas */
+        .quick-facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
         }
-
-        .about-education p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+        .quick-facts div {
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,0.025);
+            border-radius: 12px;
+            padding: 14px 20px;
+            min-width: 130px;
         }
-
-        /* --- SECTIONS GENERAL --- */
-        section {
-            padding: 60px 10%; 
+        .quick-facts strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1.1;
         }
+        .quick-facts small { color: var(--text-muted); font-size: 0.78rem; }
 
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            border-left: 5px solid var(--accent);
-            padding-left: 15px;
-            display: inline-block;
-        }
-
-        /* --- COLLEGE SECTION LAYOUT --- */
+        /* ========================================== */
+        /* COLLEGE                                    */
+        /* ========================================== */
         .college-layout {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 28px;
             align-items: stretch;
         }
 
+        .college-layout .project-card { max-width: 380px; flex: 1 1 320px; }
+        .college-layout .img-container { background: var(--shoe-band-color); border-radius: var(--radius) var(--radius) 0 0; }
+
         .college-video-wrapper {
-            flex: 1 1 500px;
+            flex: 1 1 480px;
             background: var(--card-bg);
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            padding: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.3);
         }
 
         .college-video-wrapper iframe {
             width: 100%;
             aspect-ratio: 16 / 9;
-            border-radius: 8px;
+            border-radius: 10px;
             border: none;
         }
 
-        /* --- PROJECTS CARDS & GRID --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        @media (min-width: 1024px) {
-            .projects-grid .project-card {
-                max-width: 380px; 
-            }
-        }
-
+        /* ========================================== */
+        /* PROJECT CARDS                              */
+        /* ========================================== */
         .project-card {
-            background: transparent; 
-            border-radius: 0 0 10px 10px;
-            transition: transform 0.3s ease;
-            border: none; 
+            background: transparent;
+            border-radius: 0 0 var(--radius) var(--radius);
+            transition: transform 0.35s var(--ease);
             height: 100%;
             display: flex;
             flex-direction: column;
             position: relative;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-card:hover .card-content {
-            border-color: var(--accent);
-        }
+        .project-card:hover { transform: translateY(-6px); }
+        .project-card:hover .card-content { border-color: rgba(237,110,3,0.55); }
+        .project-card:hover img { transform: scale(1.06) rotate(-1.5deg); }
 
         .badge-new {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: #ff003c;
-            color: #ffffff;
-            font-family: 'Arial Black', Impact, sans-serif;
+            top: 14px; right: 14px;
+            background: #fff;
+            color: #000;
+            font-family: var(--font-display);
             font-weight: 900;
-            font-size: 0.85rem;
-            padding: 5px 12px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 0.68rem;
+            padding: 5px 11px;
+            border-radius: 100px;
+            letter-spacing: 1.6px;
             z-index: 10;
-            border: 2px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            animation: blink-sticker 0.8s infinite alternate ease-in-out;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.45);
             pointer-events: none;
-        }
-
-        @keyframes blink-sticker {
-            0% { transform: scale(1) rotate(10deg); box-shadow: 0 4px 10px rgba(255,0,60,0.4); }
-            100% { transform: scale(1.15) rotate(15deg); box-shadow: 0 0 20px rgba(255,0,60,0.9), 0 0 10px rgba(255,255,255,0.6) inset; }
-        }
-
-        /* ========================================== */
-        /* PITA ORANYE MEMANJANG (SEAMLESS RUNWAY)   */
-        /* ========================================== */
-        .footwear-slider-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .footwear-slider-container::before {
-            content: "";
-            position: absolute;
-            top: 20px; 
-            left: -50vw;
-            right: -50vw;
-            height: 250px; 
-            background-color: var(--shoe-band-color);
-            z-index: 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .img-container {
             width: 100%;
-            height: 250px;
-            background: var(--shoe-band-color); 
+            height: var(--band-h);
+            background: var(--shoe-band-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 14px;
             position: relative;
-            border: none;
-            border-radius: 0; 
+            overflow: hidden;
         }
 
         .project-card img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            transition: transform 0.5s var(--ease);
         }
 
         .card-content {
-            padding: 25px;
-            flex-grow: 1; 
+            padding: 24px 24px 20px;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            background: var(--card-bg); 
-            border: 1px solid rgba(255,255,255,0.05);
-            border-top: none; 
-            border-radius: 0 0 10px 10px;
-            transition: border-color 0.3s ease;
+            background: var(--card-bg);
+            border: 1px solid var(--line);
+            border-top: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+            transition: border-color 0.3s;
             z-index: 1;
         }
 
         .card-content h3 {
+            color: var(--text-main);
+            font-size: 1.12rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            margin-bottom: 10px;
+        }
+        .card-content h3 .idx { color: var(--accent); }
+
+        .card-content .desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .card-content .desc strong { color: #d8d8de; }
+
+        .card-note {
+            font-size: 0.76rem;
             color: var(--accent);
+            font-style: italic;
+            margin-top: 10px;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #000;
+            background: var(--accent);
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 5px;
+            letter-spacing: 0.6px;
             margin-bottom: 10px;
         }
 
-        .card-content p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
         .tag {
             display: inline-block;
-            font-size: 0.75rem;
-            background: #333;
-            padding: 5px 10px;
-            border-radius: 4px;
-            margin-right: 5px;
-            margin-bottom: 5px;
+            font-size: 0.72rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--line);
+            color: #b8b8c0;
+            padding: 4px 10px;
+            border-radius: 100px;
         }
 
         .btn-wrapper {
-            margin-top: auto; 
-            padding-top: 25px;
-            padding-bottom: 15px; 
+            margin-top: auto;
+            padding-top: 22px;
             display: flex;
             justify-content: center;
             width: 100%;
         }
+        .btn-wrapper .btn { width: 100%; }
 
-        /* --- SWIPER CUSTOM STYLES (KOTAK VERTIKAL TINGGI) --- */
+        /* ========================================== */
+        /* PITA ORANYE + SLIDER FOOTWEAR              */
+        /* ========================================== */
+        .footwear-slider-container { position: relative; width: 100%; }
+
+        .footwear-slider-container::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: -50vw;
+            right: -50vw;
+            height: var(--band-h);
+            background-color: var(--shoe-band-color);
+            z-index: 0;
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+        }
+
         .swiper {
             width: 100%;
-            padding: 20px 0 60px 0 !important;
+            padding: 20px 0 10px 0 !important;
             position: relative;
             z-index: 1;
         }
-        
-        .swiper-button-next, .swiper-button-prev {
-            width: 5% !important; 
-            min-width: 40px;
-            height: 100% !important; 
-            top: 0 !important;
+
+        .swiper-slide { height: auto; }
+
+        /* Panah: tombol bulat, TIDAK lagi menutupi kartu */
+        .mySwiper .swiper-button-next,
+        .mySwiper .swiper-button-prev {
+            width: 46px !important;
+            height: 46px !important;
+            top: calc(20px + var(--band-h) / 2) !important;
             margin-top: 0 !important;
-            background-color: transparent; 
-            color: rgba(255, 255, 255, 0.3) !important; 
-            transition: all 0.3s ease;
-            z-index: 10;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            background: rgba(12, 12, 14, 0.78);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff !important;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+            transition: background 0.25s var(--ease), transform 0.25s var(--ease), color 0.25s;
         }
+        .mySwiper .swiper-button-prev { left: 8px !important; }
+        .mySwiper .swiper-button-next { right: 8px !important; }
+        .mySwiper .swiper-button-next::after,
+        .mySwiper .swiper-button-prev::after {
+            font-size: 1.05rem !important;
+            font-weight: 900;
+        }
+        .mySwiper .swiper-button-next:hover,
+        .mySwiper .swiper-button-prev:hover {
+            background: var(--accent);
+            color: #000 !important;
+            border-color: var(--accent);
+            transform: translateY(-50%) scale(1.08);
+        }
+        .mySwiper .swiper-button-disabled { opacity: 0.25 !important; }
 
-        .swiper-button-prev { left: 0 !important; border-radius: 0 10px 10px 0; }
-        .swiper-button-next { right: 0 !important; border-radius: 10px 0 0 10px; }
-        
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background-color: rgba(237, 110, 3, 0.9); 
-            color: #000 !important; 
-            box-shadow: 0 0 20px rgba(237, 110, 3, 0.5);
+        /* Meter posisi slide */
+        .slider-meta {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-top: 22px;
         }
-
-        .swiper-button-next::after, .swiper-button-prev::after {
-            font-size: 2rem !important; 
-            font-weight: bold;
+        .slider-track {
+            flex: 1;
+            height: 3px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 3px;
+            overflow: hidden;
         }
-        
-        .swiper-slide {
-            height: auto;
+        .slider-track i {
+            display: block;
+            height: 100%;
+            width: 20%;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: width 0.4s var(--ease), transform 0.4s var(--ease);
         }
+        .slider-count {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            min-width: 68px;
+            text-align: right;
+        }
+        .slider-count b { color: var(--accent); }
 
         .swipe-hint {
-            text-align: right;
-            color: var(--accent);
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-top: -30px;
-            margin-bottom: 20px;
-            font-style: italic;
-            animation: pulse 2s infinite;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 26px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+        .swipe-hint svg { width: 16px; height: 16px; color: var(--accent); }
 
-        /* --- TEKS AJAKAN 3D (HINT) --- */
+        /* ========================================== */
+        /* 3D VIEWER                                  */
+        /* ========================================== */
         .interactive-hint {
             position: absolute;
-            bottom: 25px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(15, 15, 17, 0.85);
-            border: 1px solid var(--accent);
+            background: rgba(12, 12, 14, 0.85);
+            border: 1px solid rgba(237,110,3,0.55);
             color: var(--accent);
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            padding: 9px 20px;
+            border-radius: 100px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             pointer-events: none;
             z-index: 15;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-            animation: float-hint 2.5s ease-in-out infinite;
+            gap: 9px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+            animation: float-hint 2.6s ease-in-out infinite;
+            transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
         }
-
-        .interactive-hint span {
-            font-size: 1.3rem;
+        .interactive-hint svg { width: 16px; height: 16px; }
+        .interactive-hint.hidden {
+            opacity: 0;
+            transform: translate(-50%, 12px);
         }
 
         @keyframes float-hint {
             0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, -8px); }
+            50% { transform: translate(-50%, -7px); }
         }
 
-        /* ========================================== */
-        /* FULLSCREEN BUTTON 3D VIEWER (BARU)         */
-        /* ========================================== */
         .fullscreen-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(15, 15, 17, 0.7);
-            border: 1px solid rgba(255,255,255,0.2);
+            top: 14px;
+            right: 14px;
+            background: rgba(12, 12, 14, 0.72);
+            border: 1px solid rgba(255,255,255,0.18);
             color: var(--text-main);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 1.2rem;
+            border-radius: 10px;
+            width: 40px; height: 40px;
             cursor: pointer;
             z-index: 20;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
+            transition: 0.25s var(--ease);
+            display: grid;
+            place-items: center;
+            backdrop-filter: blur(6px);
         }
+        .fullscreen-btn svg { width: 18px; height: 18px; }
         .fullscreen-btn:hover {
             background: var(--accent);
             color: #000;
             border-color: var(--accent);
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
-        /* ========================================== */
-        /* TECHNICAL SHOWCASE (KOTAK CYAN & UNGU) */
-        /* ========================================== */
-        .technical-showcase-container {
-            display: flex;
-            gap: 20px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 25px;
-            min-height: 520px;
-            align-items: stretch;
-        }
-
-        .technical-3d-viewport {
-            flex: 1;
-            background: radial-gradient(circle, #252528 0%, #121215 70%);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            min-height: 450px;
-            border: 1px solid rgba(255,255,255,0.03);
-            display: flex; 
-        }
-
-        .technical-swiper {
-            width: 100%;
-            height: 100%;
-            padding: 0 !important; 
-            margin: 0;
-        }
-
-        .technical-swiper .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%; 
-            position: relative;
-        }
-
-        .technical-swiper model-viewer {
-            width: 100%;
-            height: 100%;
-            --poster-color: transparent;
-            outline: none;
-        }
-
-        .technical-swiper .swiper-button-next, 
-        .technical-swiper .swiper-button-prev {
-            width: 10% !important; 
-            max-width: 60px;
-            height: 100% !important; 
-            top: 0 !important;
-            margin-top: 0 !important;
-            background-color: transparent; 
-            color: rgba(255, 255, 255, 0.2) !important; 
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .technical-swiper .swiper-button-prev { left: 0 !important; border-radius: 0; }
-        .technical-swiper .swiper-button-next { right: 0 !important; border-radius: 0; }
-
-        .technical-swiper .swiper-button-next:hover, 
-        .technical-swiper .swiper-button-prev:hover {
-            background-color: rgba(237, 110, 3, 0.85); 
-            color: #000 !important; 
-        }
-
-        .technical-swiper .swiper-button-next::after, 
-        .technical-swiper .swiper-button-prev::after {
-            font-size: 2rem !important; 
-            font-weight: bold;
-        }
-
-        /* Tampilan Layar Penuh COMING SOON */
-        .coming-soon-viewport {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle, #2a2012 0%, #121215 75%);
-            border: 2px dashed rgba(237, 110, 3, 0.4);
-            border-radius: 10px;
-            text-align: center;
-            padding: 30px;
-        }
-
-        .coming-soon-viewport h2 {
-            font-size: 3rem;
-            color: var(--accent);
-            font-weight: 900;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(237, 110, 3, 0.4);
-        }
-
-        .coming-soon-viewport p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 400px;
-            line-height: 1.5;
-        }
-
-        .technical-sidebar {
-            width: 320px;
-            background: rgba(15, 15, 17, 0.7);
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .sidebar-header {
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .sidebar-header h4 {
-            color: var(--text-main);
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        .sidebar-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            overflow-y: auto;
-            flex-grow: 1;
-        }
-
-        .sidebar-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 14px 15px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.03);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .sidebar-item:hover {
-            background: rgba(237, 110, 3, 0.08);
-            border-color: var(--accent);
-        }
-
-        .sidebar-item.active-item {
-            background: rgba(237, 110, 3, 0.15);
-            border-color: var(--accent);
-        }
-
-        .item-number {
-            font-size: 1.1rem;
-            font-weight: 900;
-            color: var(--accent);
-            margin-top: 2px;
-        }
-
-        .item-info strong {
-            display: block;
-            font-size: 1.05rem;
-            color: var(--text-main);
-            letter-spacing: 0.5px;
-        }
-
-        .item-info small {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: block;
-            margin-top: 2px;
-        }
-
-        /* BAGIAN BARU: Software Tags untuk Sidebar */
-        .tech-tags {
-            margin-top: 8px;
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-
-        .tech-tags .tag {
-            background: rgba(237, 110, 3, 0.15);
-            color: var(--accent);
-            border: 1px solid rgba(237, 110, 3, 0.3);
-            font-size: 0.65rem;
-            padding: 3px 6px;
-            margin: 0;
-            font-weight: 600;
-        }
-
-        .title-marina-label {
-            font-size: 1.3rem !important;
-            font-weight: 900 !important;
-            color: var(--accent) !important;
-            letter-spacing: 1.5px !important;
-            text-transform: uppercase;
-        }
-
-        .sidebar-footer {
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 15px;
-            text-align: center;
-        }
-
-        /* --- SKILLS & SERVICES --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-box {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            position: relative; 
-            overflow: hidden; 
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .skill-box h4 {
-            color: var(--text-main);
-            margin-bottom: 10px;
-        }
-
-        .skill-box:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(237, 110, 3, 0.3);
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 40px;
-            background: #000;
-            color: var(--text-muted);
-            margin-top: 50px;
-        }
-
-        footer a {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* ========================================== */
-        /* CSS 3D VIEWER LOADING SCREEN & HOTSPOT     */
-        /* ========================================== */
         #coming-soon .model-container {
             width: 100%;
-            height: 60vh;
+            height: 62vh;
             min-height: 400px;
-            background: radial-gradient(circle, #2a2a2d 0%, var(--bg-color) 70%);
-            border-radius: 15px;
+            background: radial-gradient(circle at 50% 45%, #2a2a2e 0%, var(--bg-color) 72%);
+            border-radius: var(--radius);
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--line);
             position: relative;
         }
 
@@ -909,120 +967,432 @@
 
         .loading-poster {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(20, 20, 23, 0.95);
+            background: rgba(18, 18, 21, 0.96);
             color: var(--accent);
-            font-family: var(--font-main);
-            font-weight: 800;
-            font-size: 1.1rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             z-index: 10;
         }
 
         .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(237, 110, 3, 0.2);
-            border-top: 4px solid var(--accent);
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(237, 110, 3, 0.18);
+            border-top: 3px solid var(--accent);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
+        .loading-poster p { margin: 0; animation: pulse-text 1.6s infinite; }
 
-        .loading-poster p {
-            margin: 0;
-            animation: pulse-text 1.5s infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse-text { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
 
         .Hotspot {
             background: var(--accent);
             border-radius: 50%;
             border: 2px solid #fff;
-            box-shadow: 0 0 10px rgba(237, 110, 3, 0.8);
+            box-shadow: 0 0 12px rgba(237, 110, 3, 0.85);
             box-sizing: border-box;
             cursor: pointer;
-            height: 20px;
-            width: 20px;
+            height: 20px; width: 20px;
             transition: all 0.3s ease;
             position: relative;
         }
-
         .Hotspot:not([data-visible]) {
-            background: transparent;
-            border: 2px solid transparent;
-            box-shadow: none;
-            pointer-events: none;
+            background: transparent; border: 2px solid transparent;
+            box-shadow: none; pointer-events: none;
         }
-
-        .Hotspot:focus {
-            outline: none;
-        }
-        .Hotspot > * {
-            opacity: 1;
-            transform: translateY(-50%);
-        }
+        .Hotspot:focus { outline: none; }
+        .Hotspot > * { opacity: 1; transform: translateY(-50%); }
 
         .HotspotAnnotation {
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             color: #fff;
             display: block;
-            font-family: var(--font-main);
-            font-size: 14px;
-            font-weight: bold;
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
             left: calc(100% + 1em);
             max-width: 200px;
-            padding: 10px 15px;
+            padding: 9px 14px;
             position: absolute;
             top: 50%;
             width: max-content;
             border: 1px solid var(--accent);
             pointer-events: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             opacity: 0;
             transform: translate3d(-10px, -50%, 0);
             transition: opacity 0.3s, transform 0.3s;
         }
-
         .Hotspot:hover .HotspotAnnotation,
         .Hotspot:focus .HotspotAnnotation {
             opacity: 1;
             transform: translate3d(0, -50%, 0);
         }
 
-        /* --- MEDIA QUERIES (MOBILE RESPONSIVE) --- */
+        /* ========================================== */
+        /* TECHNICAL SHOWCASE                         */
+        /* ========================================== */
+        .technical-showcase-container {
+            display: flex;
+            gap: 20px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            padding: 22px;
+            min-height: 520px;
+            align-items: stretch;
+        }
+
+        .technical-3d-viewport {
+            flex: 1;
+            background: radial-gradient(circle at 50% 45%, #26262a 0%, #121215 72%);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            min-height: 450px;
+            border: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+        }
+
+        .technical-swiper {
+            width: 100%;
+            height: 100%;
+            padding: 0 !important;
+            margin: 0;
+        }
+
+        .technical-swiper .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            position: relative;
+        }
+
+        .technical-swiper model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+            outline: none;
+        }
+
+        .technical-swiper .swiper-button-next,
+        .technical-swiper .swiper-button-prev {
+            width: 44px !important;
+            height: 44px !important;
+            top: 50% !important;
+            margin-top: 0 !important;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            background: rgba(12, 12, 14, 0.7);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #fff !important;
+            backdrop-filter: blur(6px);
+            transition: background 0.25s var(--ease), transform 0.25s var(--ease), color 0.25s;
+        }
+        .technical-swiper .swiper-button-prev { left: 14px !important; }
+        .technical-swiper .swiper-button-next { right: 14px !important; }
+        .technical-swiper .swiper-button-next::after,
+        .technical-swiper .swiper-button-prev::after {
+            font-size: 1rem !important;
+            font-weight: 900;
+        }
+        .technical-swiper .swiper-button-next:hover,
+        .technical-swiper .swiper-button-prev:hover {
+            background: var(--accent);
+            color: #000 !important;
+            border-color: var(--accent);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .coming-soon-viewport {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 50% 45%, #2a2012 0%, #121215 76%);
+            border: 2px dashed rgba(237, 110, 3, 0.35);
+            border-radius: 12px;
+            text-align: center;
+            padding: 30px;
+        }
+        .coming-soon-viewport h2 {
+            font-size: clamp(1.7rem, 5vw, 2.6rem);
+            color: var(--accent);
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        .coming-soon-viewport p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            max-width: 380px;
+        }
+
+        .technical-sidebar {
+            width: 320px;
+            background: rgba(12, 12, 14, 0.7);
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-header {
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sidebar-header h4 { font-size: 0.95rem; font-weight: 700; }
+
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            font-family: inherit;
+            color: inherit;
+            transition: 0.3s var(--ease);
+        }
+        .sidebar-item:hover {
+            background: var(--accent-soft);
+            border-color: rgba(237,110,3,0.45);
+            transform: translateX(3px);
+        }
+        .sidebar-item.active-item {
+            background: rgba(237, 110, 3, 0.16);
+            border-color: var(--accent);
+        }
+
+        .item-number {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-top: 2px;
+        }
+        .item-info strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+        .item-info small {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .tech-tags { margin-top: 9px; display: flex; gap: 5px; flex-wrap: wrap; }
+        .tech-tags .tag {
+            background: rgba(237, 110, 3, 0.14);
+            color: var(--accent);
+            border: 1px solid rgba(237, 110, 3, 0.3);
+            font-size: 0.66rem;
+            padding: 3px 8px;
+            font-weight: 600;
+        }
+
+        .title-marina-label {
+            font-size: 1.15rem !important;
+            font-weight: 900 !important;
+            color: var(--accent) !important;
+            letter-spacing: 1px !important;
+        }
+
+        .sidebar-footer {
+            margin-top: 18px;
+            border-top: 1px solid var(--line);
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        /* ========================================== */
+        /* SKILLS                                     */
+        /* ========================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-box {
+            background: var(--card-bg);
+            padding: 26px 24px;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s var(--ease), border-color 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--line);
+        }
+        .skill-box::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: 100%; height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.45s var(--ease);
+        }
+        .skill-box:hover::before { transform: scaleX(1); }
+        .skill-box:hover {
+            border-color: rgba(237,110,3,0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+        }
+
+        .skill-icon {
+            width: 40px; height: 40px;
+            display: grid; place-items: center;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+        .skill-icon svg { width: 20px; height: 20px; }
+        .skill-box h4 { font-size: 1.02rem; margin-bottom: 14px; }
+        .skill-box .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+        .skill-box .chips span {
+            font-size: 0.78rem;
+            color: #b4b4bc;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--line);
+            padding: 5px 11px;
+            border-radius: 100px;
+        }
+
+        /* ========================================== */
+        /* CONTACT                                    */
+        /* ========================================== */
+        #contact { background: var(--bg-soft); text-align: center; }
+        #contact .section-title {
+            border-left: none;
+            border-bottom: 4px solid var(--accent);
+            padding-left: 0;
+            padding-bottom: 10px;
+            margin-bottom: 26px;
+        }
+        .contact-copy {
+            max-width: 60ch;
+            margin: 0 auto 12px;
+            font-size: 1.02rem;
+            color: #cfcfd4;
+        }
+        .contact-sub {
+            max-width: 60ch;
+            margin: 0 auto 36px;
+            color: var(--text-muted);
+            font-size: 0.94rem;
+        }
+        .contact-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .contact-mail {
+            display: inline-block;
+            margin-top: 28px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .contact-mail a { color: var(--accent); border-bottom: 1px dotted rgba(237,110,3,0.5); }
+
+        /* ========================================== */
+        /* FOOTER + BACK TO TOP                       */
+        /* ========================================== */
+        footer {
+            text-align: center;
+            padding: 44px 8%;
+            background: #08080a;
+            color: var(--text-muted);
+            border-top: 1px solid var(--line);
+            font-size: 0.86rem;
+        }
+        footer .foot-links {
+            display: flex; gap: 22px; justify-content: center; flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+        footer .foot-links a:hover { color: var(--accent); }
+
+        #to-top {
+            position: fixed;
+            right: 22px;
+            bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            display: grid; place-items: center;
+            cursor: pointer;
+            z-index: 900;
+            box-shadow: 0 10px 26px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(14px);
+            transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+        }
+        #to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        #to-top:hover { transform: translateY(-3px) scale(1.06); }
+        #to-top svg { width: 19px; height: 19px; }
+
+        /* ========================================== */
+        /* RESPONSIVE                                 */
+        /* ========================================== */
+        @media (max-width: 1100px) {
+            .mega-menu { gap: 10px 20px; padding: 26px 4% 32px; }
+            .mega-link { width: 96px; }
+            .nav-item { padding: 0 10px; }
+            .nav-item > a { font-size: 0.85rem; }
+        }
+
         @media (max-width: 900px) {
-            .hero h1 { font-size: 2rem; }
-            nav { flex-direction: column; gap: 10px; height: auto; padding: 15px 5%; }
-            .nav-links { flex-wrap: wrap; justify-content: center; }
-            .mega-menu { display: none; }
-            .swipe-hint { text-align: center; } 
-            #coming-soon .model-container { height: 50vh; }
-            .swiper-button-next, .swiper-button-prev { width: 30px !important; min-width: auto; }
-            
-            .technical-showcase-container { flex-direction: column; }
+            :root { --band-h: 200px; }
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            section { padding: 66px 6%; }
+            .hero-overlay-box { padding: 34px 24px 32px; border-radius: 18px; }
+            .hero-actions .btn { width: 100%; }
+            .college-video-wrapper { flex: 1 1 100%; }
+            .college-layout .project-card { max-width: 100%; }
+            #coming-soon .model-container { height: 52vh; min-height: 340px; }
+            .technical-showcase-container { flex-direction: column; padding: 16px; min-height: 0; }
             .technical-sidebar { width: 100%; }
-            
-            /* BAGIAN BARU: Sidebar Horizontal Scroll di HP */
             .sidebar-list {
                 flex-direction: row;
                 overflow-x: auto;
@@ -1030,704 +1400,923 @@
                 padding-bottom: 10px;
                 scroll-snap-type: x mandatory;
             }
-            .sidebar-item {
-                flex: 0 0 85%;
-                scroll-snap-align: start;
+            .sidebar-item { flex: 0 0 82%; scroll-snap-align: start; }
+            .quick-facts div { flex: 1 1 calc(50% - 12px); min-width: 0; }
+        }
+
+        @media (max-width: 560px) {
+            section { padding: 56px 5%; }
+            .logo { font-size: 1rem; }
+            .mySwiper .swiper-button-next,
+            .mySwiper .swiper-button-prev { width: 38px !important; height: 38px !important; }
+            .mySwiper .swiper-button-next::after,
+            .mySwiper .swiper-button-prev::after { font-size: 0.85rem !important; }
+            .contact-actions .btn { width: 100%; }
+            .scroll-cue { display: none; }
+        }
+
+        /* Hormati preferensi kurangi animasi */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
+            .fade-in-section { opacity: 1 !important; transform: none !important; }
         }
     </style>
+
+    <noscript>
+        <style>
+            .fade-in-section { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
 </head>
 <body>
 
-    <nav>
-        <a href="#home" class="logo">PROJECTS CATALOGUE</a>
-        <div class="nav-links">
-            <div class="nav-item"><a href="#about">About</a></div>
-            <div class="nav-item"><a href="#college">College</a></div>
-            
-            <div class="nav-item">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav id="siteNav">
+        <a href="#home" class="logo"><span class="logo-mark">G</span> Projects Catalogue</a>
+
+        <ul class="nav-links">
+            <li class="nav-item"><a href="#about">About</a></li>
+            <li class="nav-item"><a href="#college">College</a></li>
+
+            <li class="nav-item">
                 <a href="#footwear">Footwear</a>
                 <div class="mega-menu">
-                    <a href="#footwear" class="mega-link">
-                        <img src="20260218_221106_0000 (1).png" alt="Reverve">
+                    <a href="#footwear" class="mega-link" data-slide="0">
+                        <img src="20260218_221106_0000 (1).png" alt="Reverve" loading="lazy" decoding="async">
                         <span>Reverve</span>
                     </a>
-                    <a href="#footwear" class="mega-link">
-                        <img src="20260218_221106_0000 (2).png" alt="Muscle Memory">
+                    <a href="#footwear" class="mega-link" data-slide="1">
+                        <img src="20260218_221106_0000 (2).png" alt="Muscle Memory" loading="lazy" decoding="async">
                         <span>Muscle Memory</span>
                     </a>
-                    <a href="#footwear" class="mega-link">
-                        <img src="porto 3.png" alt="Dark System">
+                    <a href="#footwear" class="mega-link" data-slide="2">
+                        <img src="porto 3.png" alt="Dark System" loading="lazy" decoding="async">
                         <span>Dark System</span>
                     </a>
-                    <a href="#footwear" class="mega-link">
-                        <img src="SPIC.png" alt="Spice Bloom">
+                    <a href="#footwear" class="mega-link" data-slide="3">
+                        <img src="SPIC.png" alt="Spice Bloom" loading="lazy" decoding="async">
                         <span>Spice Bloom</span>
                     </a>
-                    <a href="#footwear" class="mega-link">
-                        <img src="NETT.png" alt="Nett">
+                    <a href="#footwear" class="mega-link" data-slide="4">
+                        <img src="SCAR FLOW.png" alt="Scar Flow" loading="lazy" decoding="async">
+                        <span>Scar Flow</span>
+                    </a>
+                    <a href="#footwear" class="mega-link" data-slide="5">
+                        <img src="BLAKRAKAN.png" alt="Blakraan" loading="lazy" decoding="async">
+                        <span>Blakraan</span>
+                    </a>
+                    <a href="#footwear" class="mega-link" data-slide="6">
+                        <img src="TERRA.png" alt="Terra Nullius" loading="lazy" decoding="async">
+                        <span>Terra Nullius</span>
+                    </a>
+                    <a href="#footwear" class="mega-link" data-slide="7">
+                        <img src="NETT.png" alt="Nett" loading="lazy" decoding="async">
                         <span>Nett</span>
                     </a>
                 </div>
-            </div>
+            </li>
 
-            <div class="nav-item">
-                <a href="#coming-soon" style="color: var(--accent); font-weight: bold;">Coming Soon</a> 
-            </div>
-            <div class="nav-item"><a href="#technical">Technical</a></div>
-            <div class="nav-item"><a href="#skills">Skills</a></div>
-        </div>
+            <li class="nav-item"><a href="#coming-soon">Coming Soon</a></li>
+            <li class="nav-item"><a href="#technical">Technical</a></li>
+            <li class="nav-item"><a href="#skills">Skills</a></li>
+            <li class="nav-item"><a href="#contact">Contact</a></li>
+        </ul>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <span class="nav-progress" id="navProgress"></span>
     </nav>
 
-   <header id="home" class="hero">
-    <video autoplay loop muted playsinline class="hero-bg-video">
-        <source src="2t2tf2t.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay-dark"></div>
-    <svg id="laces-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;"></svg>
-
-    <div class="hero-overlay-box" id="hero-box"> 
-        <h3>Hi, I'm</h3>
-        <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
-        <h3>Footwear Designer | Technical Design Drafter</h3>
-        <p style="max-width: 600px; color: #eee; margin-bottom: 30px;">
-            I am a Footwear Designer & Developer specializing in decoding narratives into functional, high-performance products. Where storytelling meets advanced technical execution.
-        </p>
-        <div style="display: flex; gap: 15px; justify-content: center;">
-            <a href="#footwear" class="btn" id="btn-explode">View My Work</a>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about">About <span>01</span></a>
+        <a href="#college">College <span>02</span></a>
+        <a href="#footwear">Footwear <span>03</span></a>
+        <a href="#coming-soon">Coming Soon <span>04</span></a>
+        <a href="#technical">Technical <span>05</span></a>
+        <a href="#skills">Skills <span>06</span></a>
+        <a href="#contact">Contact <span>07</span></a>
+        <div class="m-cta">
+            <a href="mailto:garinkusuma.design@gmail.com" class="btn">Email me</a>
         </div>
     </div>
-</header>
+
+    <main id="main">
+
+    <header id="home" class="hero">
+        <video autoplay loop muted playsinline preload="auto" class="hero-bg-video" aria-hidden="true">
+            <source src="2t2tf2t.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay-dark"></div>
+        <svg id="laces-svg" aria-hidden="true" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;"></svg>
+
+        <div class="hero-overlay-box" id="hero-box">
+            <span class="status-pill"><i></i> Open to full-time roles</span>
+            <p class="hero-kicker">Hi, I'm</p>
+            <h1><span>Garin</span> Nata <span>Kusuma</span></h1>
+            <p class="hero-role">Footwear Designer <span class="sep">/</span> Technical Design Drafter</p>
+            <p class="hero-desc">
+                I turn narratives into functional, high-performance footwear — from concept and storytelling
+                through technical drawing, pattern making and manufacturing tooling.
+            </p>
+            <div class="hero-actions">
+                <a href="#footwear" class="btn" id="btn-explode">
+                    View my work
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+                <a href="#contact" class="btn btn-ghost">
+                    Let's talk
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 6 8 6 8-6"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <a href="#about" class="scroll-cue" aria-label="Scroll to About"><i></i></a>
+    </header>
 
     <section id="about" class="fade-in-section">
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title">About me</h2>
         <div class="about-container">
             <div class="about-text">
-                <p>Hi, I'm <strong>Garin Kusuma</strong>. I’ve been designing footwear for the past four years, mostly because I’m just a curious guy who likes to see how we live in Indonesia. I have this habit of picking up random things—unique objects, weird stories, or odd experiences—and somehow connecting them all together. People might think it’s a bit 'strange' or 'out there,' but I actually love the chaos in my head.</p>
-                <p style="margin-top: 15px;">Right now, what you see here are my design narratives, but I’m working on making them a reality very soon. To support this, I also serve as a <strong>Design Drafter</strong> for automated manufacturing, with a focus on pallet design and computer stitching processes.</p>
+                <p>Hi, I'm <strong>Garin Kusuma</strong>. I've been designing footwear for the past four years, mostly because I'm just a curious guy who likes to see how we live in Indonesia. I have this habit of picking up random things — unique objects, weird stories, or odd experiences — and somehow connecting them all together. People might think it's a bit 'strange' or 'out there,' but I actually love the chaos in my head.</p>
+                <p>Right now, what you see here are my design narratives, but I'm working on making them a reality very soon. To support this, I also serve as a <strong>Design Drafter</strong> for automated manufacturing, with a focus on pallet design and computer stitching processes.</p>
+
+                <div class="quick-facts">
+                    <div><strong>4+</strong><small>Years designing footwear</small></div>
+                    <div><strong>8</strong><small>Documented design projects</small></div>
+                    <div><strong>3D</strong><small>Rhino, NanoCAD, Delcam</small></div>
+                    <div><strong>2024</strong><small>Graduated, Politeknik ATK</small></div>
+                </div>
             </div>
+
             <div class="about-education">
-                <img src="LOGO POLTEK.png" alt="Politeknik ATK Yogyakarta Logo">
+                <img src="LOGO POLTEK.png" alt="Politeknik ATK Yogyakarta logo" loading="lazy" decoding="async">
                 <h4>Politeknik ATK Yogyakarta</h4>
-                <p style="color: var(--accent); font-weight: bold; margin-bottom: 15px;">Footwear Product Design</p>
-                <p>Graduated: 2024</p>
-                <p>GPA: 3.40</p>
+                <p class="major">Footwear Product Design</p>
+                <div class="meta">
+                    <span>Graduated 2024</span>
+                    <span>GPA 3.40</span>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="college" class="fade-in-section">
-        <h2 class="section-title">College Projects</h2>
+        <h2 class="section-title">College projects</h2>
+        <p class="section-lead">Academic work selected for exhibition — apparel construction, pattern making and full production workflow.</p>
         <div class="college-layout">
-            <div class="project-card" style="max-width: 380px; flex: 1 1 320px;">
+            <div class="project-card">
                 <div class="img-container">
-                    <img src="TOPAN2.jpg" alt="Smooth Criminal Project">
+                    <img src="TOPAN2.jpg" alt="Smooth Criminal Jacket project" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
-                    <h3>Project College: SMOOTH CRIMINAL JACKET</h3>
-                    <p><strong>Fashion Apparel.</strong> A jacket that seamlessly blends Javanese cultural heritage with the iconic style of the 'King of Pop,' Michael Jackson. This project explores the use of premium lambskin leather and traditional Sorjan-patterned woven fabric (Tenun) to create an innovative and luxurious garment. Originally developed as an academic project, this piece was selected to be showcased in a prestigious fashion show at the PDIN (National Industrial Design Center) building.</p>
-                    <div>
+                    <h3>Smooth Criminal Jacket</h3>
+                    <p class="desc"><strong>Fashion apparel.</strong> A jacket that blends Javanese cultural heritage with the iconic style of the 'King of Pop,' Michael Jackson. This project explores premium lambskin leather and traditional Sorjan-patterned woven fabric (Tenun) to create an innovative and luxurious garment. Originally an academic project, it was selected for a fashion show at the PDIN (National Industrial Design Center) building.</p>
+                    <div class="tags">
                         <span class="tag">Classic</span>
-                        <span class="tag">Street Culture</span>
-                        <span class="tag">Leather Tech</span>
+                        <span class="tag">Street culture</span>
+                        <span class="tag">Leather tech</span>
                     </div>
-                    <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                        *Details include: Story Writing, Moodboard, Technical Pattern Making (Leather & Tenun), and Full Production Workflow.
-                    </p>
+                    <p class="card-note">Includes story writing, moodboard, technical pattern making (leather &amp; tenun), and full production workflow.</p>
                     <div class="btn-wrapper">
-                        <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" class="btn">View Details</a>
+                        <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
                     </div>
                 </div>
             </div>
             <div class="college-video-wrapper">
-                <iframe src="https://www.youtube.com/embed/snPK9X9Hn5M?autoplay=1&mute=1&loop=1&playlist=snPK9X9Hn5M" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/snPK9X9Hn5M?autoplay=1&mute=1&loop=1&playlist=snPK9X9Hn5M" title="Fashion show Politeknik ATK 2023" allow="autoplay; encrypted-media" loading="lazy" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <section id="footwear" style="background-color: #121215;" class="fade-in-section"> 
-        <h2 class="section-title">Footwear Concept & Design</h2>
+    <section id="footwear" style="background-color: var(--bg-soft);" class="fade-in-section">
+        <h2 class="section-title">Footwear concept &amp; design</h2>
+        <p class="section-lead">Eight projects, each with its own narrative, technical drawings and material specifications. Open any card for the full documentation.</p>
+
         <div class="swipe-hint">
-            &#8592; Swipe or click arrows to explore more projects &#8594;
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 4 12l4 5M16 7l4 5-4 5"/></svg>
+            Swipe, use the arrows, or press ← → to browse
         </div>
-        
+
         <div class="footwear-slider-container">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    
+
                     <div class="swiper-slide">
-                        <div class="project-card">
+                        <article class="project-card">
                             <div class="img-container">
-                                <img src="20260218_221106_0000 (1).png" alt="Reverve Project">
+                                <img src="20260218_221106_0000 (1).png" alt="Reverve — climate adapt concept" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                                <h3>Project 1: REVERVE</h3>
-                                <p><strong>The "Climate Adapt" Concept.</strong> Inspired by potential extreme environmental shifts. Engineered with advanced vulcanization technology for a future ice-age scenario.</p>
-                                <div>
-                                    <span class="tag">Footwear Design</span>
+                                <h3><span class="idx">01</span> Reverve</h3>
+                                <p class="desc"><strong>The "Climate Adapt" concept.</strong> Inspired by potential extreme environmental shifts. Engineered with advanced vulcanization technology for a future ice-age scenario.</p>
+                                <div class="tags">
+                                    <span class="tag">Footwear design</span>
                                     <span class="tag">Vulcanized</span>
                                     <span class="tag">Concept</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Details include: Technical Drawing, Material Specs, & R&D Process
-                                </p>
+                                <p class="card-note">Includes technical drawing, material specs &amp; R&amp;D process.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                                    <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="project-card">
+                        <article class="project-card">
                             <div class="img-container">
-                                <img src="20260218_221106_0000 (2).png" alt="Muscle Memory Project">
+                                <img src="20260218_221106_0000 (2).png" alt="Muscle Memory — skateboard performance" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                                <h3>Project 2: MUSCLE MEMORY</h3>
-                                <p><strong>Urban Skateboard Performance.</strong> Designed for the heat of East Java. Lightweight, breathable, and refined for high-performance versatility in skateboarding.</p>
-                                <div>
+                                <h3><span class="idx">02</span> Muscle Memory</h3>
+                                <p class="desc"><strong>Urban skateboard performance.</strong> Designed for the heat of East Java. Lightweight, breathable, and refined for high-performance versatility in skateboarding.</p>
+                                <div class="tags">
                                     <span class="tag">Performance</span>
                                     <span class="tag">Skateboarding</span>
-                                    <span class="tag">Leather Tech</span>
+                                    <span class="tag">Leather tech</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Details include: Technical Drawing, Performance Testing, & R&D Process
-                                </p>
+                                <p class="card-note">Includes technical drawing, performance testing &amp; R&amp;D process.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                                    <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="project-card">
+                        <article class="project-card">
                             <div class="img-container">
-                                <img src="porto 3.png" alt="Dark System Projects">
+                                <img src="porto 3.png" alt="Dark System — lifestyle silhouette" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                                <h3>Project 3: DARK SYSTEM</h3>
-                                <p><strong>Lifestyle Defiance & Social Connectivity.</strong> The 'Dark System' is a term that highlights the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices, serving as a visual manifesto for those who refuse to be silenced. Every pair is a declaration of our refusal to be silent in the face of oppression and a statement that we are all equal.</p>
-                                <div>
+                                <h3><span class="idx">03</span> Dark System</h3>
+                                <p class="desc"><strong>Lifestyle defiance &amp; social connectivity.</strong> 'Dark System' names the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices — a visual manifesto for those who refuse to be silenced, and a declaration that we are all equal.</p>
+                                <div class="tags">
                                     <span class="tag">Lifestyle</span>
                                     <span class="tag">Solidarity</span>
-                                    <span class="tag">Social Statement</span>
+                                    <span class="tag">Social statement</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Details include: 2D/3D Design Process, Riot-Inspired Moodboards, & Meaning Analysis
-                                </p>
+                                <p class="card-note">Includes 2D/3D design process, riot-inspired moodboards &amp; meaning analysis.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" class="btn">View Details</a>
+                                    <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
-                     <div class="swiper-slide">
-                        <div class="project-card">
+                    <div class="swiper-slide">
+                        <article class="project-card">
                             <div class="img-container">
-                                <img src="SPIC.png" alt="Spice Bloom Projects">
+                                <img src="SPIC.png" alt="Spice Bloom — running silhouette" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                                <h3>Project 4: SPICE BLOOM</h3>
-                                <p><strong>The "Heritage Flow" Concept.</strong> Inspired by the historical legacy of the Indonesian spice trade and the modern global running phenomenon. Engineered with organic sole ergonomics to capture the high-energy pulse of the equatorial sun.</p>
-                                <div>
+                                <h3><span class="idx">04</span> Spice Bloom</h3>
+                                <p class="desc"><strong>The "Heritage Flow" concept.</strong> Inspired by the historical legacy of the Indonesian spice trade and the modern global running phenomenon. Engineered with organic sole ergonomics to capture the high-energy pulse of the equatorial sun.</p>
+                                <div class="tags">
                                     <span class="tag">Running</span>
                                     <span class="tag">Performance</span>
                                     <span class="tag">Sport</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Details include: Concept Explanation, Visual Development, & Technical Specifications
-                                </p>
+                                <p class="card-note">Includes concept explanation, visual development &amp; technical specifications.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" class="btn">View Details</a>
+                                    <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="project-card">
+                        <article class="project-card">
                             <div class="img-container">
-                                <img src="SCAR FLOW.png" alt="Scar Flow - IFCC Submission">
+                                <img src="SCAR FLOW.png" alt="Scar Flow — IFCC 2026 submission" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                                <p style="font-size: 0.75rem; font-weight: bold; color: var(--accent); letter-spacing: 1.5px; margin-bottom: 5px; text-transform: uppercase;">
-                                    Official Submission: IFCC 2026
-                                </p>
-                                <h3>Project 5: SCAR FLOW x REISEN</h3>
-                                <p><strong>The "Adaptive Current" Concept.</strong> An official design entry for the <strong>Indonesian Footwear Creative Competition (IFCC)</strong>, developed specifically for <strong>REI Footwear</strong>. This project bridges urban utility with rugged trail performance, featuring technical TPU architecture and an outsole system validated through intense environment with 3 styles concept.</p>
-                                <div>
-                                    <span class="tag">IFCC Entry</span>
+                                <span class="eyebrow">Official submission · IFCC 2026</span>
+                                <h3><span class="idx">05</span> Scar Flow x Reisen</h3>
+                                <p class="desc"><strong>The "Adaptive Current" concept.</strong> A design entry for the Indonesian Footwear Creative Competition (IFCC), developed for REI Footwear. It bridges urban utility with rugged trail performance, featuring technical TPU architecture and an outsole system validated in intense environments across three style concepts.</p>
+                                <div class="tags">
+                                    <span class="tag">IFCC entry</span>
                                     <span class="tag">REI Footwear</span>
-                                    <span class="tag">Trail Performance</span>
+                                    <span class="tag">Trail performance</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Includes: IFCC Design Board, Technical Material Specifications, 3D Rendering by Vizcom.
-                                </p>
+                                <p class="card-note">Includes IFCC design board, technical material specifications, 3D rendering by Vizcom.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" class="btn">View Full Submission</a>
+                                    <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View submission</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
-                    
+
                     <div class="swiper-slide">
-                        <div class="project-card">
+                        <article class="project-card">
                             <div class="img-container">
-                                <img src="BLAKRAKAN.png" alt="BLAKRAAN">
+                                <img src="BLAKRAKAN.png" alt="Blakraan — casual silhouette" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                               <h3>Project 6: BLAKRAAN</h3>
-                                <p><strong>The "Aimless Wandering" Concept.</strong> A tribute to the pure essence of unburdened childhood exploration. Designed with tactical, earthy accents and rugged comfort to bridge small-town nostalgia with modern urban functionality.</p>
-                                <div>
-                                    <span class="tag">Footwear Design</span>
-                                    <span class="tag">Casual Silhouette</span>
+                                <h3><span class="idx">06</span> Blakraan</h3>
+                                <p class="desc"><strong>The "Aimless Wandering" concept.</strong> A tribute to the pure essence of unburdened childhood exploration. Designed with tactical, earthy accents and rugged comfort to bridge small-town nostalgia with modern urban functionality.</p>
+                                <div class="tags">
+                                    <span class="tag">Footwear design</span>
+                                    <span class="tag">Casual silhouette</span>
                                     <span class="tag">Concept</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Details include: Storytelling, Technical Specs, & Colorway Archive
-                                </p>
+                                <p class="card-note">Includes storytelling, technical specs &amp; colorway archive.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" class="btn">View Details</a>
+                                    <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" target="_blank" rel="noopener" class="btn">View details</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="project-card">
+                        <article class="project-card">
                             <div class="img-container">
-                                <img src="TERRA.png" alt="TERRA NULLIUS">
+                                <img src="TERRA.png" alt="Terra Nullius — experimental slip-on" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                                <h3>Project 7: TERRA NULLIUS</h3>
-                                <p><strong>The "Ecological Reclamation" Concept.</strong> Synthesizing traditional sartorial formality with feral biological reclamation in a post-soil reality. This elegant yet experimental slip-on features CH leather, a universal buckle, and a rubber sole, violently contrasted by an artificial moss vamp—representing nature's forceful return in a dystopian future.</p>
-                                <div>
-                                    <span class="tag">Formal Elegance</span>
+                                <h3><span class="idx">07</span> Terra Nullius</h3>
+                                <p class="desc"><strong>The "Ecological Reclamation" concept.</strong> Synthesizing traditional sartorial formality with feral biological reclamation in a post-soil reality. An elegant slip-on in CH leather with a universal buckle and rubber sole, violently contrasted by an artificial moss vamp — nature's forceful return in a dystopian future.</p>
+                                <div class="tags">
+                                    <span class="tag">Formal elegance</span>
                                     <span class="tag">Experimental</span>
                                     <span class="tag">Speculative</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Details include: Dystopian Narrative, Speculative Materials (Artificial Moss, CH Leather), & Visual Concept
-                                </p>
+                                <p class="card-note">Includes dystopian narrative, speculative materials (artificial moss, CH leather) &amp; visual concept.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/15VfwET1Qssd2gBiNQ5WzKHazwj1jBqcR/view?usp=drive_link" class="btn">View Details</a>
+                                    <a href="https://drive.google.com/file/d/15VfwET1Qssd2gBiNQ5WzKHazwj1jBqcR/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="project-card">
-                            <div class="badge-new">NEW !!!</div> <div class="img-container">
-                                <img src="NETT.png" alt="NETT Project">
+                        <article class="project-card">
+                            <span class="badge-new">New</span>
+                            <div class="img-container">
+                                <img src="NETT.png" alt="Nett — tennis performance silhouette" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
-                                <h3>Project 8: NETT</h3>
-                                <p><strong>The "Baseline Rally" Concept.</strong> Born from the explosive physical demands of tennis. NETT translates the precise tension of the woven net into a breathable, lightweight upper, fortified with a secure lateral lockdown and a deeply cushioned midsole to absorb harsh hardcourt strikes.</p>
-                                <div>
-                                    <span class="tag">Tennis Performance</span>
-                                    <span class="tag">Footwear Design</span>
+                                <h3><span class="idx">08</span> Nett</h3>
+                                <p class="desc"><strong>The "Baseline Rally" concept.</strong> Born from the explosive physical demands of tennis. Nett translates the precise tension of the woven net into a breathable, lightweight upper, fortified with a secure lateral lockdown and a deeply cushioned midsole to absorb harsh hardcourt strikes.</p>
+                                <div class="tags">
+                                    <span class="tag">Tennis performance</span>
+                                    <span class="tag">Footwear design</span>
                                     <span class="tag">Heritage</span>
                                 </div>
-                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                    *Details include: Storytelling Narrative, Validation Logs, & Visual Development
-                                </p>
+                                <p class="card-note">Includes storytelling narrative, validation logs &amp; visual development.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1U3m9BnDxirXK-WiIXHjjk5UnwH3CflwX/view?usp=drive_link" class="btn">View Details</a>
+                                    <a href="https://drive.google.com/file/d/1U3m9BnDxirXK-WiIXHjjk5UnwH3CflwX/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
-                </div> 
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                </div>
+                <div class="swiper-button-next" role="button" aria-label="Next project"></div>
+                <div class="swiper-button-prev" role="button" aria-label="Previous project"></div>
+            </div>
+
+            <div class="slider-meta">
+                <div class="slider-track"><i id="fwProgress"></i></div>
+                <div class="slider-count" id="fwCount"><b>01</b> / 08</div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION COMING SOON -->
     <section id="coming-soon" class="fade-in-section">
-        <h2 class="section-title">Coming Soon Projects</h2>
-        <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
-            Take a sneak peek at what's currently on my drawing board. Explore the 3D prototype below.
-        </p>
-        
-        <div class="model-container" id="cs-viewport">
-            <!-- FULLSCREEN BUTTON BARU -->
-            <button class="fullscreen-btn" onclick="toggleFullscreen(document.getElementById('cs-viewport'))" title="Tampilan Penuh">⛶</button>
-            <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
+        <h2 class="section-title">Coming soon</h2>
+        <p class="section-lead">A sneak peek at what's on the drawing board. Drag the model to inspect it from any angle.</p>
 
-            <!-- DITAMBAHKAN loading="lazy" -->
-            <model-viewer 
-                src="GIRRAFEE.glb" 
-                alt="3D CLOG Prototype" 
-                auto-rotate 
-                camera-controls 
+        <div class="model-container" id="cs-viewport">
+            <button class="fullscreen-btn" data-fs-target="cs-viewport" aria-label="Toggle fullscreen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            </button>
+            <div class="interactive-hint" data-hint>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 3v4M12 3 9 6M12 3l3 3"/></svg>
+                Drag to rotate 360°
+            </div>
+
+            <model-viewer
+                src="GIRRAFEE.glb"
+                alt="3D clog prototype"
+                auto-rotate
+                camera-controls
                 shadow-intensity="1.5"
                 exposure="1"
                 loading="lazy"
-                interaction-prompt="hover">
-                
+                interaction-prompt="none">
+
                 <div slot="poster" class="loading-poster">
                     <div class="loading-spinner"></div>
-                    <p>LOADING 3D ASSET...</p>
+                    <p>Loading 3D asset</p>
                 </div>
 
-                <button class="Hotspot" slot="hotspot-1" data-position="0 0.1 0.1" data-normal="0 1 0">
-                    <div class="HotspotAnnotation">Coming Soon</div>
+                <button class="Hotspot" slot="hotspot-1" data-position="0 0.1 0.1" data-normal="0 1 0" aria-label="Coming soon">
+                    <div class="HotspotAnnotation">Coming soon</div>
                 </button>
-                
             </model-viewer>
         </div>
     </section>
 
-    <!-- BAGIAN BARU: TECHNICAL SHOWCASE (3D SLIDER & SIDEBAR) -->
     <section id="technical" class="fade-in-section">
-        <h2 class="section-title">Technical Drafting & Manufacturing</h2>
-        
+        <h2 class="section-title">Technical drafting &amp; manufacturing</h2>
+        <p class="section-lead">Tooling and pallet design for automated production lines — modelled, exploded and documented.</p>
+
         <div class="technical-showcase-container">
-            
+
             <div class="technical-3d-viewport" id="tech-viewport">
-                <!-- FULLSCREEN BUTTON BARU -->
-                <button class="fullscreen-btn" onclick="toggleFullscreen(document.getElementById('tech-viewport'))" title="Tampilan Penuh">⛶</button>
-                <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
+                <button class="fullscreen-btn" data-fs-target="tech-viewport" aria-label="Toggle fullscreen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                </button>
+                <div class="interactive-hint" data-hint>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 3v4M12 3 9 6M12 3l3 3"/></svg>
+                    Drag to rotate 360°
+                </div>
 
                 <div class="swiper technical-swiper">
                     <div class="swiper-wrapper">
-                        
-                        <!-- SLIDE 1: MARINA3D.glb -->
+
                         <div class="swiper-slide">
-                            <model-viewer 
-                                src="MARINA3D.glb" 
-                                alt="Nike Marina Heel Peg Pallet - Solid View" 
-                                auto-rotate 
-                                camera-controls 
+                            <model-viewer
+                                src="MARINA3D.glb"
+                                alt="Nike Marina heel peg pallet — solid view"
+                                auto-rotate
+                                camera-controls
                                 shadow-intensity="1.5"
                                 exposure="1"
                                 loading="lazy"
-                                interaction-prompt="hover">
-                                
+                                interaction-prompt="none">
                                 <div slot="poster" class="loading-poster">
                                     <div class="loading-spinner"></div>
-                                    <p>LOADING 3D ASSET...</p>
-                                </div>
-                            </model-viewer>
-                        </div>
-                        
-                        <!-- SLIDE 2: MARINA3DEXP.glb -->
-                        <div class="swiper-slide">
-                            <model-viewer 
-                                src="MARINA3DEXP.glb" 
-                                alt="Nike Marina Heel Peg Pallet - Exploded View" 
-                                auto-rotate 
-                                camera-controls 
-                                shadow-intensity="1.5"
-                                exposure="1"
-                                loading="lazy"
-                                interaction-prompt="hover">
-                                
-                                <div slot="poster" class="loading-poster">
-                                    <div class="loading-spinner"></div>
-                                    <p>LOADING EXPLODED VIEW...</p>
+                                    <p>Loading 3D asset</p>
                                 </div>
                             </model-viewer>
                         </div>
 
-                        <!-- SLIDE 3: SLOT DESAIN BARU (TAMPILAN COMING SOON LAYAR HITAM) -->
+                        <div class="swiper-slide">
+                            <model-viewer
+                                src="MARINA3DEXP.glb"
+                                alt="Nike Marina heel peg pallet — exploded view"
+                                auto-rotate
+                                camera-controls
+                                shadow-intensity="1.5"
+                                exposure="1"
+                                loading="lazy"
+                                interaction-prompt="none">
+                                <div slot="poster" class="loading-poster">
+                                    <div class="loading-spinner"></div>
+                                    <p>Loading exploded view</p>
+                                </div>
+                            </model-viewer>
+                        </div>
+
                         <div class="swiper-slide">
                             <div class="coming-soon-viewport">
-                                <h2>COMING SOON</h2>
-                                <p>New engineering drafting & technical tooling process currently in development.</p>
+                                <h2>Coming soon</h2>
+                                <p>New engineering drafting &amp; technical tooling process currently in development.</p>
                             </div>
                         </div>
 
                     </div>
-                    
-                    <!-- NAVIGASI KOTAK TRANPARAN UNTUK 3D VIEWER -->
-                    <div class="swiper-button-next tech-next"></div>
-                    <div class="swiper-button-prev tech-prev"></div>
+
+                    <div class="swiper-button-next tech-next" role="button" aria-label="Next view"></div>
+                    <div class="swiper-button-prev tech-prev" role="button" aria-label="Previous view"></div>
                 </div>
             </div>
 
-            <!-- Kotak Ungu: Sidebar Navigasi / Info -->
             <div class="technical-sidebar">
                 <div class="sidebar-header">
-                    <h4>Technical Index</h4>
-                    <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 2</span>
+                    <h4>Technical index</h4>
+                    <span id="tech-slide-count" style="font-size: 0.74rem; color: var(--accent);">Item 1 of 2</span>
                 </div>
-                
+
                 <div class="sidebar-list">
-                    <!-- Navigasi Slide 1: MARINA -->
-                    <div class="sidebar-item active-item" id="nav-item-1" onclick="techSwiper.slideTo(0)">
+                    <button type="button" class="sidebar-item active-item" id="nav-item-1" data-goto="0">
                         <span class="item-number">01</span>
-                        <div class="item-info">
-                            <strong class="title-marina-label">MARINA</strong>
-                            <small>Solid Model & Exploded View</small>
-                            <!-- SOFTWARE TAGS BARU -->
-                            <div class="tech-tags">
+                        <span class="item-info">
+                            <strong class="title-marina-label">Marina</strong>
+                            <small>Solid model &amp; exploded view</small>
+                            <span class="tech-tags">
                                 <span class="tag">NanoCAD</span>
                                 <span class="tag">Rhino 3D</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Navigasi Slide 2: NEXT SPEC -->
-                    <div class="sidebar-item" id="nav-item-2" onclick="techSwiper.slideTo(2)">
+                            </span>
+                        </span>
+                    </button>
+
+                    <button type="button" class="sidebar-item" id="nav-item-2" data-goto="2">
                         <span class="item-number">02</span>
-                        <div class="item-info">
-                            <strong>Next Spec Tooling</strong>
-                            <small style="color: var(--accent); font-weight: bold;">Coming Soon Concept</small>
-                        </div>
-                    </div>
+                        <span class="item-info">
+                            <strong>Next spec tooling</strong>
+                            <small style="color: var(--accent); font-weight: 700;">In development</small>
+                        </span>
+                    </button>
                 </div>
-                
+
                 <div class="sidebar-footer">
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; font-style: italic;">
-                        *Hint: Drag the 3D model to rotate. Click the arrows or items above to change perspective.
+                    <p style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 12px; font-style: italic;">
+                        Drag the model to rotate. Use the arrows or the list above to change perspective.
                     </p>
-                    <!-- IKON TAMBAHAN DI TOMBOL -->
-                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" id="tech-spec-btn" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs ↗</a>
+                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" rel="noopener" id="tech-spec-btn" class="btn" style="padding: 11px 14px; font-size: 0.8rem; width: 100%;">View technical specs</a>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section id="skills" style="background-color: #121215;" class="fade-in-section">
-        <h2 class="section-title">Skills & Tools</h2>
+
+    <section id="skills" style="background-color: var(--bg-soft);" class="fade-in-section">
+        <h2 class="section-title">Skills &amp; tools</h2>
+        <p class="section-lead">What I use day to day, from first sketch to production-ready tooling.</p>
         <div class="skills-grid">
             <div class="skill-box">
+                <div class="skill-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                </div>
                 <h4>Design</h4>
-                <p style="font-size: 0.9rem; color: #888;">Adobe Illustrator, Corel Draw, Photoshop, Footwear Sketching</p>
+                <div class="chips">
+                    <span>Adobe Illustrator</span><span>CorelDRAW</span><span>Photoshop</span><span>Footwear sketching</span>
+                </div>
             </div>
             <div class="skill-box">
+                <div class="skill-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+                </div>
                 <h4>Technical CAD</h4>
-                <p style="font-size: 0.9rem; color: #888;">Rhinoceros, AutoCAD, Nanocad, Delcam Shoemaker</p>
+                <div class="chips">
+                    <span>Rhinoceros</span><span>AutoCAD</span><span>NanoCAD</span><span>Delcam Shoemaker</span>
+                </div>
             </div>
             <div class="skill-box">
+                <div class="skill-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 20V8l6-4v16"/><path d="M10 20V9l8 3v8"/><path d="M14 14h.01M14 17h.01"/></svg>
+                </div>
                 <h4>Manufacturing</h4>
-                <p style="font-size: 0.9rem; color: #888;">Pattern Making, Vulcanization Process, Computer Stitching, Operational Excellence</p>
+                <div class="chips">
+                    <span>Pattern making</span><span>Vulcanization</span><span>Computer stitching</span><span>Operational excellence</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" style="background: #151515; text-align: center;" class="fade-in-section">
-        <h2 class="section-title" style="border-left: none; border-bottom: 5px solid var(--accent); padding-left: 0; padding-bottom: 10px;">
-            Let's Connect
-        </h2>
-        
-        <p style="margin-bottom: 10px; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto; color: #ccc;">
-            I am currently open to professional opportunities in footwear product development, technical design, and manufacturing automation.
+    <section id="contact" class="fade-in-section">
+        <h2 class="section-title">Let's connect</h2>
+
+        <p class="contact-copy">
+            I'm open to roles in footwear product development, technical design and manufacturing automation.
         </p>
-        <p style="margin-bottom: 40px; font-size: 1rem; max-width: 700px; margin-left: auto; margin-right: auto; color: var(--text-muted);">
-            If you have a role or project that aligns with my expertise, or if you'd like to follow my continuous design journey, I would love to hear from you. Reach out via email or connect with me on the platforms below!
+        <p class="contact-sub">
+            If you have a role or project that fits, or you'd like to follow the work as it develops, I'd love to hear from you.
         </p>
-        
-        <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
-            <a href="mailto:garinkusuma.design@gmail.com" class="btn">Email Me</a>
-            <a href="https://www.linkedin.com/in/garinkusuma" class="btn">LinkedIn</a>
-            <a href="https://www.instagram.com/voidtostar?igsh=MTFjYzlpeWtsMnpubA==" class="btn">Instagram</a>
+
+        <div class="contact-actions">
+            <a href="mailto:garinkusuma.design@gmail.com" class="btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                Email me
+            </a>
+
+            <!-- =========================================================
+                 TOMBOL CV — AKTIFKAN DENGAN MENGHAPUS TANDA KOMENTAR INI,
+                 lalu ganti href dengan link Google Drive CV kamu.
+                 Ini item paling penting yang masih hilang untuk lamaran kerja.
+            <a href="GANTI_DENGAN_LINK_CV" target="_blank" rel="noopener" class="btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+                Download CV
+            </a>
+            ========================================================= -->
+
+            <a href="https://www.linkedin.com/in/garinkusuma" target="_blank" rel="noopener" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.02-3.06-1.9-3.06-1.9 0-2.2 1.46-2.2 2.96V21h-4z"/></svg>
+                LinkedIn
+            </a>
+            <a href="https://www.instagram.com/voidtostar?igsh=MTFjYzlpeWtsMnpubA==" target="_blank" rel="noopener" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                Instagram
+            </a>
         </div>
+
+        <p class="contact-mail">Or write directly to <a href="mailto:garinkusuma.design@gmail.com">garinkusuma.design@gmail.com</a></p>
     </section>
+
+    </main>
 
     <footer>
-        <p>&copy; 2026 Garin Nata Kusuma. All Rights Reserved.</p>
+        <div class="foot-links">
+            <a href="#about">About</a>
+            <a href="#footwear">Footwear</a>
+            <a href="#technical">Technical</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p>&copy; 2026 Garin Nata Kusuma. All rights reserved.</p>
     </footer>
 
-    <script>
-      const canvas = document.getElementById('laces-svg');
-      const heroSection = document.getElementById('home');
-      let w = heroSection.clientWidth;
-      let h = heroSection.clientHeight;
-      
-      let mouse = { x: w/2, y: h/2, hover: false };
-
-      heroSection.addEventListener('mousemove', (e) => {
-          const rect = heroSection.getBoundingClientRect();
-          mouse.x = e.clientX - rect.left;
-          mouse.y = e.clientY - rect.top;
-          mouse.hover = true;
-      });
-      heroSection.addEventListener('mouseleave', () => { mouse.hover = false; });
-      window.addEventListener('resize', () => {
-          w = heroSection.clientWidth;
-          h = heroSection.clientHeight;
-      });
-
-      class Lace {
-          constructor(y1, y2, thickness, color, tension, friction) {
-              this.y1Ratio = y1;
-              this.y2Ratio = y2;
-              this.tension = tension;
-              this.friction = friction;
-              
-              this.cx = w / 2;
-              this.cy = ((this.y1Ratio + this.y2Ratio) / 2) * h;
-              this.vy = 0;
-
-              this.path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-              this.path.setAttribute("stroke", color);
-              this.path.setAttribute("stroke-width", thickness);
-              this.path.setAttribute("fill", "transparent");
-              this.path.setAttribute("stroke-linecap", "round");
-              this.path.style.filter = "drop-shadow(0px 15px 10px rgba(0,0,0,0.9))"; 
-              canvas.appendChild(this.path);
-          }
-
-          update() {
-              let startY = this.y1Ratio * h;
-              let endY = this.y2Ratio * h;
-              let targetCy = (startY + endY) / 2;
-              let controlX = w / 2;
-
-              if (mouse.hover) {
-                  let dy = mouse.y - targetCy;
-                  if (Math.abs(dy) < 150) { 
-                      targetCy = mouse.y;
-                      controlX = mouse.x;
-                  }
-              }
-
-              let ay = (targetCy - this.cy) * this.tension;
-              this.vy += ay;
-              this.vy *= this.friction;
-              this.cy += this.vy;
-
-              let d = `M -50 ${startY} Q ${controlX} ${this.cy} ${w + 50} ${endY}`;
-              this.path.setAttribute("d", d);
-          }
-      }
-
-      const laces = [
-          new Lace(0.15, 0.30, 14, "#e0e0e0", 0.15, 0.75), 
-          new Lace(0.40, 0.20, 10, "#c0c0c0", 0.10, 0.85), 
-          new Lace(0.65, 0.80, 18, "#a9a9a9", 0.25, 0.65), 
-          new Lace(0.90, 0.85, 12, "#d3d3d3", 0.12, 0.80)  
-      ];
-
-      function animateLaces() {
-          laces.forEach(lace => lace.update());
-          requestAnimationFrame(animateLaces);
-      }
-      
-      animateLaces(); 
-    </script>
-
-    <script>
-        document.getElementById('btn-explode').addEventListener('click', function(e) {
-            e.preventDefault(); 
-            const box = document.getElementById('hero-box');
-            
-            box.classList.add('explode-effect');
-            
-            setTimeout(() => {
-                document.querySelector('#footwear').scrollIntoView({ behavior: 'smooth' });
-                
-                setTimeout(() => {
-                    box.classList.remove('explode-effect');
-                }, 1500);
-            }, 350); 
-        });
-    </script>
+    <button id="to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+    </button>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
-    <script>
-      var projectSwiper = new Swiper(".mySwiper", {
-        slidesPerView: 3, 
-        spaceBetween: 30, 
-        navigation: {
-          nextEl: ".swiper-button-next:not(.tech-next)",
-          prevEl: ".swiper-button-prev:not(.tech-prev)",
-        },
-        breakpoints: {
-          320: { slidesPerView: 1, spaceBetween: 10 },
-          768: { slidesPerView: 2, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 30 }
-        }
-      });
 
-      var techSwiper = new Swiper(".technical-swiper", {
-        slidesPerView: 1, 
-        spaceBetween: 0,
-        allowTouchMove: false, 
-        navigation: {
-          nextEl: ".tech-next",
-          prevEl: ".tech-prev",
-        },
-        on: {
-          slideChange: function () {
-            let displayIndex = this.activeIndex < 2 ? 1 : 2;
-            let totalItems = 2; 
-            
-            document.getElementById('tech-slide-count').innerText = `Item ${displayIndex} of ${totalItems}`;
-            
-            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active-item'));
-            const activeNav = document.getElementById(`nav-item-${displayIndex}`);
-            if (activeNav) {
-                activeNav.classList.add('active-item');
+    <script>
+    (function () {
+        "use strict";
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* ---------- NAV: scrolled state, progress bar, scrollspy ---------- */
+        var nav = document.getElementById('siteNav');
+        var progress = document.getElementById('navProgress');
+        var toTop = document.getElementById('to-top');
+        var ticking = false;
+
+        function onScroll() {
+            var y = window.scrollY || document.documentElement.scrollTop;
+            var max = document.documentElement.scrollHeight - window.innerHeight;
+            nav.classList.toggle('scrolled', y > 20);
+            progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+            toTop.classList.toggle('show', y > 700);
+            ticking = false;
+        }
+        window.addEventListener('scroll', function () {
+            if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
+        }, { passive: true });
+        onScroll();
+
+        toTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+
+        /* ---------- MOBILE MENU ---------- */
+        var navToggle = document.getElementById('navToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+
+        function setMenu(open) {
+            mobileMenu.classList.toggle('open', open);
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        }
+        navToggle.addEventListener('click', function () {
+            setMenu(!mobileMenu.classList.contains('open'));
+        });
+        mobileMenu.addEventListener('click', function (e) {
+            if (e.target.closest('a')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') setMenu(false);
+        });
+
+        /* ---------- SCROLLSPY ---------- */
+        var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.nav-links .nav-item > a'));
+        var spyTargets = ['about', 'college', 'footwear', 'coming-soon', 'technical', 'skills', 'contact'];
+
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                navAnchors.forEach(function (a) {
+                    a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+                });
+            });
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+        spyTargets.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) spy.observe(el);
+        });
+
+        /* ---------- REVEAL ON SCROLL (sekali saja, tidak flicker) ---------- */
+        var sections = document.querySelectorAll('.fade-in-section');
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+            sections.forEach(function (s) { s.classList.add('is-visible'); });
+        } else {
+            var revealer = new IntersectionObserver(function (entries, obs) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+            sections.forEach(function (s) { revealer.observe(s); });
+        }
+
+        /* ---------- SWIPER: FOOTWEAR ---------- */
+        var fwCount = document.getElementById('fwCount');
+        var fwProgress = document.getElementById('fwProgress');
+
+        function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+        var projectSwiper = new Swiper('.mySwiper', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            keyboard: { enabled: true, onlyInViewport: true },
+            a11y: { prevSlideMessage: 'Previous project', nextSlideMessage: 'Next project' },
+            speed: reduceMotion ? 0 : 620,
+            navigation: {
+                nextEl: '.mySwiper .swiper-button-next',
+                prevEl: '.mySwiper .swiper-button-prev'
+            },
+            breakpoints: {
+                320: { slidesPerView: 1, spaceBetween: 14 },
+                768: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 30 }
+            },
+            on: {
+                init: updateMeta,
+                slideChange: updateMeta,
+                resize: updateMeta
+            }
+        });
+
+        function updateMeta() {
+            var total = this && this.slides ? this.slides.length : projectSwiper.slides.length;
+            var sw = this && this.slides ? this : projectSwiper;
+            var current = sw.activeIndex + 1;
+            var perView = Math.round(sw.params.slidesPerView) || 1;
+            if (fwCount) fwCount.innerHTML = '<b>' + pad(current) + '</b> / ' + pad(total);
+            if (fwProgress) {
+                var pct = Math.min(100, ((current + perView - 1) / total) * 100);
+                fwProgress.style.width = pct + '%';
+            }
+        }
+
+        /* Mega menu → langsung ke slide proyek yang dipilih */
+        document.querySelectorAll('.mega-link[data-slide]').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var idx = parseInt(link.getAttribute('data-slide'), 10);
+                setTimeout(function () { projectSwiper.slideTo(idx); }, 550);
+            });
+        });
+
+        /* ---------- SWIPER: TECHNICAL ---------- */
+        var techSwiper = new Swiper('.technical-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            allowTouchMove: false,
+            keyboard: { enabled: true, onlyInViewport: true },
+            a11y: { prevSlideMessage: 'Previous view', nextSlideMessage: 'Next view' },
+            speed: reduceMotion ? 0 : 500,
+            navigation: { nextEl: '.tech-next', prevEl: '.tech-prev' },
+            on: {
+                slideChange: function () {
+                    var displayIndex = this.activeIndex < 2 ? 1 : 2;
+                    var counter = document.getElementById('tech-slide-count');
+                    if (counter) counter.innerText = 'Item ' + displayIndex + ' of 2';
+
+                    document.querySelectorAll('.sidebar-item').forEach(function (item) {
+                        item.classList.remove('active-item');
+                    });
+                    var activeNav = document.getElementById('nav-item-' + displayIndex);
+                    if (activeNav) activeNav.classList.add('active-item');
+
+                    var specBtn = document.getElementById('tech-spec-btn');
+                    if (!specBtn) return;
+                    if (this.activeIndex < 2) {
+                        specBtn.href = 'https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link';
+                        specBtn.innerText = 'View technical specs';
+                        specBtn.classList.remove('disabled');
+                    } else {
+                        specBtn.removeAttribute('href');
+                        specBtn.innerText = 'Specs coming soon';
+                        specBtn.classList.add('disabled');
+                    }
+                }
+            }
+        });
+
+        document.querySelectorAll('.sidebar-item[data-goto]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                techSwiper.slideTo(parseInt(btn.getAttribute('data-goto'), 10));
+            });
+        });
+
+        /* ---------- FULLSCREEN 3D ---------- */
+        document.querySelectorAll('.fullscreen-btn[data-fs-target]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var el = document.getElementById(btn.getAttribute('data-fs-target'));
+                if (!el) return;
+                if (!document.fullscreenElement) {
+                    (el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen).call(el);
+                } else if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            });
+        });
+
+        /* ---------- HINT 3D: hilang setelah pengguna berinteraksi ---------- */
+        document.querySelectorAll('[data-hint]').forEach(function (hint) {
+            var host = hint.parentElement;
+            var hide = function () { hint.classList.add('hidden'); };
+            ['pointerdown', 'wheel', 'touchstart'].forEach(function (evt) {
+                host.addEventListener(evt, hide, { once: true, passive: true });
+            });
+            setTimeout(hide, 9000);
+        });
+
+        /* ---------- HERO: tombol meledak ---------- */
+        var explodeBtn = document.getElementById('btn-explode');
+        if (explodeBtn) {
+            explodeBtn.addEventListener('click', function (e) {
+                if (reduceMotion) return;
+                e.preventDefault();
+                var box = document.getElementById('hero-box');
+                box.classList.add('explode-effect');
+                setTimeout(function () {
+                    document.querySelector('#footwear').scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(function () { box.classList.remove('explode-effect'); }, 1400);
+                }, 330);
+            });
+        }
+
+        /* ---------- HERO: animasi tali sepatu (berhenti saat di luar layar) ---------- */
+        var canvas = document.getElementById('laces-svg');
+        var heroSection = document.getElementById('home');
+        if (canvas && heroSection && !reduceMotion) {
+            var w = heroSection.clientWidth;
+            var h = heroSection.clientHeight;
+            var mouse = { x: w / 2, y: h / 2, hover: false };
+            var running = true;
+            var rafId = null;
+
+            heroSection.addEventListener('mousemove', function (e) {
+                var rect = heroSection.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+                mouse.hover = true;
+            });
+            heroSection.addEventListener('mouseleave', function () { mouse.hover = false; });
+            window.addEventListener('resize', function () {
+                w = heroSection.clientWidth;
+                h = heroSection.clientHeight;
+            });
+
+            function Lace(y1, y2, thickness, color, tension, friction) {
+                this.y1Ratio = y1;
+                this.y2Ratio = y2;
+                this.tension = tension;
+                this.friction = friction;
+                this.cy = ((y1 + y2) / 2) * h;
+                this.vy = 0;
+                this.path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                this.path.setAttribute('stroke', color);
+                this.path.setAttribute('stroke-width', thickness);
+                this.path.setAttribute('fill', 'transparent');
+                this.path.setAttribute('stroke-linecap', 'round');
+                this.path.setAttribute('opacity', '0.55');
+                this.path.style.filter = 'drop-shadow(0px 14px 10px rgba(0,0,0,0.85))';
+                canvas.appendChild(this.path);
             }
 
-            const specBtn = document.getElementById('tech-spec-btn');
-            
-            if (this.activeIndex < 2) {
-                specBtn.href = "https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link";
-                specBtn.innerText = "View Technical Specs ↗";
-                specBtn.classList.remove("disabled");
-                specBtn.style.pointerEvents = "auto";
-            } else {
-                specBtn.removeAttribute("href"); 
-                specBtn.innerText = "Specs Coming Soon ⏳";
-                specBtn.classList.add("disabled"); 
-                specBtn.style.pointerEvents = "none";
+            Lace.prototype.update = function () {
+                var startY = this.y1Ratio * h;
+                var endY = this.y2Ratio * h;
+                var targetCy = (startY + endY) / 2;
+                var controlX = w / 2;
+
+                if (mouse.hover) {
+                    var dy = mouse.y - targetCy;
+                    if (Math.abs(dy) < 150) {
+                        targetCy = mouse.y;
+                        controlX = mouse.x;
+                    }
+                }
+                this.vy += (targetCy - this.cy) * this.tension;
+                this.vy *= this.friction;
+                this.cy += this.vy;
+
+                this.path.setAttribute('d', 'M -50 ' + startY + ' Q ' + controlX + ' ' + this.cy + ' ' + (w + 50) + ' ' + endY);
+            };
+
+            var laces = [
+                new Lace(0.15, 0.30, 13, '#e0e0e0', 0.15, 0.75),
+                new Lace(0.40, 0.20, 9, '#c0c0c0', 0.10, 0.85),
+                new Lace(0.65, 0.80, 17, '#a9a9a9', 0.25, 0.65),
+                new Lace(0.90, 0.85, 11, '#d3d3d3', 0.12, 0.80)
+            ];
+
+            function animateLaces() {
+                if (!running) return;
+                for (var i = 0; i < laces.length; i++) laces[i].update();
+                rafId = requestAnimationFrame(animateLaces);
             }
-          }
+            animateLaces();
+
+            var heroObs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting && !running) {
+                        running = true;
+                        animateLaces();
+                    } else if (!entry.isIntersecting) {
+                        running = false;
+                        if (rafId) cancelAnimationFrame(rafId);
+                    }
+                });
+            }, { threshold: 0 });
+            heroObs.observe(heroSection);
         }
-      });
-    </script>
-
-    <!-- BAGIAN BARU: SCRIPT UNTUK FULLSCREEN 3D VIEWER -->
-    <script>
-      function toggleFullscreen(elem) {
-          if (!document.fullscreenElement) {
-              if (elem.requestFullscreen) {
-                  elem.requestFullscreen();
-              } else if (elem.webkitRequestFullscreen) { /* Safari */
-                  elem.webkitRequestFullscreen();
-              } else if (elem.msRequestFullscreen) { /* IE11 */
-                  elem.msRequestFullscreen();
-              }
-          } else {
-              if (document.exitFullscreen) {
-                  document.exitFullscreen();
-              }
-          }
-      }
-    </script>
-
-    <script>
-      const observerOptions = {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.15 
-      };
-
-      const sectionObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  entry.target.classList.add('is-visible');
-              } else {
-                  entry.target.classList.remove('is-visible'); 
-              }
-          });
-      }, observerOptions);
-
-      document.querySelectorAll('.fade-in-section').forEach(section => {
-          sectionObserver.observe(section);
-      });
+    })();
     </script>
 </body>
 </html>
