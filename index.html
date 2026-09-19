@@ -521,7 +521,7 @@
             animation: pulse 2s infinite;
         }
 
-        /* --- TEKS AJAKAN 3D (HINT) BARU --- */
+        /* --- TEKS AJAKAN 3D (HINT) --- */
         .interactive-hint {
             position: absolute;
             bottom: 25px;
@@ -536,7 +536,7 @@
             font-weight: bold;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            pointer-events: none; /* Sangat penting agar model di bawahnya tetap bisa diputar */
+            pointer-events: none;
             z-index: 15;
             display: flex;
             align-items: center;
@@ -591,6 +591,7 @@
             justify-content: center;
             align-items: center;
             height: 100%; 
+            position: relative;
         }
 
         .technical-swiper model-viewer {
@@ -628,8 +629,39 @@
             font-weight: bold;
         }
 
+        /* Tampilan Layar Penuh COMING SOON untuk Slide Baru */
+        .coming-soon-viewport {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #2a2012 0%, #121215 75%);
+            border: 2px dashed rgba(252, 163, 17, 0.4);
+            border-radius: 10px;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .coming-soon-viewport h2 {
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(252, 163, 17, 0.4);
+        }
+
+        .coming-soon-viewport p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
         .technical-sidebar {
-            width: 300px;
+            width: 320px;
             background: rgba(15, 15, 17, 0.7);
             border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.05);
@@ -666,7 +698,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 12px 15px;
+            padding: 14px 15px;
             background: rgba(255,255,255,0.02);
             border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.03);
@@ -684,25 +716,33 @@
             border-color: var(--accent);
         }
 
-        .placeholder-item {
-            opacity: 0.5;
-        }
-
         .item-number {
-            font-size: 0.9rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 900;
             color: var(--accent);
         }
 
         .item-info strong {
             display: block;
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             color: var(--text-main);
+            letter-spacing: 0.5px;
         }
 
         .item-info small {
             font-size: 0.75rem;
             color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Label Khusus Judul Besar MARINA (Merah Kotak 1) */
+        .title-marina-label {
+            font-size: 1.25rem !important;
+            font-weight: 900 !important;
+            color: var(--accent) !important;
+            letter-spacing: 1.5px !important;
+            text-transform: uppercase;
         }
 
         .sidebar-footer {
@@ -758,7 +798,6 @@
         /* ========================================== */
         /* CSS 3D VIEWER LOADING SCREEN & HOTSPOT     */
         /* ========================================== */
-        /* Note: Untuk Coming Soon section */
         #coming-soon .model-container {
             width: 100%;
             height: 60vh;
@@ -777,7 +816,6 @@
             outline: none;
         }
 
-        /* Loading Poster Oranye */
         .loading-poster {
             position: absolute;
             top: 0;
@@ -1203,7 +1241,6 @@
         </div>
     </section>
 
-    <!-- SECTION COMING SOON -->
     <section id="coming-soon" class="fade-in-section">
         <h2 class="section-title">Coming Soon Projects</h2>
         <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
@@ -1211,7 +1248,6 @@
         </p>
         
         <div class="model-container">
-            <!-- TEKS AJAKAN 3D -->
             <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
 
             <model-viewer 
@@ -1236,19 +1272,16 @@
         </div>
     </section>
 
-    <!-- SECTION TECHNICAL SHOWCASE -->
     <section id="technical" class="fade-in-section">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
         
         <div class="technical-showcase-container">
             <div class="technical-3d-viewport">
-                <!-- TEKS AJAKAN 3D -->
                 <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
 
                 <div class="swiper technical-swiper">
                     <div class="swiper-wrapper">
                         
-                        <!-- SLIDE 1 -->
                         <div class="swiper-slide">
                             <model-viewer 
                                 src="MARINA3D.glb" 
@@ -1266,7 +1299,6 @@
                             </model-viewer>
                         </div>
                         
-                        <!-- SLIDE 2 -->
                         <div class="swiper-slide">
                             <model-viewer 
                                 src="MARINA3DEXP.glb" 
@@ -1284,6 +1316,13 @@
                             </model-viewer>
                         </div>
 
+                        <div class="swiper-slide">
+                            <div class="coming-soon-viewport">
+                                <h2>COMING SOON</h2>
+                                <p>New engineering drafting & technical tooling process currently in development.</p>
+                            </div>
+                        </div>
+
                     </div>
                     
                     <div class="swiper-button-next tech-next"></div>
@@ -1294,15 +1333,15 @@
             <div class="technical-sidebar">
                 <div class="sidebar-header">
                     <h4>Technical Index</h4>
-                    <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 2</span>
+                    <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 3</span>
                 </div>
                 
                 <div class="sidebar-list">
                     <div class="sidebar-item active-item" id="nav-item-1" onclick="techSwiper.slideTo(0)">
                         <span class="item-number">01</span>
                         <div class="item-info">
-                            <strong>Marina Pallet (Solid)</strong>
-                            <small>CNC & Stitching Base</small>
+                            <strong class="title-marina-label">MARINA</strong>
+                            <small>Solid Model & Tooling View</small>
                         </div>
                     </div>
                     
@@ -1310,7 +1349,15 @@
                         <span class="item-number">02</span>
                         <div class="item-info">
                             <strong>Marina (Exploded)</strong>
-                            <small>Internal Component View</small>
+                            <small>Internal Component Breakdown</small>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-item" id="nav-item-3" onclick="techSwiper.slideTo(2)">
+                        <span class="item-number">03</span>
+                        <div class="item-info">
+                            <strong>Next Spec Tooling</strong>
+                            <small style="color: var(--accent); font-weight: bold;">Coming Soon Concept</small>
                         </div>
                     </div>
                 </div>
@@ -1490,7 +1537,10 @@
           slideChange: function () {
             document.getElementById('tech-slide-count').innerText = `Item ${this.activeIndex + 1} of ${this.slides.length}`;
             document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active-item'));
-            document.getElementById(`nav-item-${this.activeIndex + 1}`).classList.add('active-item');
+            const activeNav = document.getElementById(`nav-item-${this.activeIndex + 1}`);
+            if (activeNav) {
+                activeNav.classList.add('active-item');
+            }
           }
         }
       });
