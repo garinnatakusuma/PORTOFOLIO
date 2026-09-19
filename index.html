@@ -1241,6 +1241,7 @@
         </div>
     </section>
 
+    <!-- SECTION COMING SOON -->
     <section id="coming-soon" class="fade-in-section">
         <h2 class="section-title">Coming Soon Projects</h2>
         <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
@@ -1272,19 +1273,22 @@
         </div>
     </section>
 
+    <!-- BAGIAN BARU: TECHNICAL SHOWCASE (3D SLIDER & SIDEBAR) -->
     <section id="technical" class="fade-in-section">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
         
         <div class="technical-showcase-container">
+            
+            <!-- Kotak Cyan: Viewer 3D file teknikal (Dibuat menjadi Slider) -->
             <div class="technical-3d-viewport">
-                <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
-
+                <!-- Inisialisasi Swiper Khusus Technical -->
                 <div class="swiper technical-swiper">
                     <div class="swiper-wrapper">
                         
+                        <!-- SLIDE 1: MARINAAA.glb (Model Utama) -->
                         <div class="swiper-slide">
                             <model-viewer 
-                                src="MARINA3D.glb" 
+                                src="MARINAAA.glb" 
                                 alt="Nike Marina Heel Peg Pallet - Solid View" 
                                 auto-rotate 
                                 camera-controls 
@@ -1299,6 +1303,7 @@
                             </model-viewer>
                         </div>
                         
+                        <!-- SLIDE 2: MARINA3DEXP.glb (Model Exploded View) -->
                         <div class="swiper-slide">
                             <model-viewer 
                                 src="MARINA3DEXP.glb" 
@@ -1316,6 +1321,7 @@
                             </model-viewer>
                         </div>
 
+                        <!-- SLIDE 3: SLOT DESAIN BARU (TAMPILAN COMING SOON) -->
                         <div class="swiper-slide">
                             <div class="coming-soon-viewport">
                                 <h2>COMING SOON</h2>
@@ -1325,18 +1331,22 @@
 
                     </div>
                     
+                    <!-- NAVIGASI KOTAK TRANPARAN UNTUK 3D VIEWER -->
                     <div class="swiper-button-next tech-next"></div>
                     <div class="swiper-button-prev tech-prev"></div>
                 </div>
             </div>
 
+            <!-- Kotak Ungu: Sidebar Navigasi / Info -->
             <div class="technical-sidebar">
                 <div class="sidebar-header">
                     <h4>Technical Index</h4>
-                    <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 3</span>
+                    <!-- Teks ini akan di-update oleh Javascript saat slide bergeser -->
+                    <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 2</span>
                 </div>
                 
                 <div class="sidebar-list">
+                    <!-- Navigasi Slide MARINA (Menggeser antara Solid & Exploded View) -->
                     <div class="sidebar-item active-item" id="nav-item-1" onclick="techSwiper.slideTo(0)">
                         <span class="item-number">01</span>
                         <div class="item-info">
@@ -1345,16 +1355,9 @@
                         </div>
                     </div>
                     
-                    <div class="sidebar-item" id="nav-item-2" onclick="techSwiper.slideTo(1)">
+                    <!-- Navigasi Slide COMING SOON -->
+                    <div class="sidebar-item" id="nav-item-2" onclick="techSwiper.slideTo(2)">
                         <span class="item-number">02</span>
-                        <div class="item-info">
-                            <strong>Marina (Exploded)</strong>
-                            <small>Internal Component Breakdown</small>
-                        </div>
-                    </div>
-
-                    <div class="sidebar-item" id="nav-item-3" onclick="techSwiper.slideTo(2)">
-                        <span class="item-number">03</span>
                         <div class="item-info">
                             <strong>Next Spec Tooling</strong>
                             <small style="color: var(--accent); font-weight: bold;">Coming Soon Concept</small>
@@ -1413,6 +1416,7 @@
         <p>&copy; 2026 Garin Nata Kusuma. All Rights Reserved.</p>
     </footer>
 
+    <!-- SCRIPT HERO LACES -->
     <script>
       const canvas = document.getElementById('laces-svg');
       const heroSection = document.getElementById('home');
@@ -1492,6 +1496,7 @@
       animateLaces(); 
     </script>
 
+    <!-- SCRIPT BUTTON EXPLODE -->
     <script>
         document.getElementById('btn-explode').addEventListener('click', function(e) {
             e.preventDefault(); 
@@ -1510,7 +1515,10 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- SCRIPT INISIALISASI SWIPER UTAMA DAN SWIPER TECHNICAL -->
     <script>
+      // 1. Swiper untuk Projects Grid
       var projectSwiper = new Swiper(".mySwiper", {
         slidesPerView: 3, 
         spaceBetween: 30, 
@@ -1525,22 +1533,28 @@
         }
       });
 
+      // 2. Swiper Khusus untuk Technical 3D Showcase
       var techSwiper = new Swiper(".technical-swiper", {
         slidesPerView: 1, 
         spaceBetween: 0,
-        allowTouchMove: false, 
+        allowTouchMove: false, /* Dimatikan agar tidak bentrok saat user memutar model 3D */
         navigation: {
           nextEl: ".tech-next",
           prevEl: ".tech-prev",
         },
         on: {
           slideChange: function () {
-            document.getElementById('tech-slide-count').innerText = `Item ${this.activeIndex + 1} of ${this.slides.length}`;
+            // Update teks indikator (Item 1 of X)
+            // Karena slide 0 dan 1 adalah MARINA, dan slide 2 adalah Coming Soon,
+            // kita buat logika sederhana untuk index:
+            let displayIndex = this.activeIndex < 2 ? 1 : 2;
+            let totalItems = 2; // Hanya ada 2 item di sidebar
+            
+            document.getElementById('tech-slide-count').innerText = `Item ${displayIndex} of ${totalItems}`;
+            
+            // Ubah class 'active-item' di kotak sidebar agar sesuai dengan slide 3D
             document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active-item'));
-            const activeNav = document.getElementById(`nav-item-${this.activeIndex + 1}`);
-            if (activeNav) {
-                activeNav.classList.add('active-item');
-            }
+            document.getElementById(`nav-item-${displayIndex}`).classList.add('active-item');
           }
         }
       });
