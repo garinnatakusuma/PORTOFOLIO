@@ -398,7 +398,10 @@
             position: relative;
         }
 
-        /* Hapus translasi Y pada kartu utama agar orange band tetap rata */
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
         .project-card:hover .card-content {
             border-color: var(--accent);
         }
@@ -465,7 +468,6 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            /* Filter drop-shadow dihilangkan agar tidak ada garis kotak pada gambar solid */
         }
 
         .card-content {
@@ -474,8 +476,8 @@
             display: flex;
             flex-direction: column;
             background: var(--card-bg); 
+            /* MODIFIKASI: Border diatur mengelilingi 4 sisi (kotak penuh) agar tidak terlihat kepotong */
             border: 1px solid rgba(255,255,255,0.05);
-            border-top: none; 
             border-radius: 0 0 10px 10px;
             transition: border-color 0.3s ease;
             z-index: 1;
@@ -775,7 +777,6 @@
             margin-top: 2px;
         }
 
-        /* Label Khusus Judul Besar MARINA (Merah Kotak 1) */
         .title-marina-label {
             font-size: 1.3rem !important;
             font-weight: 900 !important;
