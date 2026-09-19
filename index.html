@@ -15,7 +15,6 @@
             --card-bg: #1a1a1d;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
-            /* Wana oranye baru Garin */
             --accent: #ed6e03;
             --shoe-band-color: #ed6e03; 
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -388,12 +387,12 @@
             }
         }
 
+        /* MODIFIKASI: Dibuat menyatu mulus tanpa garis luar */
         .project-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
+            background: transparent; /* Ubah ke transparan agar menyatu dengan pita */
+            border-radius: 0 0 10px 10px;
             transition: transform 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: none; /* Hilangkan garis utuh pembungkus kartu */
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -402,6 +401,10 @@
 
         .project-card:hover {
             transform: translateY(-5px);
+        }
+
+        /* Efek Hover kini diarahkan hanya ke garis bingkai hitam (card-content) */
+        .project-card:hover .card-content {
             border-color: var(--accent);
         }
 
@@ -430,7 +433,9 @@
             100% { transform: scale(1.15) rotate(15deg); box-shadow: 0 0 20px rgba(255,0,60,0.9), 0 0 10px rgba(255,255,255,0.6) inset; }
         }
 
-        /* PITA ORANYE MEMANJANG (SEAMLESS RUNWAY) */
+        /* ========================================== */
+        /* PITA ORANYE MEMANJANG (SEAMLESS RUNWAY)   */
+        /* ========================================== */
         .footwear-slider-container {
             position: relative;
             width: 100%;
@@ -451,12 +456,14 @@
         .img-container {
             width: 100%;
             height: 250px;
-            background: var(--shoe-band-color);
+            background: var(--shoe-band-color); 
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 10px;
             position: relative;
+            border: none;
+            border-radius: 0; /* Sudut kotak sempurna agar seamless dengan pita memanjang */
         }
 
         .project-card img {
@@ -472,6 +479,11 @@
             display: flex;
             flex-direction: column;
             background: var(--card-bg); 
+            /* Garis pembungkus diletakkan di sini, membuang garis atas */
+            border: 1px solid rgba(255,255,255,0.05);
+            border-top: none; 
+            border-radius: 0 0 10px 10px;
+            transition: border-color 0.3s ease;
             z-index: 1;
         }
 
@@ -505,7 +517,7 @@
             width: 100%;
         }
 
-        /* --- SWIPER CUSTOM STYLES --- */
+        /* --- SWIPER CUSTOM STYLES (KOTAK VERTIKAL TINGGI) --- */
         .swiper {
             width: 100%;
             padding: 20px 0 60px 0 !important;
@@ -769,6 +781,7 @@
             margin-top: 2px;
         }
 
+        /* Label Khusus Judul Besar MARINA (Merah Kotak 1) */
         .title-marina-label {
             font-size: 1.3rem !important;
             font-weight: 900 !important;
@@ -1552,8 +1565,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
+    <!-- SCRIPT INISIALISASI SWIPER UTAMA DAN SWIPER TECHNICAL -->
     <script>
-      // 1. Swiper untuk Projects Grid
       var projectSwiper = new Swiper(".mySwiper", {
         slidesPerView: 3, 
         spaceBetween: 30, 
@@ -1568,7 +1581,6 @@
         }
       });
 
-      // 2. Swiper Khusus untuk Technical 3D Showcase
       var techSwiper = new Swiper(".technical-swiper", {
         slidesPerView: 1, 
         spaceBetween: 0,
