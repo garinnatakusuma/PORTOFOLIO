@@ -261,6 +261,10 @@
             box-shadow: 0 6px 0 #b55402, 0 15px 20px rgba(0,0,0,0.4); 
             transition: all 0.1s ease-in-out;
             text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; /* Jarak ikon dengan teks */
         }
 
         .btn:hover {
@@ -476,8 +480,8 @@
             display: flex;
             flex-direction: column;
             background: var(--card-bg); 
-            /* MODIFIKASI: Border diatur mengelilingi 4 sisi (kotak penuh) agar tidak terlihat kepotong */
             border: 1px solid rgba(255,255,255,0.05);
+            border-top: none; 
             border-radius: 0 0 10px 10px;
             transition: border-color 0.3s ease;
             z-index: 1;
@@ -596,6 +600,34 @@
         }
 
         /* ========================================== */
+        /* FULLSCREEN BUTTON 3D VIEWER (BARU)         */
+        /* ========================================== */
+        .fullscreen-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(15, 15, 17, 0.7);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-main);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 20;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        .fullscreen-btn:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        /* ========================================== */
         /* TECHNICAL SHOWCASE (KOTAK CYAN & UNGU) */
         /* ========================================== */
         .technical-showcase-container {
@@ -670,7 +702,7 @@
             font-weight: bold;
         }
 
-        /* Tampilan Layar Penuh COMING SOON untuk Slide Baru */
+        /* Tampilan Layar Penuh COMING SOON */
         .coming-soon-viewport {
             width: 100%;
             height: 100%;
@@ -737,7 +769,7 @@
 
         .sidebar-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 15px;
             padding: 14px 15px;
             background: rgba(255,255,255,0.02);
@@ -761,6 +793,7 @@
             font-size: 1.1rem;
             font-weight: 900;
             color: var(--accent);
+            margin-top: 2px;
         }
 
         .item-info strong {
@@ -775,6 +808,24 @@
             color: var(--text-muted);
             display: block;
             margin-top: 2px;
+        }
+
+        /* BAGIAN BARU: Software Tags untuk Sidebar */
+        .tech-tags {
+            margin-top: 8px;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tags .tag {
+            background: rgba(237, 110, 3, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(237, 110, 3, 0.3);
+            font-size: 0.65rem;
+            padding: 3px 6px;
+            margin: 0;
+            font-weight: 600;
         }
 
         .title-marina-label {
@@ -958,6 +1009,7 @@
             transform: translate3d(0, -50%, 0);
         }
 
+        /* --- MEDIA QUERIES (MOBILE RESPONSIVE) --- */
         @media (max-width: 900px) {
             .hero h1 { font-size: 2rem; }
             nav { flex-direction: column; gap: 10px; height: auto; padding: 15px 5%; }
@@ -966,8 +1018,22 @@
             .swipe-hint { text-align: center; } 
             #coming-soon .model-container { height: 50vh; }
             .swiper-button-next, .swiper-button-prev { width: 30px !important; min-width: auto; }
+            
             .technical-showcase-container { flex-direction: column; }
             .technical-sidebar { width: 100%; }
+            
+            /* BAGIAN BARU: Sidebar Horizontal Scroll di HP */
+            .sidebar-list {
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                padding-bottom: 10px;
+                scroll-snap-type: x mandatory;
+            }
+            .sidebar-item {
+                flex: 0 0 85%;
+                scroll-snap-align: start;
+            }
         }
     </style>
 </head>
@@ -1290,9 +1356,12 @@
             Take a sneak peek at what's currently on my drawing board. Explore the 3D prototype below.
         </p>
         
-        <div class="model-container">
+        <div class="model-container" id="cs-viewport">
+            <!-- FULLSCREEN BUTTON BARU -->
+            <button class="fullscreen-btn" onclick="toggleFullscreen(document.getElementById('cs-viewport'))" title="Tampilan Penuh">⛶</button>
             <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
 
+            <!-- DITAMBAHKAN loading="lazy" -->
             <model-viewer 
                 src="GIRRAFEE.glb" 
                 alt="3D CLOG Prototype" 
@@ -1300,6 +1369,7 @@
                 camera-controls 
                 shadow-intensity="1.5"
                 exposure="1"
+                loading="lazy"
                 interaction-prompt="hover">
                 
                 <div slot="poster" class="loading-poster">
@@ -1321,16 +1391,15 @@
         
         <div class="technical-showcase-container">
             
-            <!-- Kotak Cyan: Viewer 3D file teknikal (Dibuat menjadi Slider) -->
-            <div class="technical-3d-viewport">
-                <!-- TEKS AJAKAN 3D -->
+            <div class="technical-3d-viewport" id="tech-viewport">
+                <!-- FULLSCREEN BUTTON BARU -->
+                <button class="fullscreen-btn" onclick="toggleFullscreen(document.getElementById('tech-viewport'))" title="Tampilan Penuh">⛶</button>
                 <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
 
-                <!-- Inisialisasi Swiper Khusus Technical -->
                 <div class="swiper technical-swiper">
                     <div class="swiper-wrapper">
                         
-                        <!-- SLIDE 1: MARINA3D.glb (Model Utama Solid) -->
+                        <!-- SLIDE 1: MARINA3D.glb -->
                         <div class="swiper-slide">
                             <model-viewer 
                                 src="MARINA3D.glb" 
@@ -1339,6 +1408,7 @@
                                 camera-controls 
                                 shadow-intensity="1.5"
                                 exposure="1"
+                                loading="lazy"
                                 interaction-prompt="hover">
                                 
                                 <div slot="poster" class="loading-poster">
@@ -1348,7 +1418,7 @@
                             </model-viewer>
                         </div>
                         
-                        <!-- SLIDE 2: MARINA3DEXP.glb (Model Exploded View) -->
+                        <!-- SLIDE 2: MARINA3DEXP.glb -->
                         <div class="swiper-slide">
                             <model-viewer 
                                 src="MARINA3DEXP.glb" 
@@ -1357,6 +1427,7 @@
                                 camera-controls 
                                 shadow-intensity="1.5"
                                 exposure="1"
+                                loading="lazy"
                                 interaction-prompt="hover">
                                 
                                 <div slot="poster" class="loading-poster">
@@ -1386,21 +1457,25 @@
             <div class="technical-sidebar">
                 <div class="sidebar-header">
                     <h4>Technical Index</h4>
-                    <!-- Teks ini akan di-update oleh Javascript saat slide bergeser -->
                     <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 2</span>
                 </div>
                 
                 <div class="sidebar-list">
-                    <!-- Navigasi Slide 1: MARINA (Mewakili Slide 0 Solid & Slide 1 Exploded) -->
+                    <!-- Navigasi Slide 1: MARINA -->
                     <div class="sidebar-item active-item" id="nav-item-1" onclick="techSwiper.slideTo(0)">
                         <span class="item-number">01</span>
                         <div class="item-info">
                             <strong class="title-marina-label">MARINA</strong>
                             <small>Solid Model & Exploded View</small>
+                            <!-- SOFTWARE TAGS BARU -->
+                            <div class="tech-tags">
+                                <span class="tag">NanoCAD</span>
+                                <span class="tag">Rhino 3D</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Navigasi Slide 2: NEXT SPEC (Langsung melompat ke Slide 2 Coming Soon) -->
+                    <!-- Navigasi Slide 2: NEXT SPEC -->
                     <div class="sidebar-item" id="nav-item-2" onclick="techSwiper.slideTo(2)">
                         <span class="item-number">02</span>
                         <div class="item-info">
@@ -1414,8 +1489,8 @@
                     <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; font-style: italic;">
                         *Hint: Drag the 3D model to rotate. Click the arrows or items above to change perspective.
                     </p>
-                    <!-- ID 'tech-spec-btn' ditambahkan agar Javascript bisa memanipulasi tombol ini -->
-                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" id="tech-spec-btn" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs</a>
+                    <!-- IKON TAMBAHAN DI TOMBOL -->
+                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" id="tech-spec-btn" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs ↗</a>
                 </div>
             </div>
         </div>
@@ -1561,7 +1636,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <script>
-      // 1. Swiper untuk Projects Grid
       var projectSwiper = new Swiper(".mySwiper", {
         slidesPerView: 3, 
         spaceBetween: 30, 
@@ -1576,7 +1650,6 @@
         }
       });
 
-      // 2. Swiper Khusus untuk Technical 3D Showcase
       var techSwiper = new Swiper(".technical-swiper", {
         slidesPerView: 1, 
         spaceBetween: 0,
@@ -1587,40 +1660,52 @@
         },
         on: {
           slideChange: function () {
-            // Logika untuk menampilkan Indikator (Item 1 of 2)
-            // Slide 0 & 1 adalah milik MARINA (Index 1)
-            // Slide 2 adalah milik Coming Soon (Index 2)
             let displayIndex = this.activeIndex < 2 ? 1 : 2;
             let totalItems = 2; 
             
             document.getElementById('tech-slide-count').innerText = `Item ${displayIndex} of ${totalItems}`;
             
-            // Ubah class 'active-item' di kotak sidebar agar sesuai dengan slide 3D
             document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active-item'));
             const activeNav = document.getElementById(`nav-item-${displayIndex}`);
             if (activeNav) {
                 activeNav.classList.add('active-item');
             }
 
-            // Logika untuk Tombol View Technical Specs
             const specBtn = document.getElementById('tech-spec-btn');
             
             if (this.activeIndex < 2) {
-                // Saat berada di Slide MARINA (Solid atau Exploded)
                 specBtn.href = "https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link";
-                specBtn.innerText = "View Technical Specs";
+                specBtn.innerText = "View Technical Specs ↗";
                 specBtn.classList.remove("disabled");
                 specBtn.style.pointerEvents = "auto";
             } else {
-                // Saat berada di Slide COMING SOON
-                specBtn.removeAttribute("href"); // Buang link agar tidak bisa di-klik
-                specBtn.innerText = "Specs Coming Soon";
-                specBtn.classList.add("disabled"); // Tambahkan styling abu-abu mati
+                specBtn.removeAttribute("href"); 
+                specBtn.innerText = "Specs Coming Soon ⏳";
+                specBtn.classList.add("disabled"); 
                 specBtn.style.pointerEvents = "none";
             }
           }
         }
       });
+    </script>
+
+    <!-- BAGIAN BARU: SCRIPT UNTUK FULLSCREEN 3D VIEWER -->
+    <script>
+      function toggleFullscreen(elem) {
+          if (!document.fullscreenElement) {
+              if (elem.requestFullscreen) {
+                  elem.requestFullscreen();
+              } else if (elem.webkitRequestFullscreen) { /* Safari */
+                  elem.webkitRequestFullscreen();
+              } else if (elem.msRequestFullscreen) { /* IE11 */
+                  elem.msRequestFullscreen();
+              }
+          } else {
+              if (document.exitFullscreen) {
+                  document.exitFullscreen();
+              }
+          }
+      }
     </script>
 
     <script>
