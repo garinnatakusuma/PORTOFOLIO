@@ -528,7 +528,7 @@
         }
 
         /* ========================================== */
-        /* BAGIAN BARU: TECHNICAL SHOWCASE (KOTAK CYAN & UNGU) */
+        /* TECHNICAL SHOWCASE (KOTAK CYAN & UNGU) */
         /* ========================================== */
         .technical-showcase-container {
             display: flex;
@@ -541,7 +541,6 @@
             align-items: stretch;
         }
 
-        /* Kotak Cyan: Viewer Utama untuk file MARINAAA.stl */
         .technical-3d-viewport {
             flex: 1;
             background: radial-gradient(circle, #252528 0%, #121215 70%);
@@ -559,7 +558,6 @@
             outline: none;
         }
 
-        /* Kotak Ungu: Sidebar Navigasi / Slider Pemilihan Item Teknik */
         .technical-sidebar {
             width: 300px;
             background: rgba(15, 15, 17, 0.7);
@@ -683,7 +681,9 @@
             font-weight: bold;
         }
 
-        /* --- CSS UNTUK 3D VIEWER COMING SOON & HOTSPOT --- */
+        /* ========================================== */
+        /* CSS 3D VIEWER LOADING SCREEN & HOTSPOT     */
+        /* ========================================== */
         .model-container {
             width: 100%;
             height: 60vh;
@@ -700,6 +700,51 @@
             height: 100%;
             --poster-color: transparent;
             outline: none;
+        }
+
+        /* Loading Poster Oranye */
+        .loading-poster {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(20, 20, 23, 0.95);
+            color: var(--accent);
+            font-family: var(--font-main);
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            z-index: 10;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(252, 163, 17, 0.2);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-poster p {
+            margin: 0;
+            animation: pulse-text 1.5s infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .Hotspot {
@@ -1082,6 +1127,7 @@
         </div>
     </section>
 
+    <!-- SECTION COMING SOON -->
     <section id="coming-soon" class="fade-in-section">
         <h2 class="section-title">Coming Soon Projects</h2>
         <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
@@ -1090,7 +1136,7 @@
         
         <div class="model-container">
             <model-viewer 
-                src="GIRRAFEE.glb" 
+                src="GIRRAFE.glb" 
                 alt="3D CLOG Prototype" 
                 auto-rotate 
                 camera-controls 
@@ -1098,6 +1144,12 @@
                 exposure="1"
                 interaction-prompt="hover">
                 
+                <!-- LOADING POSTER ORANYE -->
+                <div slot="poster" class="loading-poster">
+                    <div class="loading-spinner"></div>
+                    <p>LOADING 3D ASSET...</p>
+                </div>
+
                 <button class="Hotspot" slot="hotspot-1" data-position="0 0.1 0.1" data-normal="0 1 0">
                     <div class="HotspotAnnotation">Coming Soon</div>
                 </button>
@@ -1106,13 +1158,13 @@
         </div>
     </section>
 
-    <!-- BAGIAN BARU: TECHNICAL SHOWCASE (KOTAK CYAN 3D MARINAAA.stl & KOTAK UNGU SIDEBAR) -->
+    <!-- SECTION TECHNICAL SHOWCASE -->
     <section id="technical" class="fade-in-section">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
         
         <div class="technical-showcase-container">
-            <!-- Kotak Cyan: Viewer 3D file MARINAAA.stl -->
             <div class="technical-3d-viewport">
+                <!-- MODEL VIEWER UNTUK MARINA DENGAN LOADING SCREEN -->
                 <model-viewer 
                     src="MARINA3D.glb" 
                     alt="Nike Marina Heel Peg Pallet 3D Model" 
@@ -1121,10 +1173,15 @@
                     shadow-intensity="1.5"
                     exposure="1"
                     interaction-prompt="hover">
+                    
+                    <div slot="poster" class="loading-poster">
+                        <div class="loading-spinner"></div>
+                        <p>LOADING 3D ASSET...</p>
+                    </div>
+
                 </model-viewer>
             </div>
 
-            <!-- Kotak Ungu: Sidebar Navigasi / Slider Pembuatan (Placeholder Siap Pakai) -->
             <div class="technical-sidebar">
                 <div class="sidebar-header">
                     <h4>Technical Index</h4>
@@ -1140,7 +1197,6 @@
                         </div>
                     </div>
                     
-                    <!-- Slot Placeholder untuk item berikutnya di masa depan -->
                     <div class="sidebar-item placeholder-item" onclick="alert('Slot tempat dokumen teknis berikutnya.')">
                         <span class="item-number">02</span>
                         <div class="item-info">
@@ -1156,7 +1212,6 @@
             </div>
         </div>
     </section>
-    <!-- AKHIR BAGIAN BARU -->
     
     <section id="skills" style="background-color: #121215;" class="fade-in-section">
         <h2 class="section-title">Skills & Tools</h2>
