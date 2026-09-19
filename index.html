@@ -16,6 +16,8 @@
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
             --accent: #fca311;
+            /* UBAH KODE HEX INI JIKA WARNA ORANYE GAMBARMU SEDIKIT BERBEDA */
+            --shoe-band-color: #fca311; 
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -274,7 +276,6 @@
             transform: translateY(6px);
         }
 
-        /* Modifikasi Khusus Button Disabled (Untuk Coming Soon Specs) */
         .btn.disabled {
             background-color: #333;
             border-color: #555;
@@ -429,21 +430,43 @@
             100% { transform: scale(1.15) rotate(15deg); box-shadow: 0 0 20px rgba(255,0,60,0.9), 0 0 10px rgba(255,255,255,0.6) inset; }
         }
 
+        /* ========================================== */
+        /* PITA ORANYE MEMANJANG (SEAMLESS RUNWAY)   */
+        /* ========================================== */
+        .footwear-slider-container {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Pita oranye memanjang horizontal dari ujung ke ujung */
+        .footwear-slider-container::before {
+            content: "";
+            position: absolute;
+            top: 20px; /* Sejajar dengan padding atas swiper */
+            left: -50vw;
+            right: -50vw;
+            height: 250px; /* Sama persis dengan tinggi wadah gambar */
+            background-color: var(--shoe-band-color);
+            z-index: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
         .img-container {
             width: 100%;
             height: 250px;
-            background: #252525;
+            background: var(--shoe-band-color); /* Latar belakang oranye yang serasi */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 10px;
+            position: relative;
         }
 
         .project-card img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.5));
         }
 
         .card-content {
@@ -451,6 +474,8 @@
             flex-grow: 1; 
             display: flex;
             flex-direction: column;
+            background: var(--card-bg); /* Memastikan bagian teks tetap kartu terpisah */
+            z-index: 1;
         }
 
         .card-content h3 {
@@ -488,6 +513,7 @@
             width: 100%;
             padding: 20px 0 60px 0 !important;
             position: relative;
+            z-index: 1;
         }
         
         .swiper-button-next, .swiper-button-prev {
@@ -746,7 +772,6 @@
             margin-top: 2px;
         }
 
-        /* Label Khusus Judul Besar MARINA */
         .title-marina-label {
             font-size: 1.3rem !important;
             font-weight: 900 !important;
@@ -1055,203 +1080,204 @@
             &#8592; Swipe or click arrows to explore more projects &#8594;
         </div>
         
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="20260218_221106_0000 (1).png" alt="Reverve Project">
-                        </div>
-                        <div class="card-content">
-                            <h3>Project 1: REVERVE</h3>
-                            <p><strong>The "Climate Adapt" Concept.</strong> Inspired by potential extreme environmental shifts. Engineered with advanced vulcanization technology for a future ice-age scenario.</p>
-                            <div>
-                                <span class="tag">Footwear Design</span>
-                                <span class="tag">Vulcanized</span>
-                                <span class="tag">Concept</span>
+        <div class="footwear-slider-container">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="img-container">
+                                <img src="20260218_221106_0000 (1).png" alt="Reverve Project">
                             </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: Technical Drawing, Material Specs, & R&D Process
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                            <div class="card-content">
+                                <h3>Project 1: REVERVE</h3>
+                                <p><strong>The "Climate Adapt" Concept.</strong> Inspired by potential extreme environmental shifts. Engineered with advanced vulcanization technology for a future ice-age scenario.</p>
+                                <div>
+                                    <span class="tag">Footwear Design</span>
+                                    <span class="tag">Vulcanized</span>
+                                    <span class="tag">Concept</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Details include: Technical Drawing, Material Specs, & R&D Process
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="20260218_221106_0000 (2).png" alt="Muscle Memory Project">
-                        </div>
-                        <div class="card-content">
-                            <h3>Project 2: MUSCLE MEMORY</h3>
-                            <p><strong>Urban Skateboard Performance.</strong> Designed for the heat of East Java. Lightweight, breathable, and refined for high-performance versatility in skateboarding.</p>
-                            <div>
-                                <span class="tag">Performance</span>
-                                <span class="tag">Skateboarding</span>
-                                <span class="tag">Leather Tech</span>
+                    <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="img-container">
+                                <img src="20260218_221106_0000 (2).png" alt="Muscle Memory Project">
                             </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: Technical Drawing, Performance Testing, & R&D Process
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                            <div class="card-content">
+                                <h3>Project 2: MUSCLE MEMORY</h3>
+                                <p><strong>Urban Skateboard Performance.</strong> Designed for the heat of East Java. Lightweight, breathable, and refined for high-performance versatility in skateboarding.</p>
+                                <div>
+                                    <span class="tag">Performance</span>
+                                    <span class="tag">Skateboarding</span>
+                                    <span class="tag">Leather Tech</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Details include: Technical Drawing, Performance Testing, & R&D Process
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" class="btn">View Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="porto 3.png" alt="Dark System Projects">
-                        </div>
-                        <div class="card-content">
-                            <h3>Project 3: DARK SYSTEM</h3>
-                            <p><strong>Lifestyle Defiance & Social Connectivity.</strong> The 'Dark System' is a term that highlights the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices, serving as a visual manifesto for those who refuse to be silenced. Every pair is a declaration of our refusal to be silent in the face of oppression and a statement that we are all equal.</p>
-                            <div>
-                                <span class="tag">Lifestyle</span>
-                                <span class="tag">Solidarity</span>
-                                <span class="tag">Social Statement</span>
+                    <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="img-container">
+                                <img src="porto 3.png" alt="Dark System Projects">
                             </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: 2D/3D Design Process, Riot-Inspired Moodboards, & Meaning Analysis
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" class="btn">View Details</a>
+                            <div class="card-content">
+                                <h3>Project 3: DARK SYSTEM</h3>
+                                <p><strong>Lifestyle Defiance & Social Connectivity.</strong> The 'Dark System' is a term that highlights the systemic oppression faced by marginalized groups. These shoes are a defiant statement against such injustices, serving as a visual manifesto for those who refuse to be silenced. Every pair is a declaration of our refusal to be silent in the face of oppression and a statement that we are all equal.</p>
+                                <div>
+                                    <span class="tag">Lifestyle</span>
+                                    <span class="tag">Solidarity</span>
+                                    <span class="tag">Social Statement</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Details include: 2D/3D Design Process, Riot-Inspired Moodboards, & Meaning Analysis
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" class="btn">View Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                 <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="SPIC.png" alt="Spice Bloom Projects">
-                        </div>
-                        <div class="card-content">
-                            <h3>Project 4: SPICE BLOOM</h3>
-                            <p><strong>The "Heritage Flow" Concept.</strong> Inspired by the historical legacy of the Indonesian spice trade and the modern global running phenomenon. Engineered with organic sole ergonomics to capture the high-energy pulse of the equatorial sun.</p>
-                            <div>
-                                <span class="tag">Running</span>
-                                <span class="tag">Performance</span>
-                                <span class="tag">Sport</span>
+                     <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="img-container">
+                                <img src="SPIC.png" alt="Spice Bloom Projects">
                             </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: Concept Explanation, Visual Development, & Technical Specifications
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" class="btn">View Details</a>
+                            <div class="card-content">
+                                <h3>Project 4: SPICE BLOOM</h3>
+                                <p><strong>The "Heritage Flow" Concept.</strong> Inspired by the historical legacy of the Indonesian spice trade and the modern global running phenomenon. Engineered with organic sole ergonomics to capture the high-energy pulse of the equatorial sun.</p>
+                                <div>
+                                    <span class="tag">Running</span>
+                                    <span class="tag">Performance</span>
+                                    <span class="tag">Sport</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Details include: Concept Explanation, Visual Development, & Technical Specifications
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" class="btn">View Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="SCAR FLOW.png" alt="Scar Flow - IFCC Submission">
-                        </div>
-                        <div class="card-content">
-                            <p style="font-size: 0.75rem; font-weight: bold; color: #ff823a; letter-spacing: 1.5px; margin-bottom: 5px; text-transform: uppercase;">
-                                Official Submission: IFCC 2026
-                            </p>
-                            <h3>Project 5: SCAR FLOW x REISEN</h3>
-                            <p><strong>The "Adaptive Current" Concept.</strong> An official design entry for the <strong>Indonesian Footwear Creative Competition (IFCC)</strong>, developed specifically for <strong>REI Footwear</strong>. This project bridges urban utility with rugged trail performance, featuring technical TPU architecture and an outsole system validated through intense environment with 3 styles concept.</p>
-                            <div>
-                                <span class="tag">IFCC Entry</span>
-                                <span class="tag">REI Footwear</span>
-                                <span class="tag">Trail Performance</span>
+                    <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="img-container">
+                                <img src="SCAR FLOW.png" alt="Scar Flow - IFCC Submission">
                             </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Includes: IFCC Design Board, Technical Material Specifications, 3D Rendering by Vizcom.
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" class="btn">View Full Submission</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="BLAKRAKAN.png" alt="BLAKRAAN">
-                        </div>
-                        <div class="card-content">
-                           <h3>Project 6: BLAKRAAN</h3>
-                            <p><strong>The "Aimless Wandering" Concept.</strong> A tribute to the pure essence of unburdened childhood exploration. Designed with tactical, earthy accents and rugged comfort to bridge small-town nostalgia with modern urban functionality.</p>
-                            <div>
-                                <span class="tag">Footwear Design</span>
-                                <span class="tag">Casual Silhouette</span>
-                                <span class="tag">Concept</span>
-                            </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: Storytelling, Technical Specs, & Colorway Archive
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" class="btn">View Details</a>
+                            <div class="card-content">
+                                <p style="font-size: 0.75rem; font-weight: bold; color: #ff823a; letter-spacing: 1.5px; margin-bottom: 5px; text-transform: uppercase;">
+                                    Official Submission: IFCC 2026
+                                </p>
+                                <h3>Project 5: SCAR FLOW x REISEN</h3>
+                                <p><strong>The "Adaptive Current" Concept.</strong> An official design entry for the <strong>Indonesian Footwear Creative Competition (IFCC)</strong>, developed specifically for <strong>REI Footwear</strong>. This project bridges urban utility with rugged trail performance, featuring technical TPU architecture and an outsole system validated through intense environment with 3 styles concept.</p>
+                                <div>
+                                    <span class="tag">IFCC Entry</span>
+                                    <span class="tag">REI Footwear</span>
+                                    <span class="tag">Trail Performance</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Includes: IFCC Design Board, Technical Material Specifications, 3D Rendering by Vizcom.
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" class="btn">View Full Submission</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="img-container">
+                                <img src="BLAKRAKAN.png" alt="BLAKRAAN">
+                            </div>
+                            <div class="card-content">
+                               <h3>Project 6: BLAKRAAN</h3>
+                                <p><strong>The "Aimless Wandering" Concept.</strong> A tribute to the pure essence of unburdened childhood exploration. Designed with tactical, earthy accents and rugged comfort to bridge small-town nostalgia with modern urban functionality.</p>
+                                <div>
+                                    <span class="tag">Footwear Design</span>
+                                    <span class="tag">Casual Silhouette</span>
+                                    <span class="tag">Concept</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Details include: Storytelling, Technical Specs, & Colorway Archive
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" class="btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="img-container">
-                            <img src="TERRA.png" alt="TERRA NULLIUS">
-                        </div>
-                        <div class="card-content">
-                            <h3>Project 7: TERRA NULLIUS</h3>
-                            <p><strong>The "Ecological Reclamation" Concept.</strong> Synthesizing traditional sartorial formality with feral biological reclamation in a post-soil reality. This elegant yet experimental slip-on features CH leather, a universal buckle, and a rubber sole, violently contrasted by an artificial moss vamp—representing nature's forceful return in a dystopian future.</p>
-                            <div>
-                                <span class="tag">Formal Elegance</span>
-                                <span class="tag">Experimental</span>
-                                <span class="tag">Speculative</span>
+                    <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="img-container">
+                                <img src="TERRA.png" alt="TERRA NULLIUS">
                             </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: Dystopian Narrative, Speculative Materials (Artificial Moss, CH Leather), & Visual Concept
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/15VfwET1Qssd2gBiNQ5WzKHazwj1jBqcR/view?usp=drive_link" class="btn">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <div class="badge-new">NEW !!!</div> <div class="img-container">
-                            <img src="NETT.png" alt="NETT Project">
-                        </div>
-                        <div class="card-content">
-                            <h3>Project 8: NETT</h3>
-                            <p><strong>The "Baseline Rally" Concept.</strong> Born from the explosive physical demands of tennis. NETT translates the precise tension of the woven net into a breathable, lightweight upper, fortified with a secure lateral lockdown and a deeply cushioned midsole to absorb harsh hardcourt strikes.</p>
-                            <div>
-                                <span class="tag">Tennis Performance</span>
-                                <span class="tag">Footwear Design</span>
-                                <span class="tag">Heritage</span>
-                            </div>
-                            <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
-                                *Details include: Storytelling Narrative, Validation Logs, & Visual Development
-                            </p>
-                            <div class="btn-wrapper">
-                                <a href="https://drive.google.com/file/d/1U3m9BnDxirXK-WiIXHjjk5UnwH3CflwX/view?usp=drive_link" class="btn">View Details</a>
+                            <div class="card-content">
+                                <h3>Project 7: TERRA NULLIUS</h3>
+                                <p><strong>The "Ecological Reclamation" Concept.</strong> Synthesizing traditional sartorial formality with feral biological reclamation in a post-soil reality. This elegant yet experimental slip-on features CH leather, a universal buckle, and a rubber sole, violently contrasted by an artificial moss vamp—representing nature's forceful return in a dystopian future.</p>
+                                <div>
+                                    <span class="tag">Formal Elegance</span>
+                                    <span class="tag">Experimental</span>
+                                    <span class="tag">Speculative</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Details include: Dystopian Narrative, Speculative Materials (Artificial Moss, CH Leather), & Visual Concept
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/15VfwET1Qssd2gBiNQ5WzKHazwj1jBqcR/view?usp=drive_link" class="btn">View Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div> 
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+                    <div class="swiper-slide">
+                        <div class="project-card">
+                            <div class="badge-new">NEW !!!</div> <div class="img-container">
+                                <img src="NETT.png" alt="NETT Project">
+                            </div>
+                            <div class="card-content">
+                                <h3>Project 8: NETT</h3>
+                                <p><strong>The "Baseline Rally" Concept.</strong> Born from the explosive physical demands of tennis. NETT translates the precise tension of the woven net into a breathable, lightweight upper, fortified with a secure lateral lockdown and a deeply cushioned midsole to absorb harsh hardcourt strikes.</p>
+                                <div>
+                                    <span class="tag">Tennis Performance</span>
+                                    <span class="tag">Footwear Design</span>
+                                    <span class="tag">Heritage</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 500; font-style: italic; margin-top: 10px; margin-bottom: 15px;">
+                                    *Details include: Storytelling Narrative, Validation Logs, & Visual Development
+                                </p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/1U3m9BnDxirXK-WiIXHjjk5UnwH3CflwX/view?usp=drive_link" class="btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> 
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </div>
     </section>
 
-    <!-- SECTION COMING SOON -->
     <section id="coming-soon" class="fade-in-section">
         <h2 class="section-title">Coming Soon Projects</h2>
         <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
@@ -1283,22 +1309,16 @@
         </div>
     </section>
 
-    <!-- BAGIAN BARU: TECHNICAL SHOWCASE (3D SLIDER & SIDEBAR) -->
     <section id="technical" class="fade-in-section">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
         
         <div class="technical-showcase-container">
-            
-            <!-- Kotak Cyan: Viewer 3D file teknikal (Dibuat menjadi Slider) -->
             <div class="technical-3d-viewport">
-                <!-- TEKS AJAKAN 3D -->
                 <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
 
-                <!-- Inisialisasi Swiper Khusus Technical -->
                 <div class="swiper technical-swiper">
                     <div class="swiper-wrapper">
                         
-                        <!-- SLIDE 1: MARINA3D.glb (Model Utama Solid) -->
                         <div class="swiper-slide">
                             <model-viewer 
                                 src="MARINA3D.glb" 
@@ -1316,7 +1336,6 @@
                             </model-viewer>
                         </div>
                         
-                        <!-- SLIDE 2: MARINA3DEXP.glb (Model Exploded View) -->
                         <div class="swiper-slide">
                             <model-viewer 
                                 src="MARINA3DEXP.glb" 
@@ -1334,7 +1353,6 @@
                             </model-viewer>
                         </div>
 
-                        <!-- SLIDE 3: SLOT DESAIN BARU (TAMPILAN COMING SOON LAYAR HITAM) -->
                         <div class="swiper-slide">
                             <div class="coming-soon-viewport">
                                 <h2>COMING SOON</h2>
@@ -1344,22 +1362,18 @@
 
                     </div>
                     
-                    <!-- NAVIGASI KOTAK TRANPARAN UNTUK 3D VIEWER -->
                     <div class="swiper-button-next tech-next"></div>
                     <div class="swiper-button-prev tech-prev"></div>
                 </div>
             </div>
 
-            <!-- Kotak Ungu: Sidebar Navigasi / Info -->
             <div class="technical-sidebar">
                 <div class="sidebar-header">
                     <h4>Technical Index</h4>
-                    <!-- Teks ini akan di-update oleh Javascript saat slide bergeser -->
                     <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 2</span>
                 </div>
                 
                 <div class="sidebar-list">
-                    <!-- Navigasi Slide 1: MARINA (Mewakili Slide 0 Solid & Slide 1 Exploded) -->
                     <div class="sidebar-item active-item" id="nav-item-1" onclick="techSwiper.slideTo(0)">
                         <span class="item-number">01</span>
                         <div class="item-info">
@@ -1368,7 +1382,6 @@
                         </div>
                     </div>
                     
-                    <!-- Navigasi Slide 2: NEXT SPEC (Langsung melompat ke Slide 2 Coming Soon) -->
                     <div class="sidebar-item" id="nav-item-2" onclick="techSwiper.slideTo(2)">
                         <span class="item-number">02</span>
                         <div class="item-info">
@@ -1382,7 +1395,6 @@
                     <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; font-style: italic;">
                         *Hint: Drag the 3D model to rotate. Click the arrows or items above to change perspective.
                     </p>
-                    <!-- ID 'tech-spec-btn' ditambahkan agar Javascript bisa memanipulasi tombol ini -->
                     <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" id="tech-spec-btn" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs</a>
                 </div>
             </div>
@@ -1529,7 +1541,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <script>
-      // 1. Swiper untuk Projects Grid
       var projectSwiper = new Swiper(".mySwiper", {
         slidesPerView: 3, 
         spaceBetween: 30, 
@@ -1544,7 +1555,6 @@
         }
       });
 
-      // 2. Swiper Khusus untuk Technical 3D Showcase
       var techSwiper = new Swiper(".technical-swiper", {
         slidesPerView: 1, 
         spaceBetween: 0,
@@ -1555,35 +1565,27 @@
         },
         on: {
           slideChange: function () {
-            // Logika untuk menampilkan Indikator (Item 1 of 2)
-            // Slide 0 & 1 adalah milik MARINA (Index 1)
-            // Slide 2 adalah milik Coming Soon (Index 2)
             let displayIndex = this.activeIndex < 2 ? 1 : 2;
             let totalItems = 2; 
             
             document.getElementById('tech-slide-count').innerText = `Item ${displayIndex} of ${totalItems}`;
             
-            // Ubah class 'active-item' di kotak sidebar agar sesuai dengan slide 3D
             document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active-item'));
             const activeNav = document.getElementById(`nav-item-${displayIndex}`);
             if (activeNav) {
                 activeNav.classList.add('active-item');
             }
 
-            // Logika untuk Tombol View Technical Specs
             const specBtn = document.getElementById('tech-spec-btn');
-            
             if (this.activeIndex < 2) {
-                // Saat berada di Slide MARINA (Solid atau Exploded)
                 specBtn.href = "https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link";
                 specBtn.innerText = "View Technical Specs";
                 specBtn.classList.remove("disabled");
                 specBtn.style.pointerEvents = "auto";
             } else {
-                // Saat berada di Slide COMING SOON
-                specBtn.removeAttribute("href"); // Buang link agar tidak bisa di-klik
+                specBtn.removeAttribute("href");
                 specBtn.innerText = "Specs Coming Soon";
-                specBtn.classList.add("disabled"); // Tambahkan styling abu-abu mati
+                specBtn.classList.add("disabled");
                 specBtn.style.pointerEvents = "none";
             }
           }
