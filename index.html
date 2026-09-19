@@ -6,8 +6,6 @@
     <title>Garin Nata Kusuma | Footwear Designer</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    
-    <!-- BAGIAN BARU: Script untuk Model Viewer 3D -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
     <style>
@@ -23,6 +21,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 100px; 
         }
 
         * {
@@ -36,23 +35,29 @@
             color: var(--text-main);
             font-family: var(--font-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- NAVBAR --- */
+        /* ========================================== */
+        /* APPLE-STYLE NAVBAR & MEGA MENU (BARU) */
+        /* ========================================== */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 0 5%;
+            height: 75px; /* Tinggi fix agar mega menu pas di bawahnya */
             position: fixed;
             width: 100%;
-            background: rgba(15, 15, 17, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 17, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.3s ease;
         }
 
         .logo {
@@ -63,22 +68,108 @@
             cursor: pointer;
         }
 
-        .logo:hover {
-            opacity: 0.8;
-        }
-
         .nav-links {
             display: flex;
-            gap: 20px;
+            height: 100%;
         }
 
-        .nav-links a:hover {
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+
+        .nav-item > a {
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover > a {
             color: var(--accent);
         }
 
+        /* Panel Dropdown Apple Style */
+        .mega-menu {
+            position: fixed;
+            top: 75px; /* Tepat di bawah navbar */
+            left: 0;
+            width: 100%;
+            background: rgba(20, 20, 23, 0.95);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 5% 50px 5%;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            
+            /* Animasi Halus (Cubic Bezier mirip Apple) */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 999;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        /* Saat menu di-hover, turunkan mega menu */
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Ikon di dalam Mega Menu */
+        .mega-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .mega-link img {
+            width: 80px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+        }
+
+        .mega-link:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .mega-link:hover img {
+            transform: scale(1.1);
+        }
+
         /* ========================================== */
-        /* KOTAK DIKEMBALIKAN BERSIH SEPERTI SEMULA */
+        /* EFEK BLUR & FADE IN SAAT SCROLL */
         /* ========================================== */
+        .fade-in-section {
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, filter 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, filter, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* --- HERO OVERLAY & EXPLODE EFFECT --- */
         .hero-overlay-box {
             background: rgba(0, 0, 0, 0.6);
             padding: 50px;
@@ -101,7 +192,6 @@
             40% { transform: scale(1.15); filter: brightness(2) blur(3px); opacity: 0.9; box-shadow: 0 0 100px var(--accent), inset 0 0 30px var(--accent); }
             100% { transform: scale(2) translateY(-30px); filter: brightness(4) blur(15px); opacity: 0; box-shadow: 0 0 300px var(--accent); }
         }
-        /* ========================================== */
 
         /* --- HERO SECTION --- */
         .hero {
@@ -153,7 +243,7 @@
             margin-bottom: 30px;
         }
 
-        /* --- 3D BUTTON STYLES (BRUTAL & CLICKABLE) --- */
+        /* --- 3D BUTTON STYLES --- */
         .btn {
             padding: 12px 35px;
             background-color: var(--card-bg);
@@ -295,7 +385,7 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            position: relative; /* TAMBAHAN MUTLAK BIAR STIKER GA LARI COK */
+            position: relative;
         }
 
         .project-card:hover {
@@ -303,7 +393,6 @@
             border-color: var(--accent);
         }
 
-        /* --- CSS STIKER KEDIP-KEDIP NEW !!! --- */
         .badge-new {
             position: absolute;
             top: 15px;
@@ -321,18 +410,12 @@
             border: 2px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             animation: blink-sticker 0.8s infinite alternate ease-in-out;
-            pointer-events: none; /* Biar ga ganggu klik gambar */
+            pointer-events: none;
         }
 
         @keyframes blink-sticker {
-            0% { 
-                transform: scale(1) rotate(10deg); 
-                box-shadow: 0 4px 10px rgba(255,0,60,0.4); 
-            }
-            100% { 
-                transform: scale(1.15) rotate(15deg); 
-                box-shadow: 0 0 20px rgba(255,0,60,0.9), 0 0 10px rgba(255,255,255,0.6) inset; 
-            }
+            0% { transform: scale(1) rotate(10deg); box-shadow: 0 4px 10px rgba(255,0,60,0.4); }
+            100% { transform: scale(1.15) rotate(15deg); box-shadow: 0 0 20px rgba(255,0,60,0.9), 0 0 10px rgba(255,255,255,0.6) inset; }
         }
 
         .img-container {
@@ -479,10 +562,10 @@
             font-weight: bold;
         }
 
-        /* --- BAGIAN BARU: CSS UNTUK 3D VIEWER & HOTSPOT --- */
+        /* --- CSS UNTUK 3D VIEWER & HOTSPOT --- */
         .model-container {
             width: 100%;
-            height: 60vh; /* Tinggi area 3D */
+            height: 60vh;
             min-height: 400px;
             background: radial-gradient(circle, #2a2a2d 0%, var(--bg-color) 70%);
             border-radius: 15px;
@@ -498,7 +581,6 @@
             outline: none;
         }
 
-        /* Desain titik Hotspot (Button) */
         .Hotspot {
             background: var(--accent);
             border-radius: 50%;
@@ -519,7 +601,6 @@
             pointer-events: none;
         }
 
-        /* Animasi titik hotspot berdenyut */
         .Hotspot:focus {
             outline: none;
         }
@@ -528,8 +609,7 @@
             transform: translateY(-50%);
         }
 
-        /* Desain Bubble Info (Tulisan Coming Soon) */
-        .HotspotAnnotation{
+        .HotspotAnnotation {
             background: rgba(0, 0, 0, 0.85);
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
@@ -548,23 +628,22 @@
             pointer-events: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* Efek muncul halus */
             opacity: 0;
             transform: translate3d(-10px, -50%, 0);
             transition: opacity 0.3s, transform 0.3s;
         }
 
-        /* Menampilkan bubble saat hotspot di-klik atau hover */
         .Hotspot:hover .HotspotAnnotation,
         .Hotspot:focus .HotspotAnnotation {
             opacity: 1;
             transform: translate3d(0, -50%, 0);
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            nav { flex-direction: column; gap: 10px; }
+            nav { flex-direction: column; gap: 10px; height: auto; padding: 15px 5%; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .mega-menu { display: none; /* Sembunyikan mega menu di HP agar tidak menuhi layar */ }
             .swipe-hint { text-align: center; } 
             .model-container { height: 50vh; }
         }
@@ -575,24 +654,50 @@
     <nav>
         <a href="#home" class="logo">PROJECTS CATALOGUE</a>
         <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#college">College</a>
-            <a href="#footwear">Footwear</a>
-            <!-- BAGIAN BARU: Link navigasi ke Coming Soon -->
-            <a href="#coming-soon" style="color: var(--accent); font-weight: bold;">Coming Soon</a> 
-            <a href="#technical">Technical</a>
-            <a href="#skills">Skills</a>
+            <div class="nav-item"><a href="#about">About</a></div>
+            <div class="nav-item"><a href="#college">College</a></div>
+            
+            <!-- MEGA MENU APPLE STYLE DI BAGIAN FOOTWEAR -->
+            <div class="nav-item">
+                <a href="#footwear">Footwear</a>
+                <!-- Panel Dropdown -->
+                <div class="mega-menu">
+                    <a href="#footwear" class="mega-link">
+                        <img src="20260218_221106_0000 (1).png" alt="Reverve">
+                        <span>Reverve</span>
+                    </a>
+                    <a href="#footwear" class="mega-link">
+                        <img src="20260218_221106_0000 (2).png" alt="Muscle Memory">
+                        <span>Muscle Memory</span>
+                    </a>
+                    <a href="#footwear" class="mega-link">
+                        <img src="porto 3.png" alt="Dark System">
+                        <span>Dark System</span>
+                    </a>
+                    <a href="#footwear" class="mega-link">
+                        <img src="SPIC.png" alt="Spice Bloom">
+                        <span>Spice Bloom</span>
+                    </a>
+                    <a href="#footwear" class="mega-link">
+                        <img src="NETT.png" alt="Nett">
+                        <span>Nett</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a href="#coming-soon" style="color: var(--accent); font-weight: bold;">Coming Soon</a> 
+            </div>
+            <div class="nav-item"><a href="#technical">Technical</a></div>
+            <div class="nav-item"><a href="#skills">Skills</a></div>
         </div>
     </nav>
 
    <header id="home" class="hero">
-    
     <video autoplay loop muted playsinline class="hero-bg-video">
         <source src="2t2tf2t.mp4" type="video/mp4">
     </video>
-    
     <div class="hero-overlay-dark"></div>
-
     <svg id="laces-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;"></svg>
 
     <div class="hero-overlay-box" id="hero-box"> 
@@ -608,31 +713,25 @@
     </div>
 </header>
 
-
-    <section id="about">
+    <section id="about" class="fade-in-section">
         <h2 class="section-title">About Me</h2>
-        
         <div class="about-container">
             <div class="about-text">
                 <p>Hi, I'm <strong>Garin Kusuma</strong>. I’ve been designing footwear for the past four years, mostly because I’m just a curious guy who likes to see how we live in Indonesia. I have this habit of picking up random things—unique objects, weird stories, or odd experiences—and somehow connecting them all together. People might think it’s a bit 'strange' or 'out there,' but I actually love the chaos in my head.</p>
                 <p style="margin-top: 15px;">Right now, what you see here are my design narratives, but I’m working on making them a reality very soon. To support this, I also serve as a <strong>Design Drafter</strong> for automated manufacturing, with a focus on pallet design and computer stitching processes.</p>
             </div>
-            
             <div class="about-education">
                 <img src="LOGO POLTEK.png" alt="Politeknik ATK Yogyakarta Logo">
-                
                 <h4>Politeknik ATK Yogyakarta</h4>
                 <p style="color: var(--accent); font-weight: bold; margin-bottom: 15px;">Footwear Product Design</p>
-                
                 <p>Graduated: 2024</p>
                 <p>GPA: 3.40</p>
             </div>
         </div>
     </section>
 
-    <section id="college">
+    <section id="college" class="fade-in-section">
         <h2 class="section-title">College Projects</h2>
-        
         <div class="college-layout">
             <div class="project-card" style="max-width: 380px; flex: 1 1 320px;">
                 <div class="img-container">
@@ -654,20 +753,17 @@
                     </div>
                 </div>
             </div>
-
             <div class="college-video-wrapper">
                 <iframe src="https://www.youtube.com/embed/snPK9X9Hn5M?autoplay=1&mute=1&loop=1&playlist=snPK9X9Hn5M" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <section id="footwear" style="background-color: #121215;"> 
+    <section id="footwear" style="background-color: #121215;" class="fade-in-section"> 
         <h2 class="section-title">Footwear Concept & Design</h2>
-        
         <div class="swipe-hint">
             &#8592; Swipe or click arrows to explore more projects &#8594;
         </div>
-        
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 
@@ -859,31 +955,28 @@
                 </div>
 
             </div> 
-            
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
     </section>
 
-    <!-- BAGIAN BARU: COMING SOON SECTION (3D VIEWER) -->
-    <section id="coming-soon">
+    <!-- SECTION COMING SOON DENGAN FILE GIRRAFE.GLB -->
+    <section id="coming-soon" class="fade-in-section">
         <h2 class="section-title">Coming Soon Projects</h2>
         <p style="max-width: 700px; color: var(--text-muted); margin-bottom: 30px;">
             Take a sneak peek at what's currently on my drawing board. Explore the 3D prototype below.
         </p>
         
         <div class="model-container">
-            <!-- Ganti "nama-file-3d-mu.glb" dengan nama file GLB aslimu yang sudah di-upload ke GitHub -->
             <model-viewer 
-                src="nama-file-3d-mu.glb" 
-                alt="3D Sneaker Prototype" 
+                src="GIRRAFE.glb" 
+                alt="3D CLOG Prototype" 
                 auto-rotate 
                 camera-controls 
                 shadow-intensity="1.5"
                 exposure="1"
                 interaction-prompt="hover">
                 
-                <!-- Titik Hotspot. Kamu bisa menyesuaikan angka data-position "x y z" agar pas dengan modelmu -->
                 <button class="Hotspot" slot="hotspot-1" data-position="0 0.1 0.1" data-normal="0 1 0">
                     <div class="HotspotAnnotation">Coming Soon</div>
                 </button>
@@ -891,9 +984,8 @@
             </model-viewer>
         </div>
     </section>
-    <!-- AKHIR BAGIAN BARU -->
 
-    <section id="technical">
+    <section id="technical" class="fade-in-section">
         <h2 class="section-title">Technical Drafting & Manufacturing</h2>
         <div class="projects-grid">
             <div class="project-card">
@@ -922,7 +1014,7 @@
         </div>
     </section>
     
-    <section id="skills" style="background-color: #121215;">
+    <section id="skills" style="background-color: #121215;" class="fade-in-section">
         <h2 class="section-title">Skills & Tools</h2>
         <div class="skills-grid">
             <div class="skill-box">
@@ -940,7 +1032,7 @@
         </div>
     </section>
 
-    <section id="contact" style="background: #151515; text-align: center;">
+    <section id="contact" style="background: #151515; text-align: center;" class="fade-in-section">
         <h2 class="section-title" style="border-left: none; border-bottom: 5px solid var(--accent); padding-left: 0; padding-bottom: 10px;">
             Let's Connect
         </h2>
@@ -1073,6 +1165,29 @@
           768: { slidesPerView: 2, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 30 }
         }
+      });
+    </script>
+
+    <!-- SCRIPT INTERSECTION OBSERVER UNTUK EFEK BLUR-REVEAL -->
+    <script>
+      const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.15 
+      };
+
+      const sectionObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+              } else {
+                  entry.target.classList.remove('is-visible'); 
+              }
+          });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+          sectionObserver.observe(section);
       });
     </script>
 </body>
