@@ -521,10 +521,37 @@
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
+        /* --- TEKS AJAKAN 3D (HINT) BARU --- */
+        .interactive-hint {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 15, 17, 0.85);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            pointer-events: none; /* Sangat penting agar model di bawahnya tetap bisa diputar */
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            animation: float-hint 2.5s ease-in-out infinite;
+        }
+
+        .interactive-hint span {
+            font-size: 1.3rem;
+        }
+
+        @keyframes float-hint {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -8px); }
         }
 
         /* ========================================== */
@@ -549,13 +576,56 @@
             position: relative;
             min-height: 450px;
             border: 1px solid rgba(255,255,255,0.03);
+            display: flex; 
         }
 
-        .technical-3d-viewport model-viewer {
+        .technical-swiper {
+            width: 100%;
+            height: 100%;
+            padding: 0 !important; 
+            margin: 0;
+        }
+
+        .technical-swiper .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%; 
+        }
+
+        .technical-swiper model-viewer {
             width: 100%;
             height: 100%;
             --poster-color: transparent;
             outline: none;
+        }
+
+        .technical-swiper .swiper-button-next, 
+        .technical-swiper .swiper-button-prev {
+            width: 10% !important; 
+            max-width: 60px;
+            height: 100% !important; 
+            top: 0 !important;
+            margin-top: 0 !important;
+            background-color: transparent; 
+            color: rgba(255, 255, 255, 0.2) !important; 
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .technical-swiper .swiper-button-prev { left: 0 !important; border-radius: 0; }
+        .technical-swiper .swiper-button-next { right: 0 !important; border-radius: 0; }
+
+        .technical-swiper .swiper-button-next:hover, 
+        .technical-swiper .swiper-button-prev:hover {
+            background-color: rgba(252, 163, 17, 0.85); 
+            color: #000 !important; 
+        }
+
+        .technical-swiper .swiper-button-next::after, 
+        .technical-swiper .swiper-button-prev::after {
+            font-size: 2rem !important; 
+            font-weight: bold;
         }
 
         .technical-sidebar {
@@ -573,11 +643,15 @@
             margin-bottom: 15px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .sidebar-header h4 {
             color: var(--text-main);
             font-size: 1rem;
+            margin-bottom: 0;
         }
 
         .sidebar-list {
@@ -684,7 +758,8 @@
         /* ========================================== */
         /* CSS 3D VIEWER LOADING SCREEN & HOTSPOT     */
         /* ========================================== */
-        .model-container {
+        /* Note: Untuk Coming Soon section */
+        #coming-soon .model-container {
             width: 100%;
             height: 60vh;
             min-height: 400px;
@@ -695,7 +770,7 @@
             position: relative;
         }
 
-        model-viewer {
+        #coming-soon model-viewer {
             width: 100%;
             height: 100%;
             --poster-color: transparent;
@@ -811,7 +886,7 @@
             .nav-links { flex-wrap: wrap; justify-content: center; }
             .mega-menu { display: none; }
             .swipe-hint { text-align: center; } 
-            .model-container { height: 50vh; }
+            #coming-soon .model-container { height: 50vh; }
             .swiper-button-next, .swiper-button-prev { width: 30px !important; min-width: auto; }
             .technical-showcase-container { flex-direction: column; }
             .technical-sidebar { width: 100%; }
@@ -931,6 +1006,7 @@
         <div class="swipe-hint">
             &#8592; Swipe or click arrows to explore more projects &#8594;
         </div>
+        
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 
@@ -1135,8 +1211,11 @@
         </p>
         
         <div class="model-container">
+            <!-- TEKS AJAKAN 3D -->
+            <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
+
             <model-viewer 
-                src="GIRRAFEE.glb" 
+                src="GIRRAFE.glb" 
                 alt="3D CLOG Prototype" 
                 auto-rotate 
                 camera-controls 
@@ -1144,7 +1223,6 @@
                 exposure="1"
                 interaction-prompt="hover">
                 
-                <!-- LOADING POSTER ORANYE -->
                 <div slot="poster" class="loading-poster">
                     <div class="loading-spinner"></div>
                     <p>LOADING 3D ASSET...</p>
@@ -1164,49 +1242,83 @@
         
         <div class="technical-showcase-container">
             <div class="technical-3d-viewport">
-                <!-- MODEL VIEWER UNTUK MARINA DENGAN LOADING SCREEN -->
-                <model-viewer 
-                    src="MARINA3D.glb" 
-                    alt="Nike Marina Heel Peg Pallet 3D Model" 
-                    auto-rotate 
-                    camera-controls 
-                    shadow-intensity="1.5"
-                    exposure="1"
-                    interaction-prompt="hover">
-                    
-                    <div slot="poster" class="loading-poster">
-                        <div class="loading-spinner"></div>
-                        <p>LOADING 3D ASSET...</p>
-                    </div>
+                <!-- TEKS AJAKAN 3D -->
+                <div class="interactive-hint"><span>👆</span> Putar 3D Model 360°</div>
 
-                </model-viewer>
+                <div class="swiper technical-swiper">
+                    <div class="swiper-wrapper">
+                        
+                        <!-- SLIDE 1 -->
+                        <div class="swiper-slide">
+                            <model-viewer 
+                                src="MARINAAA.glb" 
+                                alt="Nike Marina Heel Peg Pallet - Solid View" 
+                                auto-rotate 
+                                camera-controls 
+                                shadow-intensity="1.5"
+                                exposure="1"
+                                interaction-prompt="hover">
+                                
+                                <div slot="poster" class="loading-poster">
+                                    <div class="loading-spinner"></div>
+                                    <p>LOADING 3D ASSET...</p>
+                                </div>
+                            </model-viewer>
+                        </div>
+                        
+                        <!-- SLIDE 2 -->
+                        <div class="swiper-slide">
+                            <model-viewer 
+                                src="MARINA3DEXP.glb" 
+                                alt="Nike Marina Heel Peg Pallet - Exploded View" 
+                                auto-rotate 
+                                camera-controls 
+                                shadow-intensity="1.5"
+                                exposure="1"
+                                interaction-prompt="hover">
+                                
+                                <div slot="poster" class="loading-poster">
+                                    <div class="loading-spinner"></div>
+                                    <p>LOADING EXPLODED VIEW...</p>
+                                </div>
+                            </model-viewer>
+                        </div>
+
+                    </div>
+                    
+                    <div class="swiper-button-next tech-next"></div>
+                    <div class="swiper-button-prev tech-prev"></div>
+                </div>
             </div>
 
             <div class="technical-sidebar">
                 <div class="sidebar-header">
                     <h4>Technical Index</h4>
-                    <span style="font-size: 0.75rem; color: var(--accent);">Item 1 of 1</span>
+                    <span id="tech-slide-count" style="font-size: 0.75rem; color: var(--accent);">Item 1 of 2</span>
                 </div>
                 
                 <div class="sidebar-list">
-                    <div class="sidebar-item active-item">
+                    <div class="sidebar-item active-item" id="nav-item-1" onclick="techSwiper.slideTo(0)">
                         <span class="item-number">01</span>
                         <div class="item-info">
-                            <strong>Marina Pallet</strong>
-                            <small>CNC & Stitching</small>
+                            <strong>Marina Pallet (Solid)</strong>
+                            <small>CNC & Stitching Base</small>
                         </div>
                     </div>
                     
-                    <div class="sidebar-item placeholder-item" onclick="alert('Slot tempat dokumen teknis berikutnya.')">
+                    <div class="sidebar-item" id="nav-item-2" onclick="techSwiper.slideTo(1)">
                         <span class="item-number">02</span>
                         <div class="item-info">
-                            <strong>Next Spec</strong>
-                            <small>Coming Soon</small>
+                            <strong>Marina (Exploded)</strong>
+                            <small>Internal Component View</small>
                         </div>
                     </div>
                 </div>
                 
                 <div class="sidebar-footer">
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; font-style: italic;">
+                        *Hint: Drag the 3D model to rotate. Click the arrows or items above to change perspective.
+                    </p>
                     <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" class="btn" style="padding: 10px 15px; font-size: 0.85rem; width: 100%;">View Technical Specs</a>
                 </div>
             </div>
@@ -1352,17 +1464,34 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-      var swiper = new Swiper(".mySwiper", {
+      var projectSwiper = new Swiper(".mySwiper", {
         slidesPerView: 3, 
         spaceBetween: 30, 
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next:not(.tech-next)",
+          prevEl: ".swiper-button-prev:not(.tech-prev)",
         },
         breakpoints: {
           320: { slidesPerView: 1, spaceBetween: 10 },
           768: { slidesPerView: 2, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 30 }
+        }
+      });
+
+      var techSwiper = new Swiper(".technical-swiper", {
+        slidesPerView: 1, 
+        spaceBetween: 0,
+        allowTouchMove: false, 
+        navigation: {
+          nextEl: ".tech-next",
+          prevEl: ".tech-prev",
+        },
+        on: {
+          slideChange: function () {
+            document.getElementById('tech-slide-count').innerText = `Item ${this.activeIndex + 1} of ${this.slides.length}`;
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active-item'));
+            document.getElementById(`nav-item-${this.activeIndex + 1}`).classList.add('active-item');
+          }
         }
       });
     </script>
