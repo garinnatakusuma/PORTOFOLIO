@@ -649,21 +649,32 @@
 
         .college-video-wrapper {
             flex: 1 1 480px;
+            min-width: 0;
             background: var(--card-bg);
             border-radius: var(--radius);
             border: 1px solid var(--line);
             padding: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             box-shadow: 0 14px 30px rgba(0,0,0,0.3);
         }
 
-        .college-video-wrapper iframe {
+        /* Ratio box: tinggi dijamin oleh padding, bukan oleh iframe.
+           Cara ini tidak bisa collapse di Android WebView. */
+        .video-frame {
+            position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
+            padding-top: 56.25%;
             border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
             border: none;
+            display: block;
         }
 
         /* ========================================== */
@@ -1398,6 +1409,50 @@
         }
         footer .foot-links a:hover { color: var(--accent); }
 
+        /* ========================================== */
+        /* BAR NAVIGASI SCROLL (KHUSUS HP)            */
+        /* ========================================== */
+        .scroll-nav {
+            position: fixed;
+            right: 12px;
+            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            z-index: 950;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 100px;
+            background: rgba(18, 18, 21, 0.38);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+            opacity: 0.55;
+            transition: opacity 0.4s var(--ease);
+        }
+        .scroll-nav.awake { opacity: 1; }
+
+        .scroll-nav button {
+            width: 54px;
+            height: 58px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: background 0.16s var(--ease), color 0.16s var(--ease);
+        }
+        .scroll-nav button svg { width: 23px; height: 23px; }
+        .scroll-nav button:active,
+        .scroll-nav button.hit {
+            background: var(--accent);
+            color: #000;
+        }
+        .scroll-nav button:disabled { opacity: 0.28; pointer-events: none; }
+        .scroll-nav .sn-div { width: 26px; height: 1px; background: rgba(255, 255, 255, 0.14); }
+
         #to-top {
             position: fixed;
             right: 22px;
@@ -1437,8 +1492,9 @@
             section { padding: 66px 22px; }
             .hero-overlay-box { padding: 34px 24px 32px; border-radius: 18px; }
             .hero-actions .btn { width: 100%; }
-            .college-video-wrapper { flex: 1 1 100%; }
-            .college-layout .project-card { max-width: 100%; }
+            .college-layout { flex-direction: column; }
+            .college-layout .project-card { max-width: 100%; flex: 0 0 auto; }
+            .college-video-wrapper { flex: 0 0 auto; width: 100%; padding: 12px; }
             #coming-soon .model-container { height: 52vh; min-height: 340px; }
             .technical-showcase-container { flex-direction: column; padding: 16px; min-height: 0; }
             .technical-sidebar { width: 100%; }
@@ -1451,6 +1507,8 @@
             }
             .sidebar-item { flex: 0 0 82%; scroll-snap-align: start; }
             .quick-facts div { flex: 1 1 calc(50% - 12px); min-width: 0; }
+            .scroll-nav { display: flex; }
+            #to-top { display: none; }
         }
 
         @media (max-width: 560px) {
@@ -1643,7 +1701,9 @@
                 </div>
             </div>
             <div class="college-video-wrapper">
-                <iframe src="https://www.youtube.com/embed/snPK9X9Hn5M?autoplay=1&mute=1&loop=1&playlist=snPK9X9Hn5M" title="Fashion show Politeknik ATK 2023" allow="autoplay; encrypted-media" loading="lazy" allowfullscreen></iframe>
+                <div class="video-frame">
+                    <iframe src="https://www.youtube.com/embed/snPK9X9Hn5M?autoplay=1&mute=1&loop=1&playlist=snPK9X9Hn5M" title="Fashion show Politeknik ATK 2023" allow="autoplay; encrypted-media" loading="lazy" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -2077,6 +2137,16 @@
         <p>&copy; 2026 Garin Nata Kusuma. All rights reserved.</p>
     </footer>
 
+    <nav class="scroll-nav" id="scrollNav" aria-label="Section navigation">
+        <button type="button" data-dir="up" aria-label="Previous section">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>
+        </button>
+        <span class="sn-div"></span>
+        <button type="button" data-dir="down" aria-label="Next section">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+    </nav>
+
     <button id="to-top" aria-label="Back to top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     </button>
@@ -2100,6 +2170,7 @@
             nav.classList.toggle('scrolled', y > 20);
             progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
             toTop.classList.toggle('show', y > 700);
+            wake();
             ticking = false;
         }
         window.addEventListener('scroll', function () {
@@ -2110,6 +2181,60 @@
         toTop.addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
         });
+
+        /* ---------- BAR NAVIGASI SCROLL (HP) ---------- */
+        var scrollNav = document.getElementById('scrollNav');
+        var sectionIds = ['home', 'about', 'college', 'footwear', 'coming-soon', 'technical', 'skills', 'contact'];
+        var awakeTimer = null;
+
+        function wake() {
+            if (!scrollNav) return;
+            scrollNav.classList.add('awake');
+            clearTimeout(awakeTimer);
+            awakeTimer = setTimeout(function () { scrollNav.classList.remove('awake'); }, 1600);
+        }
+
+        function sectionOffsets() {
+            var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+            var tops = [];
+            sectionIds.forEach(function (id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                tops.push(Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY - navH)));
+            });
+            return tops.sort(function (a, b) { return a - b; });
+        }
+
+        if (scrollNav) {
+            scrollNav.addEventListener('click', function (e) {
+                var btn = e.target.closest('button[data-dir]');
+                if (!btn) return;
+
+                btn.classList.add('hit');
+                setTimeout(function () { btn.classList.remove('hit'); }, 260);
+                wake();
+
+                var tops = sectionOffsets();
+                var y = window.scrollY;
+                var target;
+
+                if (btn.getAttribute('data-dir') === 'down') {
+                    for (var i = 0; i < tops.length; i++) {
+                        if (tops[i] > y + 12) { target = tops[i]; break; }
+                    }
+                    if (target === undefined) {
+                        target = document.documentElement.scrollHeight - window.innerHeight;
+                    }
+                } else {
+                    target = 0;
+                    for (var j = 0; j < tops.length; j++) {
+                        if (tops[j] < y - 12) { target = tops[j]; }
+                    }
+                }
+
+                window.scrollTo({ top: target, behavior: reduceMotion ? 'auto' : 'smooth' });
+            });
+        }
 
         /* ---------- MOBILE MENU ---------- */
         var navToggle = document.getElementById('navToggle');
