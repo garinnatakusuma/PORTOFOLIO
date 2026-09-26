@@ -12,7 +12,7 @@
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Garin Nata Kusuma — Footwear Designer & Technical Design Drafter">
-    <meta property="og:description" content="Footwear concepts, technical drafting and manufacturing tooling. 8 design projects, 3D prototypes, and full documentation.">
+    <meta property="og:description" content="Footwear concepts, technical drafting and manufacturing tooling. 9 design projects, 3D prototypes, and full documentation.">
     <meta property="og:url" content="https://garinnatakusuma.github.io/PORTOFOLIO/">
     <meta property="og:image" content="https://garinnatakusuma.github.io/PORTOFOLIO/NETT.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Footwear concepts, technical drafting and manufacturing tooling.">
     <meta name="twitter:image" content="https://garinnatakusuma.github.io/PORTOFOLIO/NETT.png">
 
-    <!-- Favicon inline (tidak perlu file baru) -->
+    <!-- Favicon inline -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f0f11'/><text x='50' y='72' font-size='64' font-family='Arial Black,Arial' font-weight='900' fill='%23ed6e03' text-anchor='middle'>G</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,6 +73,9 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Helper class for locking scroll when modal is open */
+        body.modal-open { overflow: hidden; }
+
         h1, h2, h3, h4, .logo, .btn { font-family: var(--font-display); }
 
         a { text-decoration: none; color: inherit; transition: 0.3s var(--ease); }
@@ -81,7 +84,7 @@
 
         ::selection { background: var(--accent); color: #000; }
 
-        /* Fokus keyboard terlihat (aksesibilitas) */
+        /* Fokus keyboard */
         a:focus-visible,
         button:focus-visible,
         [tabindex]:focus-visible {
@@ -129,7 +132,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
 
-        /* Indikator progres baca */
         .nav-progress {
             position: absolute;
             left: 0; bottom: -1px;
@@ -178,7 +180,6 @@
             padding: 4px 0;
         }
 
-        /* Garis bawah aktif / hover */
         .nav-item > a::after {
             content: "";
             position: absolute;
@@ -256,7 +257,6 @@
         }
         .mega-link:hover img { transform: scale(1.08) rotate(-3deg); }
 
-        /* Tombol hamburger */
         .nav-toggle {
             display: none;
             width: 42px; height: 42px;
@@ -280,7 +280,6 @@
         .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
         .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-        /* Drawer mobile */
         .mobile-menu {
             position: fixed;
             top: var(--nav-h);
@@ -374,7 +373,6 @@
             box-shadow: 0 30px 70px rgba(0,0,0,0.5);
         }
 
-        /* Badge status ketersediaan kerja */
         .status-pill {
             display: inline-flex;
             align-items: center;
@@ -450,7 +448,6 @@
             100% { transform: scale(1.7) translateY(-24px); filter: brightness(3) blur(14px); opacity: 0; }
         }
 
-        /* Petunjuk scroll */
         .scroll-cue {
             position: absolute;
             bottom: 26px; left: 50%;
@@ -535,7 +532,6 @@
         /* ========================================== */
         /* SECTIONS                                   */
         /* ========================================== */
-        /* Kolom konten terpusat: rapi di layar lebar, tetap pas di HP */
         section {
             padding: 88px clamp(20px, 5vw, 56px);
             scroll-margin-top: var(--nav-h);
@@ -610,7 +606,6 @@
             padding: 5px 12px; border-radius: 100px;
         }
 
-        /* Fakta ringkas */
         .quick-facts {
             display: flex;
             flex-wrap: wrap;
@@ -657,8 +652,6 @@
             box-shadow: 0 14px 30px rgba(0,0,0,0.3);
         }
 
-        /* Ratio box: tinggi dijamin oleh padding, bukan oleh iframe.
-           Cara ini tidak bisa collapse di Android WebView. */
         .video-frame {
             position: relative;
             width: 100%;
@@ -830,7 +823,6 @@
 
         .swiper-slide { height: auto; }
 
-        /* Panah: tombol bulat, TIDAK lagi menutupi kartu */
         .mySwiper .swiper-button-next,
         .mySwiper .swiper-button-prev {
             width: 46px !important;
@@ -862,7 +854,6 @@
         }
         .mySwiper .swiper-button-disabled { opacity: 0.25 !important; }
 
-        /* Meter posisi slide */
         .slider-meta {
             display: flex;
             align-items: center;
@@ -908,7 +899,6 @@
         /* ========================================== */
         /* 3D VIEWER                                  */
         /* ========================================== */
-        /* Penanda permanen: ini model 3D */
         .viewer-badge {
             position: absolute;
             top: 14px;
@@ -967,7 +957,6 @@
             padding-left: 11px;
         }
 
-        /* Setelah pengguna memutar model, hint meredup tapi tidak hilang */
         .interactive-hint.dim { opacity: 0.4; animation: none; }
         .model-container:hover .interactive-hint.dim,
         .technical-3d-viewport:hover .interactive-hint.dim { opacity: 1; }
@@ -1476,6 +1465,87 @@
         #to-top svg { width: 19px; height: 19px; }
 
         /* ========================================== */
+        /* MODAL POP-UP (GOOGLE DRIVE PREVIEW)        */
+        /* ========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(10, 10, 12, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s var(--ease);
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-container {
+            width: 90vw;
+            height: 90vh;
+            max-width: 1400px;
+            background: var(--bg-color);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+            transform: translateY(20px);
+            transition: 0.3s var(--ease);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: grid;
+            place-items: center;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .modal-close:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        .modal-close svg { width: 22px; height: 22px; }
+        #gdrive-iframe {
+            width: 100%; height: 100%;
+            border: none;
+            position: relative;
+            z-index: 5;
+            background: transparent;
+        }
+        .modal-loader {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            color: var(--accent);
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        /* ========================================== */
         /* RESPONSIVE                                 */
         /* ========================================== */
         @media (max-width: 1100px) {
@@ -1509,6 +1579,13 @@
             .quick-facts div { flex: 1 1 calc(50% - 12px); min-width: 0; }
             .scroll-nav { display: flex; }
             #to-top { display: none; }
+            
+            /* Responsive Modal HP: Fullscreen 100% */
+            .modal-container {
+                width: 100vw; height: 100vh;
+                border-radius: 0; border: none;
+            }
+            .modal-close { top: 20px; right: 20px; background: rgba(0,0,0,0.8); }
         }
 
         @media (max-width: 560px) {
@@ -1588,6 +1665,11 @@
                         <img src="NETT.png" alt="Nett" loading="lazy" decoding="async">
                         <span>Nett</span>
                     </a>
+                    <!-- TAMBAHAN MEGA MENU UNTUK NOTHING -->
+                    <a href="#footwear" class="mega-link" data-slide="8">
+                        <img src="NOTHING.png" alt="Nothing" loading="lazy" decoding="async">
+                        <span>Nothing</span>
+                    </a>
                 </div>
             </li>
 
@@ -1613,7 +1695,7 @@
         <a href="#skills">Skills <span>06</span></a>
         <a href="#contact">Contact <span>07</span></a>
         <div class="m-cta">
-            <a href="https://drive.google.com/file/d/1s5cpCPy2c5BgUktLitF0pvAgWWmPxIJf/view?usp=drive_link" target="_blank" rel="noopener" class="btn">CV</a>
+            <a href="https://drive.google.com/file/d/1s5cpCPy2c5BgUktLitF0pvAgWWmPxIJf/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">CV</a>
             <a href="mailto:garinkusuma.design@gmail.com" class="btn btn-ghost">Email me</a>
         </div>
     </div>
@@ -1641,7 +1723,7 @@
                     View my work
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </a>
-                <a href="https://drive.google.com/file/d/1s5cpCPy2c5BgUktLitF0pvAgWWmPxIJf/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-ghost">
+                <a href="https://drive.google.com/file/d/1s5cpCPy2c5BgUktLitF0pvAgWWmPxIJf/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-ghost open-gdrive">
                     Download CV
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
                 </a>
@@ -1660,7 +1742,7 @@
 
                 <div class="quick-facts">
                     <div><strong>4+</strong><small>Years designing footwear</small></div>
-                    <div><strong>8</strong><small>Documented design projects</small></div>
+                    <div><strong>9</strong><small>Documented design projects</small></div>
                     <div><strong>3D</strong><small>Rhino, NanoCAD, Delcam</small></div>
                     <div><strong>2024</strong><small>Graduated, Politeknik ATK</small></div>
                 </div>
@@ -1696,7 +1778,8 @@
                     </div>
                     <p class="card-note">Includes story writing, moodboard, technical pattern making (leather &amp; tenun), and full production workflow.</p>
                     <div class="btn-wrapper">
-                        <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
+                        <!-- Tambahkan class open-gdrive agar pop-up berfungsi di sini juga -->
+                        <a href="https://drive.google.com/file/d/1ayRnCYfWdU4qhIyEZn7vexYHYVdrLDAZ/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                     </div>
                 </div>
             </div>
@@ -1710,7 +1793,7 @@
 
     <section id="footwear" style="background-color: var(--bg-soft);" class="fade-in-section">
         <h2 class="section-title">Footwear concept &amp; design</h2>
-        <p class="section-lead">Eight projects, each with its own narrative, technical drawings and material specifications. Open any card for the full documentation.</p>
+        <p class="section-lead">Nine projects, each with its own narrative, technical drawings and material specifications. Open any card for the full documentation.</p>
 
         <div class="swipe-hint">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 4 12l4 5M16 7l4 5-4 5"/></svg>
@@ -1721,6 +1804,7 @@
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
 
+                    <!-- SLIDE 1 -->
                     <div class="swiper-slide">
                         <article class="project-card">
                             <div class="img-container">
@@ -1736,12 +1820,13 @@
                                 </div>
                                 <p class="card-note">Includes technical drawing, material specs &amp; R&amp;D process.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
+                                    <a href="https://drive.google.com/file/d/1GDbGczJ-E2OTc7XHX0_d18arYjNflY68/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                                 </div>
                             </div>
                         </article>
                     </div>
 
+                    <!-- SLIDE 2 -->
                     <div class="swiper-slide">
                         <article class="project-card">
                             <div class="img-container">
@@ -1757,12 +1842,13 @@
                                 </div>
                                 <p class="card-note">Includes technical drawing, performance testing &amp; R&amp;D process.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
+                                    <a href="https://drive.google.com/file/d/1vYXgyNziEKTYX_--4tZXASm0lYEMOk2K/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                                 </div>
                             </div>
                         </article>
                     </div>
 
+                    <!-- SLIDE 3 -->
                     <div class="swiper-slide">
                         <article class="project-card">
                             <div class="img-container">
@@ -1778,12 +1864,13 @@
                                 </div>
                                 <p class="card-note">Includes 2D/3D design process, riot-inspired moodboards &amp; meaning analysis.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
+                                    <a href="https://drive.google.com/file/d/1eip6EOxOLehpZ1GeHfPs8fF7VgNCyfJW/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                                 </div>
                             </div>
                         </article>
                     </div>
 
+                    <!-- SLIDE 4 -->
                     <div class="swiper-slide">
                         <article class="project-card">
                             <div class="img-container">
@@ -1799,12 +1886,13 @@
                                 </div>
                                 <p class="card-note">Includes concept explanation, visual development &amp; technical specifications.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
+                                    <a href="https://drive.google.com/file/d/1E1vJ7efdogI1ziSwUHFFvqjoLZa2Q0b4/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                                 </div>
                             </div>
                         </article>
                     </div>
 
+                    <!-- SLIDE 5 -->
                     <div class="swiper-slide">
                         <article class="project-card">
                             <div class="img-container">
@@ -1821,12 +1909,13 @@
                                 </div>
                                 <p class="card-note">Includes IFCC design board, technical material specifications, 3D rendering by Vizcom.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View submission</a>
+                                    <a href="https://drive.google.com/file/d/1Qx5EBEXw87A5eFudQK9mMKDEuGRR6jJP/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View submission</a>
                                 </div>
                             </div>
                         </article>
                     </div>
 
+                    <!-- SLIDE 6 -->
                     <div class="swiper-slide">
                         <article class="project-card">
                             <div class="img-container">
@@ -1842,12 +1931,13 @@
                                 </div>
                                 <p class="card-note">Includes storytelling, technical specs &amp; colorway archive.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" target="_blank" rel="noopener" class="btn">View details</a>
+                                    <a href="https://drive.google.com/file/d/17Zia4A_It31-PVhQDpWgCrQyEErDPOXi/view?usp=sharing" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                                 </div>
                             </div>
                         </article>
                     </div>
 
+                    <!-- SLIDE 7 -->
                     <div class="swiper-slide">
                         <article class="project-card">
                             <div class="img-container">
@@ -1863,15 +1953,15 @@
                                 </div>
                                 <p class="card-note">Includes dystopian narrative, speculative materials (artificial moss, CH leather) &amp; visual concept.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/15VfwET1Qssd2gBiNQ5WzKHazwj1jBqcR/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
+                                    <a href="https://drive.google.com/file/d/15VfwET1Qssd2gBiNQ5WzKHazwj1jBqcR/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                                 </div>
                             </div>
                         </article>
                     </div>
 
+                    <!-- SLIDE 8 -->
                     <div class="swiper-slide">
                         <article class="project-card">
-                            <span class="badge-new">New</span>
                             <div class="img-container">
                                 <img src="NETT.png" alt="Nett — tennis performance silhouette" loading="lazy" decoding="async">
                             </div>
@@ -1885,7 +1975,30 @@
                                 </div>
                                 <p class="card-note">Includes storytelling narrative, validation logs &amp; visual development.</p>
                                 <div class="btn-wrapper">
-                                    <a href="https://drive.google.com/file/d/1U3m9BnDxirXK-WiIXHjjk5UnwH3CflwX/view?usp=drive_link" target="_blank" rel="noopener" class="btn">View details</a>
+                                    <a href="https://drive.google.com/file/d/1U3m9BnDxirXK-WiIXHjjk5UnwH3CflwX/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- SLIDE 9: NOTHING (NEW) -->
+                    <div class="swiper-slide">
+                        <article class="project-card">
+                            <span class="badge-new">New</span>
+                            <div class="img-container">
+                                <img src="NOTHING.png" alt="Nothing — structural nihilism concept" loading="lazy" decoding="async">
+                            </div>
+                            <div class="card-content">
+                                <h3><span class="idx">09</span> Nothing</h3>
+                                <p class="desc"><strong>The "Structural Nihilism" concept.</strong> A paradoxical exploration of mass and void. In an era obsessed with adding material, this silhouette finds strength in absence. It brutally contrasts a hyper-layered upper—representing modern urban noise—with a monolithic bottom unit defined by its negative space. The massive hollow tunnels act as a mechanical suspension system engineered to compress, absorb harsh impacts, and propel the wearer forward.</p>
+                                <div class="tags">
+                                    <span class="tag">Lifestyle</span>
+                                    <span class="tag">3D construction</span>
+                                    <span class="tag">2D vector</span>
+                                </div>
+                                <p class="card-note">Includes 3D construction, 2D vector detailing, and structural analysis.</p>
+                                <div class="btn-wrapper">
+                                    <a href="https://drive.google.com/file/d/1pkYz0IeHx8IfsYzy7hLn7_SRdjqHa2B8/view?usp=drive_link" target="_blank" rel="noopener" class="btn open-gdrive">View details</a>
                                 </div>
                             </div>
                         </article>
@@ -1898,7 +2011,8 @@
 
             <div class="slider-meta">
                 <div class="slider-track"><i id="fwProgress"></i></div>
-                <div class="slider-count" id="fwCount"><b>01</b> / 08</div>
+                <!-- Otomatis diatur JS menjadi 01 / 09 -->
+                <div class="slider-count" id="fwCount"><b>01</b> / 09</div>
             </div>
         </div>
     </section>
@@ -2051,7 +2165,7 @@
                     <p style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 12px; font-style: italic;">
                         Drag the model to rotate. Use the arrows or the list above to change perspective.
                     </p>
-                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" rel="noopener" id="tech-spec-btn" class="btn" style="padding: 11px 14px; font-size: 0.8rem; width: 100%;">View technical specs</a>
+                    <a href="https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link" target="_blank" rel="noopener" id="tech-spec-btn" class="btn open-gdrive" style="padding: 11px 14px; font-size: 0.8rem; width: 100%;">View technical specs</a>
                 </div>
             </div>
         </div>
@@ -2107,7 +2221,7 @@
                 Email me
             </a>
 
-            <a href="https://drive.google.com/file/d/1s5cpCPy2c5BgUktLitF0pvAgWWmPxIJf/view?usp=drive_link" target="_blank" rel="noopener" class="btn">
+            <a href="https://drive.google.com/file/d/1s5cpCPy2c5BgUktLitF0pvAgWWmPxIJf/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-ghost open-gdrive">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
                 Download CV
             </a>
@@ -2150,6 +2264,23 @@
     <button id="to-top" aria-label="Back to top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     </button>
+
+    <!-- ========================================== -->
+    <!-- MODAL POP-UP GOOGLE DRIVE PREVIEW          -->
+    <!-- ========================================== -->
+    <div id="gdrive-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-container">
+            <button class="modal-close" id="modal-close-btn" aria-label="Close popup">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-loader">
+                <div class="loading-spinner"></div>
+                <p>Loading document...</p>
+            </div>
+            <!-- Iframe akan diinjeksi link-nya oleh JavaScript -->
+            <iframe id="gdrive-iframe" src="" allow="autoplay" allowfullscreen></iframe>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -2249,7 +2380,7 @@
             setMenu(!mobileMenu.classList.contains('open'));
         });
         mobileMenu.addEventListener('click', function (e) {
-            if (e.target.closest('a')) setMenu(false);
+            if (e.target.closest('a') && !e.target.closest('.open-gdrive')) setMenu(false);
         });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') setMenu(false);
@@ -2273,13 +2404,11 @@
             if (el) spy.observe(el);
         });
 
-        /* ---------- REVEAL ON SCROLL (sekali saja, tidak flicker) ---------- */
+        /* ---------- REVEAL ON SCROLL ---------- */
         var sections = document.querySelectorAll('.fade-in-section');
         if (reduceMotion || !('IntersectionObserver' in window)) {
             sections.forEach(function (s) { s.classList.add('is-visible'); });
         } else {
-            /* Muncul saat masuk layar, mengabur lagi saat benar-benar keluar layar.
-               Dua ambang berbeda supaya tidak berkedip di tengah scroll. */
             var revealer = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     if (entry.intersectionRatio >= 0.08) {
@@ -2367,10 +2496,12 @@
                         specBtn.href = 'https://drive.google.com/file/d/1wZpW4rh-BPwwWckIPN_IR2xSggUw1wv4/view?usp=drive_link';
                         specBtn.innerText = 'View technical specs';
                         specBtn.classList.remove('disabled');
+                        specBtn.classList.add('open-gdrive'); // Pastikan pop-up berfungsi kembali
                     } else {
                         specBtn.removeAttribute('href');
                         specBtn.innerText = 'Specs coming soon';
                         specBtn.classList.add('disabled');
+                        specBtn.classList.remove('open-gdrive');
                     }
                 }
             }
@@ -2419,7 +2550,7 @@
             });
         }
 
-        /* ---------- HERO: animasi tali sepatu (berhenti saat di luar layar) ---------- */
+        /* ---------- HERO: animasi tali sepatu ---------- */
         var canvas = document.getElementById('laces-svg');
         var heroSection = document.getElementById('home');
         if (canvas && heroSection && !reduceMotion) {
@@ -2505,6 +2636,59 @@
             }, { threshold: 0 });
             heroObs.observe(heroSection);
         }
+
+        /* ========================================== */
+        /* SCRIPT MODAL POP-UP GOOGLE DRIVE PREVIEW   */
+        /* ========================================== */
+        var modal = document.getElementById('gdrive-modal');
+        var iframe = document.getElementById('gdrive-iframe');
+        var closeBtn = document.getElementById('modal-close-btn');
+
+        // Menangkap semua tombol dengan class .open-gdrive
+        document.querySelectorAll('.open-gdrive').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Mencegah buka tab baru
+
+                // Ambil URL Google Drive-nya
+                var originalUrl = this.href;
+                
+                // Ubah format URL dari ".../view?usp=sharing" menjadi ".../preview"
+                // Ini WAJIB agar Google Drive bisa di-embed ke dalam iframe
+                var previewUrl = originalUrl.replace(/\/view\?.*$/, '/preview');
+                
+                // Masukkan URL ke iframe dan tampilkan modal
+                iframe.src = previewUrl;
+                modal.classList.add('active');
+                
+                // Kunci scroll halaman belakang
+                document.body.classList.add('modal-open');
+            });
+        });
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            modal.classList.remove('active');
+            // Hapus source iframe agar tidak memberatkan memori di belakang layar
+            setTimeout(function() { iframe.src = ''; }, 300);
+            
+            // Buka kunci scroll halaman belakang
+            document.body.classList.remove('modal-open');
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        
+        // Tutup saat area gelap/luar diklik
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+        });
+        
+        // Tutup saat tombol ESC ditekan
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
     })();
     </script>
 </body>
