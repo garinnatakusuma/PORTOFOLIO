@@ -1283,6 +1283,21 @@
         }
 
         .tech-tags { margin-top: 9px; display: flex; gap: 5px; flex-wrap: wrap; }
+        .tech-tags .tag {
+            background: rgba(237, 110, 3, 0.14);
+            color: var(--accent);
+            border: 1px solid rgba(237, 110, 3, 0.3);
+            font-size: 0.66rem;
+            padding: 3px 8px;
+            font-weight: 600;
+            transition: all 0.3s var(--ease);
+        }
+        .tech-tags .tag:hover {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(237, 110, 3, 0.2);
+        }
 
         .title-marina-label {
             font-size: 1.15rem !important;
@@ -1344,7 +1359,6 @@
         .skill-icon svg { width: 20px; height: 20px; }
         .skill-box h4 { font-size: 1.02rem; margin-bottom: 14px; }
         
-        /* EFEK HOVER KOTAK KECIL CHIPS DI SKILLS */
         .skill-box .chips { display: flex; flex-wrap: wrap; gap: 7px; }
         .skill-box .chips span {
             font-size: 0.78rem;
@@ -1487,7 +1501,7 @@
         #to-top svg { width: 19px; height: 19px; }
 
         /* ========================================== */
-        /* MODAL POP-UP (GOOGLE DRIVE PREVIEW)        */
+        /* MODAL POP-UP GOOGLE DRIVE PREVIEW          */
         /* ========================================== */
         .modal-overlay {
             position: fixed; top: 0; left: 0;
@@ -1502,7 +1516,7 @@
         
         .modal-container {
             width: 100%; height: 100%; max-width: 1400px;
-            background: var(--bg-color); border-radius: 12px;
+            background: #0f0f11; border-radius: 12px;
             display: flex; flex-direction: column;
             overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.8);
             transform: translateY(20px); transition: 0.3s var(--ease);
@@ -1510,7 +1524,6 @@
         }
         .modal-overlay.active .modal-container { transform: translateY(0); }
 
-        /* HEADER POP-UP BARU (Mencegah tombol menumpuk) */
         .modal-topbar {
             display: flex; justify-content: flex-end; align-items: center; gap: 12px;
             padding: 10px 16px; background: rgba(18, 18, 21, 0.95);
@@ -1537,9 +1550,26 @@
             flex: 1; position: relative; background: #0f0f11;
         }
 
+        /* Animasi Loader dapat di-hide lewat class */
+        .modal-loader {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            background: #0f0f11;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         #gdrive-iframe {
             width: 100%; height: 100%; border: none;
-            position: relative; z-index: 5; background: transparent;
+            position: relative; z-index: 5; background: #0f0f11;
         }
 
         /* ========================================== */
@@ -2261,7 +2291,7 @@
     <!-- ========================================== -->
     <div id="gdrive-modal" class="modal-overlay" aria-hidden="true">
         <div class="modal-container" id="modal-container-fs">
-            <!-- HEADER BARU: Mencegah tombol numpuk -->
+            <!-- HEADER: Mencegah tombol numpuk -->
             <div class="modal-topbar">
                 <div class="modal-title-bar">Document Viewer</div>
                 <button class="modal-btn" id="modal-fs-btn" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
@@ -2269,7 +2299,8 @@
             </div>
             
             <div class="modal-body">
-                <div class="modal-loader">
+                <!-- ID modal-loader dipasang untuk JS -->
+                <div class="modal-loader hidden" id="modal-loader">
                     <div class="loading-spinner"></div>
                     <p>Loading document...</p>
                 </div>
@@ -2642,6 +2673,7 @@
         var closeBtn = document.getElementById('modal-close-btn');
         var modalFsBtn = document.getElementById('modal-fs-btn');
         var modalContainerFs = document.getElementById('modal-container-fs');
+        var modalLoader = document.getElementById('modal-loader');
 
         document.querySelectorAll('.open-gdrive').forEach(function (link) {
             link.addEventListener('click', function (e) {
@@ -2649,15 +2681,28 @@
                 var originalUrl = this.href;
                 var previewUrl = originalUrl.replace(/\/view\?.*$/, '/preview');
                 
+                // Pastikan loading muncul setiap kali tombol ditekan
+                modalLoader.classList.remove('hidden');
+                
                 iframe.src = previewUrl;
                 modal.classList.add('active');
                 document.body.classList.add('modal-open');
             });
         });
 
+        // Menghilangkan UI Loading setelah iframe Google Drive sepenuhnya ter-load
+        iframe.addEventListener('load', function() {
+            if(iframe.src && iframe.src !== window.location.href) {
+                modalLoader.classList.add('hidden');
+            }
+        });
+
         function closeModal() {
             modal.classList.remove('active');
-            setTimeout(function() { iframe.src = ''; }, 300);
+            setTimeout(function() { 
+                iframe.src = ''; 
+                modalLoader.classList.add('hidden'); // Reset loader untuk next open
+            }, 300);
             document.body.classList.remove('modal-open');
             
             // Exit fullscreen if modal is closed while in fullscreen
