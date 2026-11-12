@@ -10,7 +10,7 @@
   <meta property="og:title" content="Garin Nata Kusuma — Footwear Design & Engineering" />
   <meta property="og:description" content="Turning narratives into functional footwear — from concept development to technical design and manufacturing." />
   <meta property="og:url" content="https://garinnatakusuma.github.io/PORTOFOLIO/" />
-  <meta property="og:image" content="https://garinnatakusuma.github.io/PORTOFOLIO/NETT.png" />
+  <meta property="og:image" content="https://garinnatakusuma.github.io/PORTOFOLIO/HERO_IFCC.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Garin Nata Kusuma — Footwear Design & Engineering</title>
 
@@ -368,10 +368,138 @@
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       [data-reveal] { opacity: 1; transform: none; filter: none; }
     }
+
+
+    /* Global ambient particle field: adaptive across the full page */
+    :root { --particle-rgb: 237,110,3; --particle-alt-rgb: 255,232,207; }
+    .light, .projects-section, .process-section { --particle-rgb: 185,78,0; --particle-alt-rgb: 92,115,83; }
+    .college-section, .technical-section, .skills-section { --particle-rgb: 237,110,3; --particle-alt-rgb: 228,218,205; }
+    .contact-section { --particle-rgb: 56,28,10; --particle-alt-rgb: 255,244,229; }
+    .ambient-particles { position: fixed; inset: 0; z-index: 4; width: 100%; height: 100%; pointer-events: none; opacity: .57; mix-blend-mode: screen; }
+    .hero-shoe-wrap { width: min(100%, 500px); height: 450px; }
+
+    /* Consistent micro-interactions */
+    a, button { -webkit-tap-highlight-color: transparent; }
+    .button, .nav-cv, .filter-btn, .model-tab, .project-link, .contact-action, .footer-links a, .mobile-panel a, .tag, .chips span { transition-timing-function: var(--ease); }
+    .button:active, .filter-btn:active, .model-tab:active, .fullscreen-btn:active, .menu-toggle:active { transform: scale(.97); }
+    .button-primary:hover { box-shadow: 0 12px 34px rgba(237,110,3,.32), 0 0 0 4px rgba(237,110,3,.09); }
+    .button-outline:hover, .nav-cv:hover { box-shadow: 0 0 22px rgba(237,110,3,.12); }
+    .tag, .chips span { transition: color .25s, border-color .25s, background .25s, transform .25s; }
+    .tag:hover, .chips span:hover { color: var(--orange); border-color: rgba(237,110,3,.55); background: rgba(237,110,3,.07); transform: translateY(-2px); }
+    .project-card { transform-style: preserve-3d; }
+    .project-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(360px circle at var(--mx,50%) var(--my,50%), rgba(237,110,3,.09), transparent 62%); transition: opacity .35s; }
+    .project-card:hover::after { opacity: 1; }
+    .project-info, .project-art { position: relative; z-index: 1; }
+    .project-card:hover .project-info h3 { color: var(--orange-deep); }
+    .footer-links a, .contact-action { transition: color .25s, padding .25s, border-color .25s; }
+    .scroll-cue { position: relative; padding: 9px 14px 9px 10px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; background: rgba(10,10,12,.58); color: #fff; font: 700 .68rem var(--mono); letter-spacing: .08em; box-shadow: 0 0 0 4px rgba(237,110,3,.08), 0 8px 24px rgba(0,0,0,.25); transition: border-color .25s, background .25s, transform .25s, box-shadow .25s; }
+    .scroll-cue:hover { color: #fff; border-color: var(--orange); background: rgba(237,110,3,.19); transform: translateY(-3px); box-shadow: 0 0 0 5px rgba(237,110,3,.11), 0 12px 30px rgba(0,0,0,.3); }
+    .scroll-cue i { width: 22px; height: 32px; flex: 0 0 22px; border: 1.7px solid rgba(255,255,255,.8); }
+    .scroll-cue i::after { left: 8px; width: 4px; height: 7px; }
+    .scroll-cue b { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; color: #111; background: var(--orange); font: 900 1rem var(--display); animation: scrollArrow 1.4s ease-in-out infinite; }
+    @keyframes scrollArrow { 0%,100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+
+    /* Full-screen interactive 3D viewers */
+    .model-panel:fullscreen, .coming-model:fullscreen { width: 100vw; height: 100dvh; min-height: 100dvh; max-width: none; border: 0; border-radius: 0; background: radial-gradient(circle at 50% 42%, #302b25, #111113 70%); }
+    .model-panel:fullscreen model-viewer, .coming-model:fullscreen model-viewer { width: 100%; height: 100%; min-height: 100%; }
+    .model-panel:fullscreen .model-topline, .coming-model:fullscreen .coming-model-topline { inset: 22px 24px auto; }
+    .coming-model { isolation: isolate; }
+    .coming-model-topline { position: absolute; z-index: 5; inset: 15px 15px auto; display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
+    .coming-model-topline .fullscreen-btn { pointer-events: auto; }
+    .fullscreen-btn { transition: color .25s, background .25s, border-color .25s, transform .25s, box-shadow .25s; }
+    .fullscreen-btn:hover { border-color: var(--orange); box-shadow: 0 0 24px rgba(237,110,3,.28); transform: translateY(-2px); }
+
+    /* Interactive animated Design Approach */
+    .approach-layout { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(320px,.8fr); gap: 22px; align-items: stretch; }
+    .approach-visual { min-height: 490px; position: relative; overflow: hidden; padding: 23px 24px 17px; border-radius: var(--radius); background: radial-gradient(circle at 48% 48%, #29251f 0%, #19191b 62%, #131315 100%); color: #e9e4dc; border: 1px solid rgba(237,110,3,.26); box-shadow: inset 0 0 75px rgba(237,110,3,.045); }
+    .approach-visual::before { content: ''; position: absolute; width: 330px; height: 330px; border-radius: 50%; border: 1px solid rgba(237,110,3,.12); left: 50%; top: 52%; transform: translate(-50%,-50%); box-shadow: 0 0 0 42px rgba(237,110,3,.025), 0 0 0 84px rgba(237,110,3,.018); pointer-events: none; }
+    .viz-topline, .viz-caption { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 15px; color: #a79d91; font: 500 .61rem var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+    .viz-topline span:last-child { color: var(--orange); }
+    .approach-svg { display: block; width: 100%; height: 390px; margin-top: 12px; overflow: visible; color: #e7dfd4; }
+    .viz-form { transform-origin: center; animation: formBreathe 6s ease-in-out infinite; }
+    .viz-form-detail { animation: dashFlow 13s linear infinite; }
+    .viz-route { opacity: .7; animation: dashFlow 15s linear infinite; }
+    @keyframes dashFlow { to { stroke-dashoffset: -180; } }
+    @keyframes formBreathe { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.01); } }
+    .viz-node { cursor: default; transition: opacity .4s, filter .4s; opacity: .55; }
+    .viz-node > circle:first-child { fill: rgba(237,110,3,.08); stroke: #ed6e03; stroke-width: 1.5; transition: r .35s, fill .35s, stroke-width .35s; }
+    .viz-node .node-core { fill: #f8bb82; filter: url(#vizGlow); }
+    .viz-node text { fill: #b9b1a7; font: 600 10px 'IBM Plex Mono', monospace; letter-spacing: 1px; }
+    .viz-node.is-active { opacity: 1; filter: url(#vizGlow); }
+    .viz-node.is-active > circle:first-child { r: 19px; fill: rgba(237,110,3,.2); stroke-width: 2.2; }
+    .viz-node.is-active text { fill: #ffb579; }
+    .viz-runner { fill: #fff1df; filter: url(#vizGlow); }
+    .viz-center-label text:first-child { fill: #fff2e8; font: 800 13px 'Archivo', sans-serif; letter-spacing: 1.6px; }
+    .viz-center-label text:last-child { fill: #aaa096; font: 500 8px 'IBM Plex Mono', monospace; letter-spacing: 1.2px; }
+    .viz-caption { padding-top: 7px; border-top: 1px solid rgba(255,255,255,.1); color: #8f8880; }
+    .approach-controls { display: flex; flex-direction: column; gap: 15px; }
+    .approach-step-list { display: grid; gap: 8px; }
+    .approach-step { display: grid; grid-template-columns: 34px 1fr 22px; align-items: center; gap: 12px; width: 100%; min-height: 67px; padding: 12px 14px; text-align: left; border: 1px solid rgba(16,16,18,.13); border-radius: 12px; background: rgba(255,255,255,.42); color: var(--ink); cursor: pointer; transition: transform .3s var(--ease), border-color .3s, background .3s, box-shadow .3s; }
+    .approach-step:hover { transform: translateX(4px); border-color: rgba(185,78,0,.42); background: #fffaf3; }
+    .approach-step.active { border-color: rgba(185,78,0,.65); background: #fffdfa; box-shadow: 0 10px 28px rgba(87,60,33,.09), inset 3px 0 0 var(--orange-deep); }
+    .approach-step-no { color: var(--orange-deep); font: 600 .73rem var(--mono); }
+    .approach-step-copy strong { display: block; font: 800 .98rem var(--display); letter-spacing: -.02em; }
+    .approach-step-copy small { display: block; margin-top: 3px; color: #777068; font: 500 .6rem var(--mono); letter-spacing: .035em; }
+    .approach-step-arrow { color: #8b8176; font-size: 1rem; transition: transform .3s, color .3s; }
+    .approach-step.active .approach-step-arrow, .approach-step:hover .approach-step-arrow { color: var(--orange-deep); transform: translate(2px,-2px); }
+    .approach-detail { flex: 1; padding: 22px 23px; border: 1px solid rgba(185,78,0,.19); border-radius: 13px; background: rgba(255,255,255,.28); transition: background .35s, border-color .35s; }
+    .approach-detail-index { color: var(--orange-deep); font: 600 .64rem var(--mono); letter-spacing: .1em; }
+    .approach-detail h3 { margin: 9px 0 7px; font: 800 1.42rem/1.05 var(--display); letter-spacing: -.04em; }
+    .approach-detail p { color: #625c55; font-size: .78rem; line-height: 1.7; }
+
+    /* Embedded Google Drive document modal */
+    .document-viewer { width: min(1180px, calc(100vw - 34px)); height: min(88dvh, 900px); max-width: none; max-height: none; margin: auto; padding: 0; border: 1px solid rgba(237,110,3,.4); border-radius: 18px; color: var(--white); background: #121214; box-shadow: 0 32px 100px rgba(0,0,0,.62); overflow: hidden; }
+    .document-viewer::backdrop { background: rgba(5,5,6,.82); backdrop-filter: blur(12px); }
+    .document-viewer[open] { animation: viewerIn .35s var(--ease) both; }
+    @keyframes viewerIn { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .document-viewer-head { min-height: 76px; padding: 15px 19px 14px 23px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line-dark); background: rgba(27,27,30,.96); }
+    .document-kicker { color: var(--orange); font: 500 .59rem var(--mono); letter-spacing: .12em; }
+    .document-viewer-head h2 { margin-top: 4px; font: 800 1.18rem/1.1 var(--display); letter-spacing: -.025em; }
+    .document-close { flex: 0 0 42px; width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.17); border-radius: 50%; color: white; background: transparent; cursor: pointer; font: 300 1.7rem/1 var(--body); transition: color .25s, background .25s, transform .25s, border-color .25s; }
+    .document-close:hover { color: #111; background: var(--orange); border-color: var(--orange); transform: rotate(90deg); }
+    .document-frame-wrap { height: calc(100% - 126px); background: #080809; }
+    .document-frame-wrap iframe { width: 100%; height: 100%; border: 0; display: block; background: #080809; }
+    .document-viewer-foot { height: 50px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; color: #8d8881; font: 500 .62rem var(--mono); border-top: 1px solid var(--line-dark); }
+    .document-viewer-foot a { color: var(--orange); white-space: nowrap; transition: color .2s; }
+    .document-viewer-foot a:hover { color: #ffb579; }
+
+    @media (max-width: 900px) {
+      .approach-layout { grid-template-columns: 1fr; }
+      .approach-visual { min-height: 420px; }
+      .approach-svg { height: 330px; }
+      .approach-controls { display: grid; grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .ambient-particles { opacity: .42; }
+      .approach-visual { min-height: 350px; padding: 18px 14px 14px; }
+      .approach-svg { height: 265px; margin-top: 14px; }
+      .viz-topline, .viz-caption { font-size: .53rem; }
+      .approach-step { min-height: 62px; }
+      .document-viewer { width: calc(100vw - 14px); height: calc(100dvh - 18px); border-radius: 12px; }
+      .document-viewer-head { min-height: 67px; padding: 12px 12px 12px 16px; }
+      .document-viewer-head h2 { font-size: 1rem; }
+      .document-frame-wrap { height: calc(100% - 119px); }
+      .document-viewer-foot { height: 52px; padding: 0 12px; font-size: .52rem; }
+      .scroll-cue { gap: 8px; font-size: .58rem; }
+      .hero-shoe-wrap { width: min(100%, 370px); height: 350px; }
+    }
+    @media (max-width: 420px) {
+      .approach-svg { height: 220px; }
+      .viz-node text { font-size: 8px; }
+      .document-viewer-foot span { max-width: 56%; line-height: 1.35; }
+      .scroll-cue { padding: 8px 10px 8px 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ambient-particles { opacity: .2; }
+      .viz-form, .viz-form-detail, .viz-route, .scroll-cue b { animation: none !important; }
+      .document-viewer[open] { animation: none; }
+    }
+
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <canvas class="ambient-particles" id="ambientParticles" aria-hidden="true"></canvas>
 
   <nav class="site-nav" id="siteNav" aria-label="Main navigation">
     <a class="brand" href="#home" aria-label="Garin Nata Kusuma home"><span class="brand-mark">G</span><span>GARIN NATA KUSUMA</span></a>
@@ -406,7 +534,6 @@
         <source src="2t2tf2t.mp4" type="video/mp4" />
       </video>
       <div class="hero-shade"></div>
-      <canvas id="particle-canvas" aria-hidden="true"></canvas>
       <div class="wrap hero-grid">
         <div class="hero-copy" data-reveal>
           <div class="availability"><i></i> OPEN TO FULL-TIME ROLES</div>
@@ -422,14 +549,14 @@
         <div class="hero-visual" aria-label="Abstract footwear design visualization" data-reveal>
           <div class="orbit"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span></div>
           <div class="orbit-core"><strong>G.</strong></div>
-          <div class="hero-shoe-wrap"><img src="NETT.png" alt="Nett — Baseline Rally tennis footwear concept" /></div>
-          <div class="hero-featured"><span>FEATURED DESIGN / 08</span><strong>NETT — BASELINE RALLY</strong></div>
+          <div class="hero-shoe-wrap"><img src="HERO_IFCC.png" alt="IFCC trail footwear concept — olive green upper, orange details and rugged black outsole" fetchpriority="high" /></div>
+          <div class="hero-featured"><span>IFCC 2026 / FEATURED ENTRY</span><strong>SCAR FLOW × REISEN</strong></div>
           <span class="orbit-label one">Concept / 3D / Form</span>
           <span class="orbit-label two">Narrative to object</span>
           <span class="orbit-label three">ID — 2026</span>
         </div>
       </div>
-      <div class="wrap hero-bottom"><a class="scroll-cue" href="#about"><i></i> SCROLL TO EXPLORE</a><span>INDEPENDENT DESIGN PRACTICE · INDONESIA</span></div>
+      <div class="wrap hero-bottom"><a class="scroll-cue" href="#about" aria-label="Scroll down to explore the portfolio"><i aria-hidden="true"></i><span>SCROLL TO EXPLORE</span><b aria-hidden="true">↓</b></a><span>INDEPENDENT DESIGN PRACTICE · INDONESIA</span></div>
     </header>
 
     <div class="ticker" aria-label="Areas of practice">
@@ -484,7 +611,7 @@
           </div>
         </article>
         <div class="college-video" data-reveal>
-          <div class="video-frame"><iframe src="https://www.youtube.com/embed/snPK9X9Hn5M?mute=1&loop=1&playlist=snPK9X9Hn5M" title="Politeknik ATK Yogyakarta fashion show 2023" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="video-frame"><iframe class="youtube-autoplay" data-youtube-id="snPK9X9Hn5M" src="about:blank" title="Politeknik ATK Yogyakarta fashion show 2023" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
           <div class="video-caption"><span>POLITEKNIK ATK YOGYAKARTA</span><span>FASHION SHOW / 2023</span></div>
         </div>
       </div>
@@ -556,8 +683,8 @@
         </div>
         <div class="technical-layout" data-reveal>
           <div class="model-panel" id="modelPanel">
-            <div class="model-topline"><span class="model-label" id="modelLabel">3D MODEL / SOLID VIEW</span><button class="fullscreen-btn" id="fullscreenModel" aria-label="Toggle 3D viewer fullscreen">⛶</button></div>
-            <model-viewer id="marinaViewer" src="MARINA3D.glb" alt="Marina heel peg pallet — solid 3D model" camera-controls auto-rotate rotation-per-second="18deg" shadow-intensity="1.2" exposure="1" environment-image="neutral" loading="lazy" interaction-prompt="auto"></model-viewer>
+            <div class="model-topline"><span class="model-label" id="modelLabel">3D MODEL / SOLID VIEW</span><button class="fullscreen-btn" id="fullscreenModel" data-fullscreen-target="modelPanel" aria-label="Open 3D model in fullscreen" title="Fullscreen 3D viewer">⛶</button></div>
+            <model-viewer id="marinaViewer" src="MARINA3D.glb" alt="Marina heel peg pallet — solid 3D model" camera-controls enable-pan shadow-intensity="1.2" exposure="1" environment-image="neutral" loading="lazy" interaction-prompt="none"></model-viewer>
             <span class="model-hint">DRAG TO ROTATE · SCROLL TO ZOOM</span>
           </div>
           <aside class="model-sidebar">
@@ -574,7 +701,7 @@
         </div>
         <div class="coming-grid" data-reveal>
           <div class="coming-copy"><span class="sidebar-kicker">On the drawing board / 02</span><h3>Next chapter.<br /><span style="color:var(--orange)">In development.</span></h3><p>A preview of an upcoming footwear prototype. The 3D model can be rotated to inspect its shape from different angles.</p></div>
-          <div class="coming-model"><model-viewer src="GIRRAFEE.glb" alt="Upcoming clog footwear prototype" camera-controls auto-rotate rotation-per-second="20deg" shadow-intensity="1.4" exposure="1" environment-image="neutral" loading="lazy" interaction-prompt="auto"></model-viewer></div>
+          <div class="coming-model" id="comingModelPanel"><div class="coming-model-topline"><span class="model-label">3D PREVIEW / USER CONTROL</span><button class="fullscreen-btn" data-fullscreen-target="comingModelPanel" aria-label="Open upcoming 3D model in fullscreen" title="Fullscreen 3D viewer">⛶</button></div><model-viewer id="upcomingViewer" src="GIRRAFEE.glb" alt="Upcoming clog footwear prototype" camera-controls enable-pan shadow-intensity="1.4" exposure="1" environment-image="neutral" loading="lazy" interaction-prompt="none"></model-viewer></div>
         </div>
       </div>
     </section>
@@ -585,11 +712,47 @@
           <div><span class="eyebrow">05 / Design approach</span><h2>A narrative becomes<br /><em>a product system.</em></h2></div>
           <p>The portfolio connects the conceptual and technical sides of footwear development. Each stage gives the next one a clear direction.</p>
         </div>
-        <div class="process-grid" data-reveal>
-          <article class="process-step"><span class="num">01 / RESEARCH</span><h3>Observe & collect</h3><p>Look for references in culture, objects, environments, movement, and everyday experiences.</p><div class="process-line"></div></article>
-          <article class="process-step"><span class="num">02 / CONCEPT</span><h3>Build the narrative</h3><p>Translate observations into a design story, moodboard, silhouette direction, and product identity.</p><div class="process-line"></div></article>
-          <article class="process-step"><span class="num">03 / DEVELOPMENT</span><h3>Develop the form</h3><p>Explore proportions, materials, construction, 2D drawings, and 3D footwear models.</p><div class="process-line"></div></article>
-          <article class="process-step"><span class="num">04 / ENGINEERING</span><h3>Prepare to make</h3><p>Develop technical drawings, patterns, tooling concepts, and manufacturing documentation.</p><div class="process-line"></div></article>
+        <div class="approach-layout" data-reveal>
+          <figure class="approach-visual" id="approachVisual" data-stage="research" aria-label="Interactive animated visualization of the footwear design process">
+            <div class="viz-topline"><span>DESIGN SYSTEM / 4 PHASES</span><span id="vizState">01 — RESEARCH INPUT</span></div>
+            <svg class="approach-svg" viewBox="0 0 760 430" role="img" aria-label="A connected footwear form diagram with moving nodes and material pathways">
+              <defs>
+                <pattern id="vizGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="currentColor" stroke-opacity=".09" stroke-width="1"/></pattern>
+                <linearGradient id="vizStroke" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ed6e03"/><stop offset="1" stop-color="#b94e00"/></linearGradient>
+                <filter id="vizGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <rect x="0" y="0" width="760" height="430" fill="url(#vizGrid)"/>
+              <g class="viz-guides" fill="none" stroke="currentColor" stroke-opacity=".18">
+                <circle cx="380" cy="214" r="160" stroke-dasharray="3 8"/>
+                <circle cx="380" cy="214" r="112" stroke-dasharray="2 7"/>
+                <path d="M55 214H705M380 35V395" stroke-dasharray="2 9"/>
+              </g>
+              <path class="viz-route" id="approachRoute" d="M94 270 C155 75 260 65 380 214 S610 350 666 145" fill="none" stroke="url(#vizStroke)" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 10"/>
+              <path class="viz-form" d="M168 255 C205 250 223 225 254 196 C281 171 305 157 335 165 L430 189 C470 198 495 223 525 244 L584 276 C603 287 614 302 607 313 C599 325 570 328 536 327 L250 327 C215 327 185 316 168 297 C157 285 155 267 168 255Z" fill="rgba(237,110,3,.055)" stroke="currentColor" stroke-opacity=".78" stroke-width="2.2"/>
+              <path class="viz-form-detail" d="M254 196 C289 206 326 231 356 259 C380 280 407 291 440 294 M335 165 C350 192 374 219 407 244 M184 287 C260 300 379 306 532 303" fill="none" stroke="#ed6e03" stroke-opacity=".7" stroke-width="1.3" stroke-dasharray="4 6"/>
+              <g class="viz-node" data-node="research"><circle cx="94" cy="270" r="13"/><circle class="node-core" cx="94" cy="270" r="4"/><text x="70" y="302">RESEARCH</text></g>
+              <g class="viz-node" data-node="concept"><circle cx="262" cy="102" r="13"/><circle class="node-core" cx="262" cy="102" r="4"/><text x="236" y="75">CONCEPT</text></g>
+              <g class="viz-node" data-node="development"><circle cx="500" cy="306" r="13"/><circle class="node-core" cx="500" cy="306" r="4"/><text x="466" y="341">DEVELOPMENT</text></g>
+              <g class="viz-node" data-node="engineering"><circle cx="666" cy="145" r="13"/><circle class="node-core" cx="666" cy="145" r="4"/><text x="624" y="117">ENGINEERING</text></g>
+              <circle class="viz-runner runner-one" r="4"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#approachRoute"/></animateMotion></circle>
+              <circle class="viz-runner runner-two" r="2.8"><animateMotion dur="11s" begin="-4s" repeatCount="indefinite"><mpath href="#approachRoute"/></animateMotion></circle>
+              <g class="viz-center-label"><text x="380" y="206" text-anchor="middle">FORM / FUNCTION</text><text x="380" y="226" text-anchor="middle">FOOTWEAR DEVELOPMENT</text></g>
+            </svg>
+            <figcaption class="viz-caption"><span>SELECT A PHASE TO EXPLORE THE SYSTEM</span><span>INTERACTIVE / 01—04</span></figcaption>
+          </figure>
+          <div class="approach-controls">
+            <div class="approach-step-list" role="group" aria-label="Explore the four design approach phases">
+              <button class="approach-step active" type="button" data-stage="research" aria-pressed="true"><span class="approach-step-no">01</span><span class="approach-step-copy"><strong>Observe & collect</strong><small>Research / Inspiration / Inputs</small></span><span class="approach-step-arrow">↗</span></button>
+              <button class="approach-step" type="button" data-stage="concept" aria-pressed="false"><span class="approach-step-no">02</span><span class="approach-step-copy"><strong>Build the narrative</strong><small>Story / Moodboard / Identity</small></span><span class="approach-step-arrow">↗</span></button>
+              <button class="approach-step" type="button" data-stage="development" aria-pressed="false"><span class="approach-step-no">03</span><span class="approach-step-copy"><strong>Develop the form</strong><small>Proportion / Material / 3D</small></span><span class="approach-step-arrow">↗</span></button>
+              <button class="approach-step" type="button" data-stage="engineering" aria-pressed="false"><span class="approach-step-no">04</span><span class="approach-step-copy"><strong>Prepare to make</strong><small>Pattern / Tooling / Production</small></span><span class="approach-step-arrow">↗</span></button>
+            </div>
+            <div class="approach-detail" id="approachDetail" aria-live="polite" aria-atomic="true">
+              <span class="approach-detail-index">01 / RESEARCH</span>
+              <h3>Observe & collect</h3>
+              <p>Look for references in culture, objects, environments, movement, and everyday experiences. The strongest product narratives often begin with details that seem unrelated.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -621,6 +784,15 @@
     </section>
   </main>
 
+  <dialog class="document-viewer" id="documentViewer" aria-labelledby="documentViewerTitle">
+    <div class="document-viewer-head">
+      <div><span class="document-kicker">PORTFOLIO DOCUMENT / INLINE VIEWER</span><h2 id="documentViewerTitle">Project documentation</h2></div>
+      <button class="document-close" id="closeDocumentViewer" type="button" aria-label="Close document viewer">×</button>
+    </div>
+    <div class="document-frame-wrap"><iframe id="documentFrame" src="about:blank" title="Embedded portfolio document preview" allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <div class="document-viewer-foot"><span>Document preview is displayed inside this portfolio.</span><a id="documentExternalLink" href="#" target="_blank" rel="noopener">Open original file ↗</a></div>
+  </dialog>
+
   <footer class="footer">
     <div class="wrap">
       <div class="footer-top"><a class="brand" href="#home"><span class="brand-mark">G</span><span>GARIN NATA KUSUMA</span></a><nav class="footer-links" aria-label="Footer navigation"><a href="#about">About</a><a href="#footwear">Footwear</a><a href="#technical">Technical</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav></div>
@@ -634,14 +806,17 @@
   <script>
     (() => {
       'use strict';
-      const nav = document.getElementById('siteNav');
-      const progress = document.getElementById('navProgress');
-      const backTop = document.getElementById('backTop');
-      const menuToggle = document.getElementById('menuToggle');
-      const mobilePanel = document.getElementById('mobilePanel');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      document.getElementById('year').textContent = new Date().getFullYear();
+      const $ = (selector, root = document) => root.querySelector(selector);
+      const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nav = $('#siteNav');
+      const progress = $('#navProgress');
+      const backTop = $('#backTop');
+      const menuToggle = $('#menuToggle');
+      const mobilePanel = $('#mobilePanel');
+
+      $('#year').textContent = new Date().getFullYear();
 
       // Mobile navigation
       const setMenu = (open) => {
@@ -651,23 +826,27 @@
         menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       };
       menuToggle.addEventListener('click', () => setMenu(!mobilePanel.classList.contains('open')));
-      mobilePanel.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+      $$('.mobile-panel a').forEach(link => link.addEventListener('click', () => setMenu(false)));
       document.addEventListener('keydown', event => { if (event.key === 'Escape') setMenu(false); });
 
-      // Scroll progress, sticky header and back-to-top control
+      // Scroll progress, sticky navigation, and back-to-top state
+      let previousScrollY = window.scrollY;
+      let scrollMomentum = 0;
       const onScroll = () => {
         const scrollable = document.documentElement.scrollHeight - window.innerHeight;
         const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
         progress.style.width = `${Math.min(100, ratio * 100)}%`;
         nav.classList.toggle('scrolled', window.scrollY > 20);
         backTop.classList.toggle('show', window.scrollY > 650);
+        scrollMomentum += Math.max(-24, Math.min(24, window.scrollY - previousScrollY));
+        previousScrollY = window.scrollY;
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
       backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' }));
 
       // Scroll reveal
-      const revealItems = document.querySelectorAll('[data-reveal]');
+      const revealItems = $$('[data-reveal]');
       if (reducedMotion || !('IntersectionObserver' in window)) {
         revealItems.forEach(item => item.classList.add('visible'));
       } else {
@@ -683,8 +862,8 @@
       }
 
       // Active navigation section marker
-      const sectionLinks = [...document.querySelectorAll('.nav-links a')];
-      const navSections = [...document.querySelectorAll('main > section[id], main > header[id]')];
+      const sectionLinks = $$('.nav-links a');
+      const navSections = $$('main > section[id], main > header[id]');
       if ('IntersectionObserver' in window) {
         const sectionObserver = new IntersectionObserver(entries => {
           entries.forEach(entry => {
@@ -696,9 +875,9 @@
       }
 
       // Portfolio project filters
-      const filterButtons = [...document.querySelectorAll('.filter-btn')];
-      const projectCards = [...document.querySelectorAll('.project-card')];
-      const projectCount = document.getElementById('projectCount');
+      const filterButtons = $$('.filter-btn');
+      const projectCards = $$('.project-card');
+      const projectCount = $('#projectCount');
       filterButtons.forEach(button => {
         button.addEventListener('click', () => {
           const filter = button.dataset.filter;
@@ -718,13 +897,22 @@
         });
       });
 
-      // Switch the Marina viewer between solid and exploded GLB files
-      const viewer = document.getElementById('marinaViewer');
-      const modelLabel = document.getElementById('modelLabel');
-      const modelTabs = [...document.querySelectorAll('.model-tab')];
+      // Subtle cursor-following light on project cards
+      projectCards.forEach(card => {
+        card.addEventListener('pointermove', event => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+          card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+        }, { passive: true });
+      });
+
+      // Marina model: switch between solid and exploded GLB assets
+      const marinaViewer = $('#marinaViewer');
+      const modelLabel = $('#modelLabel');
+      const modelTabs = $$('.model-tab');
       modelTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-          if (viewer.getAttribute('src') !== tab.dataset.model) viewer.setAttribute('src', tab.dataset.model);
+          if (marinaViewer.getAttribute('src') !== tab.dataset.model) marinaViewer.setAttribute('src', tab.dataset.model);
           modelLabel.textContent = tab.dataset.label;
           modelTabs.forEach(item => {
             const active = item === tab;
@@ -734,86 +922,291 @@
         });
       });
 
-      // Fullscreen for the main 3D viewport
-      document.getElementById('fullscreenModel').addEventListener('click', async () => {
-        const panel = document.getElementById('modelPanel');
-        try {
-          if (!document.fullscreenElement) await panel.requestFullscreen();
-          else await document.exitFullscreen();
-        } catch (error) {
-          console.warn('Fullscreen is not available in this browser.', error);
-        }
+      // Every 3D asset can enter fullscreen independently. model-viewer keeps orbit, pan and zoom controls.
+      $$('[data-fullscreen-target]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const panel = document.getElementById(button.dataset.fullscreenTarget);
+          if (!panel) return;
+          try {
+            if (document.fullscreenElement === panel) await document.exitFullscreen();
+            else {
+              if (document.fullscreenElement) await document.exitFullscreen();
+              await panel.requestFullscreen();
+            }
+          } catch (error) {
+            console.warn('Fullscreen is not available in this browser.', error);
+          }
+        });
       });
 
-      // Lightweight animated particle network in the hero
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      let canvasWidth = 0;
-      let canvasHeight = 0;
-      let animationFrame = 0;
-      const pointer = { x: -1000, y: -1000 };
+      // Open Google Drive files in an in-page preview dialog instead of navigating away.
+      const docDialog = $('#documentViewer');
+      const docFrame = $('#documentFrame');
+      const docTitle = $('#documentViewerTitle');
+      const docExternal = $('#documentExternalLink');
+      const closeDocButton = $('#closeDocumentViewer');
+      const getDriveFileId = url => {
+        try {
+          const parsed = new URL(url, window.location.href);
+          const pathMatch = parsed.pathname.match(/\/file\/d\/([^/]+)/);
+          return pathMatch ? pathMatch[1] : parsed.searchParams.get('id');
+        } catch { return null; }
+      };
+      const openDocument = (link) => {
+        const fileId = getDriveFileId(link.href);
+        if (!fileId) return false;
+        const cardTitle = link.closest('.project-card')?.querySelector('.project-info h3')?.textContent.trim();
+        const localTitle = link.closest('.college-content')?.querySelector('h3')?.textContent.trim();
+        const label = cardTitle || localTitle || link.textContent.trim() || 'Portfolio document';
+        docTitle.textContent = label;
+        docExternal.href = link.href;
+        docFrame.src = `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview`;
+        if (typeof docDialog.showModal === 'function') docDialog.showModal();
+        else window.open(link.href, '_blank', 'noopener');
+        return true;
+      };
+      document.addEventListener('click', event => {
+        const link = event.target.closest('a[href*="drive.google.com/file/d/"]');
+        if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (openDocument(link)) event.preventDefault();
+      });
+      const closeDocument = () => {
+        if (docDialog.open) docDialog.close();
+      };
+      closeDocButton.addEventListener('click', closeDocument);
+      docDialog.addEventListener('click', event => {
+        if (event.target === docDialog) closeDocument();
+      });
+      docDialog.addEventListener('close', () => { docFrame.src = 'about:blank'; });
 
-      function resizeCanvas() {
-        const rect = canvas.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.7);
-        canvasWidth = rect.width;
-        canvasHeight = rect.height;
-        canvas.width = Math.round(rect.width * dpr);
-        canvas.height = Math.round(rect.height * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.max(28, Math.min(76, Math.round(rect.width / 18)));
-        particles = Array.from({ length: count }, () => ({
-          x: Math.random() * rect.width,
-          y: Math.random() * rect.height,
-          vx: (Math.random() - .5) * .24,
-          vy: (Math.random() - .5) * .24,
-          r: Math.random() * 1.8 + .45,
-          orange: Math.random() > .72
-        }));
+      // Play the YouTube video muted when its section enters view; pause it when the visitor scrolls away.
+      const youtubeFrame = $('.youtube-autoplay');
+      if (youtubeFrame) {
+        const videoId = youtubeFrame.dataset.youtubeId;
+        const youtubeUrl = `https://www.youtube-nocookie.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${videoId}&playsinline=1&controls=1&rel=0`;
+        const sendYouTubeCommand = command => {
+          youtubeFrame.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: command, args: [] }), '*');
+        };
+        let youtubeStarted = false;
+        if ('IntersectionObserver' in window) {
+          const youtubeObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && entry.intersectionRatio >= .35) {
+                if (!youtubeStarted) {
+                  youtubeFrame.src = reducedMotion ? youtubeUrl.replace('autoplay=1', 'autoplay=0') : youtubeUrl;
+                  youtubeStarted = true;
+                } else if (!reducedMotion) sendYouTubeCommand('playVideo');
+              } else if (youtubeStarted) sendYouTubeCommand('pauseVideo');
+            });
+          }, { threshold: [0, .35, .6] });
+          youtubeObserver.observe(youtubeFrame);
+        } else {
+          youtubeFrame.src = youtubeUrl;
+        }
       }
-      function drawParticles() {
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < -5 || p.x > canvasWidth + 5) p.vx *= -1;
-          if (p.y < -5 || p.y > canvasHeight + 5) p.vy *= -1;
-          const dxp = p.x - pointer.x, dyp = p.y - pointer.y;
-          const distp = Math.hypot(dxp, dyp);
-          if (distp < 110 && distp > 0) { p.x += dxp / distp * .22; p.y += dyp / distp * .22; }
-          ctx.beginPath();
-          ctx.fillStyle = p.orange ? 'rgba(237,110,3,.86)' : 'rgba(225,218,208,.52)';
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-          for (let j = i + 1; j < particles.length; j++) {
-            const q = particles[j];
-            const dx = p.x - q.x, dy = p.y - q.y;
-            const distance = Math.hypot(dx, dy);
-            if (distance < 105) {
-              ctx.beginPath();
-              ctx.strokeStyle = `rgba(237,110,3,${(1 - distance / 105) * .17})`;
-              ctx.lineWidth = .65;
-              ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+
+      // Interactive Design Approach: selecting a phase changes the animated system and its explanation.
+      const approachVisual = $('#approachVisual');
+      const approachDetail = $('#approachDetail');
+      const vizState = $('#vizState');
+      const approachSteps = $$('.approach-step');
+      const approachContent = {
+        research: {
+          index: '01 / RESEARCH', state: '01 — RESEARCH INPUT', title: 'Observe & collect',
+          body: 'Look for references in culture, objects, environments, movement, and everyday experiences. The strongest product narratives often begin with details that seem unrelated.'
+        },
+        concept: {
+          index: '02 / CONCEPT', state: '02 — NARRATIVE BUILD', title: 'Build the narrative',
+          body: 'Translate observations into a design story, moodboard, silhouette direction, and product identity. The narrative becomes a clear visual and functional brief.'
+        },
+        development: {
+          index: '03 / DEVELOPMENT', state: '03 — FORM EXPLORATION', title: 'Develop the form',
+          body: 'Explore proportions, materials, construction, 2D drawings, and 3D footwear models. Test how each design decision supports the intended use and visual language.'
+        },
+        engineering: {
+          index: '04 / ENGINEERING', state: '04 — PRODUCTION LOGIC', title: 'Prepare to make',
+          body: 'Develop technical drawings, patterns, tooling concepts, and manufacturing documentation. Translate the approved product form into production-oriented information.'
+        }
+      };
+      const setApproachStage = stage => {
+        const content = approachContent[stage];
+        if (!content) return;
+        approachVisual.dataset.stage = stage;
+        vizState.textContent = content.state;
+        $('.approach-detail-index', approachDetail).textContent = content.index;
+        $('h3', approachDetail).textContent = content.title;
+        $('p', approachDetail).textContent = content.body;
+        $$('.viz-node', approachVisual).forEach(node => node.classList.toggle('is-active', node.dataset.node === stage));
+        approachSteps.forEach(button => {
+          const active = button.dataset.stage === stage;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-pressed', String(active));
+        });
+      };
+      approachSteps.forEach(button => button.addEventListener('click', () => setApproachStage(button.dataset.stage)));
+      setApproachStage('research');
+
+      // Full-page particle field with flowing paths, section-aware colors, scroll response and pointer interaction.
+      const particleCanvas = $('#ambientParticles');
+      const particleContext = particleCanvas?.getContext('2d');
+      if (particleCanvas && particleContext) {
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let particles = [];
+        let frameId = 0;
+        let frameCount = 0;
+        let activeSectionIndex = 0;
+        let ambientRgb = '237,110,3';
+        let alternateRgb = '255,232,207';
+        let pointer = { x: -1000, y: -1000 };
+        const toneSections = $$('header.hero, main > section, .ticker');
+        const lerp = (a, b, amount) => a + (b - a) * amount;
+
+        const readSectionTone = () => {
+          const focusLine = window.innerHeight * .48;
+          let selected = 0;
+          let closest = Infinity;
+          toneSections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const distance = focusLine < rect.top ? rect.top - focusLine : focusLine > rect.bottom ? focusLine - rect.bottom : 0;
+            if (distance < closest) { closest = distance; selected = index; }
+          });
+          if (selected !== activeSectionIndex) activeSectionIndex = selected;
+          const source = toneSections[selected] || document.body;
+          const style = getComputedStyle(source);
+          const nextMain = style.getPropertyValue('--particle-rgb').trim() || '237,110,3';
+          const nextAlt = style.getPropertyValue('--particle-alt-rgb').trim() || '255,232,207';
+          ambientRgb = nextMain;
+          alternateRgb = nextAlt;
+        };
+
+        const resizeParticles = () => {
+          const oldCount = particles.length;
+          width = window.innerWidth;
+          height = window.innerHeight;
+          dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+          particleCanvas.width = Math.round(width * dpr);
+          particleCanvas.height = Math.round(height * dpr);
+          particleContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+          const count = Math.max(42, Math.min(112, Math.round(width / 12)));
+          particles = Array.from({ length: count }, (_, index) => {
+            const prior = particles[index];
+            return prior || {
+              x: Math.random() * width, y: Math.random() * height,
+              vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28,
+              seed: Math.random(), phase: Math.random() * Math.PI * 2,
+              size: .55 + Math.random() * 1.55,
+              lane: Math.random(), shimmer: Math.random() * Math.PI * 2
+            };
+          });
+          readSectionTone();
+        };
+
+        const drawParticles = time => {
+          particleContext.clearRect(0, 0, width, height);
+          const mode = activeSectionIndex % 4;
+          const scrollFlow = Math.max(-1, Math.min(1, scrollMomentum / 30));
+          const centerX = width * (.5 + Math.sin(time * .00012) * .12);
+          const centerY = height * (.5 + Math.cos(time * .00015) * .12);
+
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            const phase = p.phase + time * .00018 + window.scrollY * .0007;
+            let targetX, targetY;
+
+            if (mode === 1) {
+              const angle = p.seed * Math.PI * 2 + time * .00012;
+              const radius = Math.min(width, height) * (.12 + p.lane * .24);
+              targetX = centerX + Math.cos(angle) * radius;
+              targetY = centerY + Math.sin(angle) * radius * .72;
+            } else if (mode === 2) {
+              const columns = Math.max(7, Math.round(width / 115));
+              const rows = Math.max(4, Math.round(height / 125));
+              const column = i % columns;
+              const row = Math.floor(i / columns) % rows;
+              targetX = (column + .5) * width / columns + Math.sin(phase) * 17;
+              targetY = (row + .5) * height / rows + Math.cos(phase * .8) * 16;
+            } else if (mode === 3) {
+              targetX = ((p.seed + time * .000018 + 1) % 1) * width;
+              targetY = height * (.18 + p.lane * .64) + Math.sin(targetX * .006 + phase) * height * .12;
+            } else {
+              targetX = ((p.seed + time * .000012 + 1) % 1) * width;
+              targetY = height * (.2 + p.lane * .6) + Math.sin(targetX * .0055 + phase) * height * .15 + Math.cos(phase * .7) * 18;
+            }
+
+            const attraction = .0015 + Math.min(.002, Math.abs(scrollFlow) * .0012);
+            p.vx += (targetX - p.x) * attraction;
+            p.vy += (targetY - p.y) * attraction;
+            p.vx += scrollFlow * (p.lane - .5) * .045;
+
+            const dxPointer = p.x - pointer.x;
+            const dyPointer = p.y - pointer.y;
+            const pointerDistance = Math.hypot(dxPointer, dyPointer);
+            if (pointerDistance < 145 && pointerDistance > 0) {
+              const force = (1 - pointerDistance / 145) * .14;
+              p.vx += (dxPointer / pointerDistance) * force - (dyPointer / pointerDistance) * force * .32;
+              p.vy += (dyPointer / pointerDistance) * force + (dxPointer / pointerDistance) * force * .32;
+            }
+
+            p.vx *= .972;
+            p.vy *= .972;
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < -30) p.x = width + 30;
+            if (p.x > width + 30) p.x = -30;
+            if (p.y < -30) p.y = height + 30;
+            if (p.y > height + 30) p.y = -30;
+
+            const twinkle = .45 + (Math.sin(time * .002 + p.shimmer) + 1) * .22;
+            particleContext.beginPath();
+            particleContext.fillStyle = `rgba(${i % 5 === 0 ? alternateRgb : ambientRgb},${twinkle})`;
+            particleContext.shadowColor = `rgba(${i % 5 === 0 ? alternateRgb : ambientRgb},.72)`;
+            particleContext.shadowBlur = p.size > 1.5 ? 8 : 4;
+            particleContext.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            particleContext.fill();
+            particleContext.shadowBlur = 0;
+
+            for (let j = i + 1; j < particles.length; j++) {
+              const q = particles[j];
+              const dx = p.x - q.x;
+              const dy = p.y - q.y;
+              const distance = Math.hypot(dx, dy);
+              if (distance < 100) {
+                const alpha = (1 - distance / 100) * .14;
+                particleContext.beginPath();
+                particleContext.strokeStyle = `rgba(${ambientRgb},${alpha})`;
+                particleContext.lineWidth = .65;
+                particleContext.moveTo(p.x, p.y);
+                particleContext.lineTo(q.x, q.y);
+                particleContext.stroke();
+              }
             }
           }
-        }
-        animationFrame = requestAnimationFrame(drawParticles);
-      }
-      if (ctx && !reducedMotion) {
-        resizeCanvas();
-        drawParticles();
-        window.addEventListener('resize', resizeCanvas, { passive: true });
-        canvas.addEventListener('pointermove', event => {
-          const rect = canvas.getBoundingClientRect();
-          pointer.x = event.clientX - rect.left;
-          pointer.y = event.clientY - rect.top;
-        }, { passive: true });
-        canvas.addEventListener('pointerleave', () => { pointer.x = -1000; pointer.y = -1000; });
+          scrollMomentum *= .88;
+          frameCount++;
+          if (!reducedMotion && !document.hidden) frameId = requestAnimationFrame(drawParticles);
+        };
+
+        resizeParticles();
+        if (reducedMotion) drawParticles(0);
+        else frameId = requestAnimationFrame(drawParticles);
+        window.addEventListener('resize', resizeParticles, { passive: true });
+        window.addEventListener('pointermove', event => { pointer.x = event.clientX; pointer.y = event.clientY; }, { passive: true });
+        window.addEventListener('pointerleave', () => { pointer.x = -1000; pointer.y = -1000; });
         document.addEventListener('visibilitychange', () => {
-          if (document.hidden) cancelAnimationFrame(animationFrame);
-          else drawParticles();
+          if (document.hidden) cancelAnimationFrame(frameId);
+          else if (!reducedMotion) {
+            readSectionTone();
+            frameId = requestAnimationFrame(drawParticles);
+          }
         });
+        let toneCheck = 0;
+        const updateParticleTone = () => {
+          if (++toneCheck % 24 === 0) readSectionTone();
+          if (!reducedMotion && !document.hidden) requestAnimationFrame(updateParticleTone);
+        };
+        if (!reducedMotion) requestAnimationFrame(updateParticleTone);
       }
     })();
   </script>
