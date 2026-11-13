@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#101012" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <meta name="description" content="Garin Nata Kusuma — Footwear Designer & Technical Design Drafter. Footwear concepts, technical design, pattern making and manufacturing tooling." />
   <meta name="author" content="Garin Nata Kusuma" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Garin Nata Kusuma — Footwear Design & Engineering" />
   <meta property="og:description" content="Turning narratives into functional footwear — from concept development to technical design and manufacturing." />
-  <meta property="og:url" content="https://garinnatakusuma.github.io/PORTOFOLIO/" /> 
+  <meta property="og:url" content="https://garinnatakusuma.github.io/PORTOFOLIO/" />
   <meta property="og:image" content="https://garinnatakusuma.github.io/PORTOFOLIO/HERO_IFCC.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Garin Nata Kusuma — Footwear Design & Engineering</title>
@@ -495,6 +498,80 @@
       .document-viewer[open] { animation: none; }
     }
 
+  
+
+    /* My Journey — compact, interactive experience cards */
+    .journey-section { margin-top: clamp(64px, 8vw, 108px); }
+    .journey-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 27px; }
+    .journey-heading h3 { margin-top: 13px; color: var(--ink); font: 800 clamp(2.45rem, 5.5vw, 4.7rem)/.94 var(--display); letter-spacing: -.07em; }
+    .journey-heading h3 em { color: var(--orange-deep); font-style: normal; }
+    .journey-heading > p { max-width: 380px; color: #686159; font-size: .88rem; }
+    .journey-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+    .journey-card { --spot-x: 50%; --spot-y: 0%; position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; min-width: 0; min-height: 390px; padding: clamp(21px, 2.7vw, 30px); border: 1px solid rgba(16,16,18,.12); border-radius: 18px; color: var(--white); background: radial-gradient(ellipse at 100% 0%, rgba(237,110,3,.10), transparent 46%), #19191c; box-shadow: 0 12px 34px rgba(34,27,20,.07); transition: transform .42s var(--ease), border-color .35s, box-shadow .4s; }
+    .journey-card::before { content: ''; position: absolute; z-index: -1; inset: 0; opacity: 0; pointer-events: none; background: radial-gradient(420px circle at var(--spot-x) var(--spot-y), rgba(237,110,3,.16), transparent 58%); transition: opacity .35s; }
+    .journey-card:hover { transform: translateY(-6px); border-color: rgba(237,110,3,.52); box-shadow: 0 22px 54px rgba(34,27,20,.14), 0 0 0 1px rgba(237,110,3,.08); }
+    .journey-card:hover::before { opacity: 1; }
+    .journey-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 25px; }
+    .journey-index, .journey-status { color: #f18a39; font: 600 .62rem var(--mono); letter-spacing: .1em; }
+    .journey-status { padding: 6px 9px; border: 1px solid rgba(237,110,3,.28); border-radius: 999px; color: #c9beb2; font-size: .56rem; white-space: nowrap; }
+    .journey-status.is-current { display: inline-flex; align-items: center; gap: 7px; color: #a8d8b6; border-color: rgba(123,214,157,.25); }
+    .journey-status i { width: 6px; height: 6px; border-radius: 50%; background: #7bd69d; box-shadow: 0 0 0 4px rgba(123,214,157,.1); }
+    .journey-company { display: flex; align-items: center; gap: 15px; min-width: 0; }
+    .journey-logo-frame { position: relative; flex: 0 0 68px; width: 68px; height: 68px; display: grid; place-items: center; padding: 9px; overflow: hidden; border-radius: 13px; background: #f5f2ec; box-shadow: 0 5px 18px rgba(0,0,0,.16); }
+    .journey-logo-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .journey-logo-frame.logo-missing::after, .journey-brand-frame.logo-missing::after { content: attr(data-fallback); color: #292725; font: 800 .68rem var(--display); letter-spacing: .02em; text-align: center; }
+    .journey-company-info { flex: 1; min-width: 0; }
+    .journey-company-info h4 { color: #f8f6f1; font: 800 clamp(1.05rem, 1.65vw, 1.38rem)/1.04 var(--display); letter-spacing: -.04em; overflow-wrap: anywhere; }
+    .journey-company-info p { margin-top: 7px; color: #aaa39b; font-size: .73rem; }
+    .journey-company-mark { align-self: flex-start; color: rgba(237,110,3,.65); font-size: 1.1rem; transition: transform .3s, color .3s; }
+    .journey-card:hover .journey-company-mark { color: #ff9a4d; transform: translate(3px,-3px); }
+    .journey-summary { margin: 23px 0 19px; max-width: 540px; color: #c3bdb5; font-size: .82rem; line-height: 1.7; }
+    .journey-brand-row { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.11); }
+    .journey-brand-group { display: grid; gap: 8px; min-width: 0; }
+    .journey-mini-label, .journey-detail-label { color: #8f887f; font: 600 .55rem var(--mono); letter-spacing: .11em; }
+    .journey-brand-frame { width: 104px; height: 49px; display: grid; place-items: center; padding: 8px 12px; border-radius: 9px; background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.16); }
+    .journey-brand-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .journey-brand-frame.ardiles-frame { width: 116px; height: 52px; padding: 8px 12px; background: #fff; }
+    .journey-brand-pair { display: flex; flex-wrap: wrap; gap: 9px; }
+    .journey-brand-pair .journey-brand-frame { width: 92px; height: 47px; }
+    .journey-brand-pair .converse-frame { width: 105px; }
+    .journey-context { color: #9a9289; text-align: right; font: 500 .56rem/1.65 var(--mono); letter-spacing: .06em; }
+    .journey-roles { display: flex; flex-wrap: wrap; gap: 7px; margin: -3px 0 16px; }
+    .journey-roles span { display: inline-flex; padding: 6px 9px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; color: #c9c1b7; background: rgba(255,255,255,.035); font: 500 .57rem var(--mono); line-height: 1.35; }
+    .journey-brand-row-wide { margin-top: auto; }
+    .journey-detail { max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-5px); transition: max-height .42s var(--ease), opacity .28s ease, transform .35s var(--ease), visibility .35s; }
+    .journey-card.is-expanded .journey-detail { max-height: 260px; margin-top: 20px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.1); opacity: 1; visibility: visible; transform: translateY(0); }
+    .journey-detail ul { display: grid; gap: 8px; margin: 11px 0 0; padding: 0; list-style: none; }
+    .journey-detail li { position: relative; padding-left: 15px; color: #bcb5ac; font-size: .72rem; line-height: 1.55; }
+    .journey-detail li::before { content: ''; position: absolute; left: 0; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 9px rgba(237,110,3,.45); }
+    .journey-toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-top: 19px; padding: 13px 0 0; border: 0; border-top: 1px solid rgba(255,255,255,.1); background: transparent; color: #f2eee8; text-align: left; cursor: pointer; font: 700 .68rem var(--mono); letter-spacing: .025em; transition: color .25s; }
+    .journey-toggle:hover, .journey-toggle:focus-visible { color: #ff9a4d; }
+    .journey-toggle-icon { display: grid; place-items: center; width: 27px; height: 27px; border: 1px solid rgba(237,110,3,.35); border-radius: 50%; color: var(--orange); font-size: 1rem; transition: transform .35s var(--ease), background .25s, color .25s; }
+    .journey-card.is-expanded .journey-toggle-icon { transform: rotate(45deg); background: var(--orange); color: #111; }
+    @media (max-width: 900px) {
+      .journey-grid { grid-template-columns: 1fr; }
+      .journey-card { min-height: auto; }
+      .journey-company-info h4 { font-size: clamp(1.12rem, 3vw, 1.45rem); }
+    }
+    @media (max-width: 760px) {
+      .journey-heading { display: block; margin-bottom: 22px; }
+      .journey-heading > p { margin-top: 13px; }
+      .journey-section { margin-top: 66px; }
+      .journey-card { padding: 22px; }
+      .journey-company { gap: 12px; }
+      .journey-logo-frame { flex-basis: 60px; width: 60px; height: 60px; }
+      .journey-company-info h4 { font-size: 1.12rem; }
+    }
+    @media (max-width: 420px) {
+      .journey-card-top { align-items: flex-start; }
+      .journey-index { font-size: .56rem; }
+      .journey-status { font-size: .51rem; }
+      .journey-brand-row { align-items: flex-start; }
+      .journey-context { padding-top: 24px; }
+      .journey-brand-pair .journey-brand-frame { width: 82px; }
+      .journey-brand-pair .converse-frame { width: 96px; }
+    }
+
   </style>
 </head>
 <body>
@@ -590,6 +667,103 @@
           </div>
           <span class="side-index">YOGYAKARTA · INDONESIA</span>
         </aside>
+      </div>
+
+      <div class="wrap journey-section" aria-labelledby="journeyTitle">
+        <div class="journey-heading" data-reveal>
+          <div>
+            <span class="eyebrow">CAREER TIMELINE / 02—03</span>
+            <h3 id="journeyTitle">My <em>Journey.</em></h3>
+          </div>
+          <p>From my first exposure to footwear manufacturing to developing products and stitching processes in the industry.</p>
+        </div>
+
+        <div class="journey-grid">
+          <article class="journey-card" data-reveal data-journey-card>
+            <div class="journey-card-top">
+              <span class="journey-index">02 / INTERNSHIP</span>
+              <span class="journey-status">6 MONTHS</span>
+            </div>
+            <div class="journey-company">
+              <div class="journey-logo-frame" data-fallback="SS">
+                <img src="SS_LOGO.jfif" alt="PT SS Utama logo" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('logo-missing')" />
+              </div>
+              <div class="journey-company-info">
+                <h4>PT SS UTAMA</h4>
+                <p>Surabaya, Indonesia</p>
+              </div>
+              <span class="journey-company-mark" aria-hidden="true">↗</span>
+            </div>
+            <p class="journey-summary">My first hands-on footwear-manufacturing experience during my studies at Politeknik ATK Yogyakarta, at the factory producing Ardiles footwear.</p>
+            <div class="journey-brand-row">
+              <div class="journey-brand-group">
+                <span class="journey-mini-label">PRODUCED BRAND</span>
+                <div class="journey-brand-frame ardiles-frame" data-fallback="ARDILES">
+                  <img src="ARDILES_LOGO.jfif" alt="Ardiles footwear brand logo" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('logo-missing')" />
+                </div>
+              </div>
+              <span class="journey-context">INTERNSHIP<br />DURING STUDY</span>
+            </div>
+            <div class="journey-detail" id="journeyDetailSs" aria-hidden="true" inert>
+              <span class="journey-detail-label">KEY TAKEAWAYS</span>
+              <ul>
+                <li>Gained first practical exposure to footwear manufacturing workflows.</li>
+                <li>Learned the production process for vulcanized footwear.</li>
+                <li>Connected the factory experience with my final project for graduation from Politeknik ATK.</li>
+              </ul>
+            </div>
+            <button class="journey-toggle" type="button" aria-expanded="false" aria-controls="journeyDetailSs">
+              <span class="journey-toggle-label">Explore experience</span><span class="journey-toggle-icon" aria-hidden="true">＋</span>
+            </button>
+          </article>
+
+          <article class="journey-card" data-reveal data-journey-card>
+            <div class="journey-card-top">
+              <span class="journey-index">03 / CURRENT EXPERIENCE</span>
+              <span class="journey-status is-current"><i></i> CURRENT</span>
+            </div>
+            <div class="journey-company">
+              <div class="journey-logo-frame" data-fallback="SCI">
+                <img src="SCI_LOGO.jfif" alt="PT Selalu Cinta Indonesia logo" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('logo-missing')" />
+              </div>
+              <div class="journey-company-info">
+                <h4>PT SELALU CINTA INDONESIA</h4>
+                <p>Salatiga, Indonesia</p>
+              </div>
+              <span class="journey-company-mark" aria-hidden="true">↗</span>
+            </div>
+            <p class="journey-summary">Currently working across footwear development and fiber computer-stitching design for international footwear brands.</p>
+            <div class="journey-roles" aria-label="Current roles">
+              <span>Management Trainee</span>
+              <span>Footwear Developer</span>
+              <span>Fiber Computer Stitching Designer</span>
+            </div>
+            <div class="journey-brand-row journey-brand-row-wide">
+              <div class="journey-brand-group">
+                <span class="journey-mini-label">BRANDS</span>
+                <div class="journey-brand-pair">
+                  <div class="journey-brand-frame" data-fallback="NIKE">
+                    <img src="NIKE_LOGO.jfif" alt="Nike brand logo" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('logo-missing')" />
+                  </div>
+                  <div class="journey-brand-frame converse-frame" data-fallback="CONVERSE">
+                    <img src="CONVERSE_LOGO.jfif" alt="Converse brand logo" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('logo-missing')" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="journey-detail" id="journeyDetailSci" aria-hidden="true" inert>
+              <span class="journey-detail-label">ROLE FOCUS</span>
+              <ul>
+                <li>Management Trainee — developing professional and cross-functional experience.</li>
+                <li>Footwear Developer — contributing to footwear product development.</li>
+                <li>Fiber Computer Stitching Designer — working with fiber-based computer stitching design.</li>
+              </ul>
+            </div>
+            <button class="journey-toggle" type="button" aria-expanded="false" aria-controls="journeyDetailSci">
+              <span class="journey-toggle-label">Explore experience</span><span class="journey-toggle-icon" aria-hidden="true">＋</span>
+            </button>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1045,6 +1219,33 @@
       };
       approachSteps.forEach(button => button.addEventListener('click', () => setApproachStage(button.dataset.stage)));
       setApproachStage('research');
+
+      // My Journey cards: keyboard-accessible details toggles and subtle pointer spotlight.
+      $$('.journey-toggle').forEach(button => {
+        const card = button.closest('.journey-card');
+        const detail = document.getElementById(button.getAttribute('aria-controls'));
+        button.addEventListener('click', () => {
+          const expanded = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!expanded));
+          card.classList.toggle('is-expanded', !expanded);
+          detail.setAttribute('aria-hidden', String(expanded));
+          detail.inert = expanded;
+          $('.journey-toggle-label', button).textContent = expanded ? 'Explore experience' : 'Close details';
+        });
+      });
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        $$('[data-journey-card]').forEach(card => {
+          card.addEventListener('pointermove', event => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--spot-x', `${event.clientX - rect.left}px`);
+            card.style.setProperty('--spot-y', `${event.clientY - rect.top}px`);
+          }, { passive: true });
+          card.addEventListener('pointerleave', () => {
+            card.style.setProperty('--spot-x', '50%');
+            card.style.setProperty('--spot-y', '0%');
+          }, { passive: true });
+        });
+      }
 
       // Full-page particle field with flowing paths, section-aware colors, scroll response and pointer interaction.
       const particleCanvas = $('#ambientParticles');
